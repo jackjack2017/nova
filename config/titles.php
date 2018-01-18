@@ -11,25 +11,6 @@ return [
     */
 
     'admin' => 'dashboard',
-    'users' => [
-        'index' => 'usersGestion',
-        'edit' => 'userEdit',
-    ],
-    'contacts' => [
-        'index' => 'contactsGestion',
-    ],
-    'posts' => [
-        'index' => 'postsGestion',
-        'edit' => 'postEdit',
-        'create' => 'postCreate',
-        'show' => 'postShow',
-    ],
-    'notifications' => [
-        'index' => 'notificationsGestion',
-    ],
-    'comments' => [
-        'index' => 'commentsGestion',
-    ],
     'medias' => [
         'index' => 'mediasGestion',
     ],
