@@ -16,21 +16,29 @@
 | Frontend
 |--------------------------------------------------------------------------|
 */
+Route::get('/', function () {
+    return view('main');
+});
 
+Route::get('/model', function () {
+    return view('model');
+});
 
+Route::get('/page', function () {
+    return view('page');
+});
 
+Route::get('/product', function () {
+    return view('product');
+});
 
+Route::get('/category', function () {
+    return view('category');
+});
 
-
-
-
-
-
-
-
-
-
-
+Route::post('/product/test', function () {
+    return view('test');
+});
 
 
 // Authentification

@@ -1,0 +1,26 @@
+//@import 'functions';
+@import '../variables';
+//Use for include css config files
+ 
+@import 'functions';
+@include add-font('../fonts/OpenSansBold',normal,bold);
+@include add-font('../fonts/OpenSansBoldItalic',italic,bold);
+@include add-font('../fonts/OpenSansItalic',italic,normal);
+@include add-font('../fonts/OpenSansRegular',normal,normal);
+
+
+
+//variable fonts
+$base-font: 'OpenSansRegular', Arial, Geneva, sans-serif;
+$text-font: 'OpenSansBold', Arial, Geneva, sans-serif;
+
+.price-txt-blk-wrap{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.price-txt-blk.__l{
+  padding-right: 20px;
+}
+
