@@ -26,6 +26,9 @@ class AppServiceProvider extends ServiceProvider
             return auth()->user()->role === 'admin';
         });
 
+        $this->bodyClassShare();
+
+
 //               Blade::if('request', function ($url) {
 //            return request()->is($url);
 //        });
@@ -39,5 +42,21 @@ class AppServiceProvider extends ServiceProvider
     public function register()
     {
         //
+    }
+
+    /**
+     * Prepare and share body class
+     */
+    protected function bodyClassShare()
+    {
+        $request = request();
+
+        if($request->path() === '/'){
+            $body_class = 'page-index';
+        } else {
+            $body_class = 'page-' . str_replace('/', '-', $request->path());
+        }
+
+        view()->share('body_class', $body_class);
     }
 }
