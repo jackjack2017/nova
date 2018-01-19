@@ -15,18 +15,7 @@ return [
         'icon' => 'dashboard',
         'url' => '/admin',
     ],
-    'posts' =>
-    [
-        'name' => 'posts',
-        'icon' => 'file-text',
-        'url' => '/admin/posts',
-    ],
-    'users' =>
-    [
-        'name' => 'users',
-        'icon' => 'user',
-        'url' => '/admin/users',
-    ],
+
     'edit' =>
     [
         'name' => 'edition',
@@ -37,22 +26,10 @@ return [
         'name' => 'creation',
         'icon' => 'edit'
     ],
-    'contacts' =>
-    [
-        'name' => 'contacts',
-        'icon' => 'envelope',
-        'url' => '#',
-    ],
     'notifications' =>
     [
         'name' => 'notifications',
         'icon' => 'bell',
-        'url' => '#',
-    ],
-    'comments' =>
-    [
-        'name' => 'comments',
-        'icon' => 'comment',
         'url' => '#',
     ],
     'medias' =>

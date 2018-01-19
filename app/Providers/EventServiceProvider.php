@@ -12,12 +12,6 @@ class EventServiceProvider extends ServiceProvider
      * @var array
      */
     protected $listen = [
-        'App\Events\ModelCreated' => [
-            'App\Listeners\ModelCreated',
-        ],
-        'App\Events\PostUpdated' => [
-            'App\Listeners\PostUpdated',
-        ],
     ];
 
     /**
