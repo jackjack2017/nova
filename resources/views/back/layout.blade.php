@@ -67,66 +67,6 @@ desired effect
       <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
         <span class="sr-only">Toggle navigation</span>
       </a>
-      <!-- Navbar Right Menu -->
-      <div class="navbar-custom-menu">
-        <ul class="nav navbar-nav">
-
-          <!-- Notifications Menu -->
-          @if ($countNotifications)
-            <li class="dropdown notifications-menu">
-              <!-- Menu toggle button -->
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                <i class="fa fa-bell-o"></i>
-
-                  <span class="label label-warning">{{ $countNotifications }}</span>
-
-              </a>
-              <ul class="dropdown-menu">
-                <li class="header">@lang('New notifications')</li>
-                <li>
-                  <!-- Inner Menu: contains the notifications -->
-                  <ul class="menu">
-                    <li><!-- start notification -->
-                      <a href="#">
-                        <i class="fa fa-users text-aqua"></i> {{ $countNotifications }} @lang('new') {{ trans_choice(__('comment|comments'), $countNotifications) }}
-                      </a>
-                    </li>
-                    <!-- end notification -->
-                  </ul>
-                </li>
-                <li class="footer"><a href="{{ route('notifications.index', [auth()->id()]) }}">@lang('View')</a></li>
-              </ul>
-            </li>
-          @endif
-
-          <!-- User Account Menu -->
-          <li class="dropdown user user-menu">
-            <!-- Menu Toggle Button -->
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-              <!-- The user image in the navbar-->
-              <img src="{{ Gravatar::get(auth()->user()->email) }}" class="user-image" alt="User Image">
-              <!-- hidden-xs hides the username on small devices so only the image appears. -->
-              <span class="hidden-xs">{{ auth()->user()->name }}</span>
-            </a>
-            <ul class="dropdown-menu">
-              <!-- The user image in the menu -->
-              <li class="user-header">
-                <img src="{{ Gravatar::get(auth()->user()->email) }}" class="img-circle" alt="User Image">
-                <p>{{ auth()->user()->name }}</p>
-              </li>
-              <!-- Menu Footer-->
-              <li class="user-footer">
-                <div class="pull-right">
-                  <a id="logout" href="#" class="btn btn-default btn-flat">@lang('Sign out')</a>
-                  <form id="logout-form" action="{{ route('logout') }}" method="POST" class="hide">
-                    {{ csrf_field() }}
-                  </form>
-                </div>
-              </li>
-            </ul>
-          </li>
-        </ul>
-      </div>
     </nav>
   </header>
   <!-- Left side column. contains the logo and sidebar -->
@@ -138,94 +78,39 @@ desired effect
         <li {{ currentRouteBootstrap('admin') }}>
           <a href="{{ route('admin') }}"><i class="fa fa-fw fa-dashboard"></i> <span>@lang('Dashboard')</span></a>
         </li>
-        @admin
-
-          @include('back.partials.treeview', [
-            'icon' => 'user',
-            'type' => 'user',
-            'items' => [
-              [
-                'route' => route('users.index'),
-                'command' => 'list',
-                'color' => 'blue',
-              ],
-              [
-                'route' => route('users.index', ['new' => 'on']),
-                'command' => 'new',
-                'color' => 'yellow',
-              ],
-            ],
-          ])
-
-          @include('back.partials.treeview', [
-            'icon' => 'envelope',
-            'type' => 'contact',
-            'items' => [
-              [
-                'route' => route('contacts.index'),
-                'command' => 'list',
-                'color' => 'blue',
-              ],
-              [
-                'route' => route('contacts.index', ['new' => 'on']),
-                'command' => 'new',
-                'color' => 'yellow',
-              ],
-            ],
-          ])
-
-          @include('back.partials.treeview', [
-            'icon' => 'comment',
-            'type' => 'comment',
-            'items' => [
-              [
-                'route' => route('comments.index'),
-                'command' => 'list',
-                'color' => 'blue',
-              ],
-              [
-                'route' => route('comments.index', ['new' => 'on']),
-                'command' => 'new',
-                'color' => 'yellow',
-              ],
-            ],
-          ])
-
+        {{--@admin--}}
+        {{----}}
         <li><a href="{{ route('categories.index') }}"><i class="fa fa-list"></i> <span>@lang('Categories')</span></a></li>
 
-        @endadmin
+        {{--@endadmin--}}
 
-        @include('back.partials.treeview', [
-          'icon' => 'file-text',
-          'type' => 'post',
-          'items' => [
-            [
-              'route' => route('posts.index'),
-              'command' => 'list',
-              'color' => 'blue',
-            ],
-            [
-              'route' => route('posts.index', ['new' => 'on']),
-              'command' => 'new',
-              'color' => 'yellow',
-            ],
-            [
-              'route' => route('posts.create'),
-              'command' => 'create',
-              'color' => 'green',
-            ],
-          ],
-        ])
+        {{--@include('back.partials.treeview', [--}}
+          {{--'icon' => 'file-text',--}}
+          {{--'type' => 'categories',--}}
+          {{--'items' => [--}}
+            {{--[--}}
+              {{--'route' => route('categories.index'),--}}
+              {{--'command' => 'list',--}}
+              {{--'color' => 'blue',--}}
+            {{--],--}}
+            {{--[--}}
+              {{--'route' => route('categories.index', ['new' => 'on']),--}}
+              {{--'command' => 'new',--}}
+              {{--'color' => 'yellow',--}}
+            {{--],--}}
+            {{--[--}}
+              {{--'route' => route('categories.create'),--}}
+              {{--'command' => 'create',--}}
+              {{--'color' => 'green',--}}
+            {{--],--}}
+          {{--],--}}
+        {{--])--}}
 
         <li><a href="{{ route('medias.index') }}"><i class="fa fa-image"></i> <span>@lang('Medias')</span></a></li>
 
-        @admin
-          <li><a href="{{ route('settings.edit') }}"><i class="fa fa-cog"></i> <span>@lang('Settings')</span></a></li>
-        @endadmin
 
-        @if ($countNotifications)
-          <li><a href="{{ route('notifications.index', [auth()->id()]) }}"><i class="fa fa-bell"></i> <span>@lang('Notifications')</span></a></li>
-        @endif
+        <li><a href="{{ route('settings.edit') }}"><i class="fa fa-cog"></i> <span>@lang('Settings')</span></a></li>
+
 
       </ul>
       <!-- /.sidebar-menu -->

@@ -19,9 +19,9 @@ class CategoryController extends Controller
      */
     public function index(Request $request)
     {
-        $categories = Category::oldest('title')->withCount('posts')->get();
+        $categories = Category::oldest('title')->get();
 
-        return view('back.categories.index', compact ('categories'));
+        return view('back.categories.index', compact('categories'));
     }
 
     /**
@@ -37,7 +37,7 @@ class CategoryController extends Controller
     /**
      * Store a newly created categorie in storage.
      *
-     * @param  \App\Http\Requests\CategoryRequest  $request
+     * @param  \App\Http\Requests\CategoryRequest $request
      * @return \Illuminate\Http\Response
      */
     public function store(CategoryRequest $request)
@@ -50,19 +50,19 @@ class CategoryController extends Controller
     /**
      * Show the form for editing the specified categorie.
      *
-     * @param  \App\Models\Category  $category
+     * @param  \App\Models\Category $category
      * @return \Illuminate\Http\Response
      */
     public function edit(Category $category)
     {
-        return view('back.categories.edit', compact ('category'));
+        return view('back.categories.edit', compact('category'));
     }
 
     /**
      * Update the specified categorie in storage.
      *
-     * @param  \App\Http\Requests\CategoryRequest  $request
-     * @param  \App\Models\Category  $category
+     * @param  \App\Http\Requests\CategoryRequest $request
+     * @param  \App\Models\Category $category
      * @return \Illuminate\Http\Response
      */
     public function update(CategoryRequest $request, Category $category)
@@ -75,13 +75,13 @@ class CategoryController extends Controller
     /**
      * Remove the specified categorie from storage.
      *
-     * @param  \App\Models\Category  $category
+     * @param  \App\Models\Category $category
      * @return \Illuminate\Http\Response
      */
     public function destroy(Category $category)
     {
-        $category->delete ();
+        $category->delete();
 
-        return response ()->json ();
+        return response()->json();
     }
 }

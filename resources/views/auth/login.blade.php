@@ -1,6 +1,4 @@
-@extends('front.layout')
 
-@section('main')
    <section id="content-wrap">
         <div class="row">
             <div class="col-twelve">
@@ -49,4 +47,3 @@
             </div>
         </div>
     </section>
-@endsection
