@@ -154,7 +154,7 @@
 				</div>
 				
 				<div class="category-btn-show-wrap">
-					<a href="#" class="category-btn-show">Показать еще</a>
+					<a href="#" class="category-btn-show js_showMore-btn">Показать еще</a>
 				</div>
 				
 
