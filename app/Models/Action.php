@@ -2,10 +2,12 @@
 
 namespace App\Models;
 
+use App\Traits\ImageableTrait;
 use Illuminate\Database\Eloquent\Model;
-use App\Models\Product;
 
-class Category extends Model {
+class Action extends Model {
+
+    use ImageableTrait;
 
     /**
     * The attributes that are mass assignable.
@@ -18,13 +20,11 @@ class Category extends Model {
 
 
 
-	/**
-     * Many to Many relation
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\hasMany
+    /**
+     * Get all of the action's images
      */
-	public function products()
-	{
-		return $this->hasMany(Product::class);
-	}
+    public function images()
+    {
+        return $this->morphMany('App\Image', 'imageable');
+    }
 }
