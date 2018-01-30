@@ -1,59 +1,30 @@
-@extends('back.layout')
-
-@section('main')
-
-    @yield('form-open')
-        {{ csrf_field() }}
-
+<div class="row">
+    <div class="col-xs-12">
         <div class="row">
-
-            <div class="col-md-12">
-                @include('back.partials.boxinput', [
-                    'box' => [
-                        'type' => 'box-primary',
-                        'title' => __('Title'),
-                    ],
-                    'input' => [
-                        'name' => 'title',
-                        'value' => isset($category) ? $category->title : '',
-                        'input' => 'text',
-                        'required' => true,
-                    ],
-                ])
-                @include('back.partials.boxinput', [
-                    'box' => [
-                        'type' => 'box-primary',
-                        'title' => __('Slug'),
-                    ],
-                    'input' => [
-                        'name' => 'slug',
-                        'value' => isset($category) ? $category->slug : '',
-                        'input' => 'text',
-                        'required' => true,
-                    ],
-                ])
-                <button type="submit" class="btn btn-primary">@lang('Submit')</button>
+            <div class="col-md-4">
+                {!! $form->text('name', null, 'Название') !!}
             </div>
-
+            {{--<div class="col-md-4">--}}
+                {{--{!! $form->checkbox('active', 'Активный') !!}--}}
+            {{--</div>--}}
         </div>
-        <!-- /.row -->
-    </form>
 
-@endsection
+        {{--<div class="row">--}}
+            {{--<div class="col-md-4">--}}
+                {{--{!! $form->select('parent_id', ['-'], null, 'Родительская категория') !!}--}}
+            {{--</div>--}}
+        {{--</div>--}}
 
-@section('js')
+        {{--<div class="row">--}}
+            {{--<div class="col-md-6">--}}
+                {{--{!! $form->textarea('description', null, 'Описание') !!}--}}
+            {{--</div>--}}
+        {{--</div>--}}
+    </div>
+</div>
 
-    <script src="{{ asset('adminlte/plugins/voca/voca.min.js') }}"></script>
-    <script>
+<div class="box-footer">
+    <button type="submit" class="btn btn-primary pull-right">Сохранить</button>
+</div>
 
-        $('#slug').keyup(function () {
-            $(this).val(v.slugify($(this).val()))
-        })
 
-        $('#title').keyup(function () {
-            $('#slug').val(v.slugify($(this).val()))
-        })
-
-    </script>
-
-@endsection

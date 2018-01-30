@@ -27,26 +27,7 @@
   <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
   <![endif]-->
 </head>
-<!--
-BODY TAG OPTIONS:
-=================
-Apply one or more of the following classes to get the
-desired effect
-|---------------------------------------------------------|
-| SKINS         | skin-blue                               |
-|               | skin-black                              |
-|               | skin-purple                             |
-|               | skin-yellow                             |
-|               | skin-red                                |
-|               | skin-green                              |
-|---------------------------------------------------------|
-|LAYOUT OPTIONS | fixed                                   |
-|               | layout-boxed                            |
-|               | layout-top-nav                          |
-|               | sidebar-collapse                        |
-|               | sidebar-mini                            |
-|---------------------------------------------------------|
--->
+
 <body class="hold-transition skin-blue sidebar-mini">
 <div class="wrapper">
 
@@ -81,30 +62,31 @@ desired effect
         {{--@admin--}}
         {{----}}
         <li><a href="{{ route('categories.index') }}"><i class="fa fa-list"></i> <span>@lang('Categories')</span></a></li>
+        {{--<li><a href="{{ route('products.index') }}"><i class="fa fa-list"></i> <span>@lang('Products')</span></a></li>--}}
 
         {{--@endadmin--}}
 
-        {{--@include('back.partials.treeview', [--}}
-          {{--'icon' => 'file-text',--}}
-          {{--'type' => 'categories',--}}
-          {{--'items' => [--}}
-            {{--[--}}
-              {{--'route' => route('categories.index'),--}}
-              {{--'command' => 'list',--}}
-              {{--'color' => 'blue',--}}
-            {{--],--}}
-            {{--[--}}
-              {{--'route' => route('categories.index', ['new' => 'on']),--}}
-              {{--'command' => 'new',--}}
-              {{--'color' => 'yellow',--}}
-            {{--],--}}
-            {{--[--}}
-              {{--'route' => route('categories.create'),--}}
-              {{--'command' => 'create',--}}
-              {{--'color' => 'green',--}}
-            {{--],--}}
-          {{--],--}}
-        {{--])--}}
+        @include('back.partials.treeview', [
+          'icon' => 'file-text',
+          'type' => 'product',
+          'items' => [
+            [
+              'route' => route('products.index', 'men'),
+              'command' => 'men',
+              'color' => 'blue',
+            ],
+            [
+              'route' => route('products.index', 'women'),
+              'command' => 'women',
+              'color' => 'yellow',
+            ],
+            [
+              'route' => route('products.index', 'children'),
+              'command' => 'children',
+              'color' => 'green',
+            ],
+          ],
+        ])
 
         <li><a href="{{ route('medias.index') }}"><i class="fa fa-image"></i> <span>@lang('Medias')</span></a></li>
 
@@ -122,10 +104,11 @@ desired effect
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
-      <h1>
-        {{ $title }}
-        @yield('button')
-      </h1>
+      <h1>@yield('title', '')</h1>
+      {{--<h1>--}}
+        {{--{{ $title }}--}}
+        {{--@yield('button')--}}
+      {{--</h1>--}}
       <ol class="breadcrumb">
         @foreach ($breadcrumbs as $item)
           <li @if ($loop->last && $item['url'] === '#') class="active" @endif>

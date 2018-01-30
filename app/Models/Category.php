@@ -3,7 +3,6 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use App\Models\Post;
 
 class Category extends Model {
 
@@ -26,13 +25,13 @@ class Category extends Model {
 	    return request()->segment(1) === 'admin' ? 'id' : 'slug';
 	}
 
-	/**
-     * Many to Many relation
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\belongsToMany
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-	public function posts()
-	{
-		return $this->belongsToMany(Post::class);
-	}
+    public function products()
+    {
+        return $this->hasMany(Picture::class,'product_id','id')->orderBy('position');
+    }
+
 }

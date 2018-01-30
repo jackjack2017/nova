@@ -50,5 +50,17 @@ return [
         'icon' => 'list',
         'url' => '/admin/categories',
     ],
+    'men' =>
+        [
+            'name' => 'men',
+            'icon' => 'edit',
+            'url' => '/admin/products/men',
+        ],
+    'products' =>
+        [
+            'name' => 'products',
+            'icon' => 'list',
+            'url' => '#',
+        ],
 
 ];

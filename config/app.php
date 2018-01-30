@@ -180,6 +180,7 @@ return [
         App\Providers\RouteServiceProvider::class,
         App\Providers\ElfinderServiceProvider::class,
 
+        Collective\Html\HtmlServiceProvider::class,
     ],
 
     /*
@@ -229,41 +230,42 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
         'Gravatar' => Creativeorange\Gravatar\Facades\Gravatar::class,
-
+        'Form' => Collective\Html\FormFacade::class,
+        'Html' => Collective\Html\HtmlFacade::class,
     ],
 
-    /*
-    |--------------------------------------------------------------------------
-    | Pagination Configuration
-    |--------------------------------------------------------------------------
-    */
-
-    'nbrPages' => [
-        'front' => [
-            'posts' => 6,
-        ],
-        'back' => [
-            'posts' => 5,
-            'users' => 8,
-            'comments' => 3,
-            'contacts' => 3,
-        ],
-    ],
-
-    /*
-    |--------------------------------------------------------------------------
-    | Comments nesting level
-    |--------------------------------------------------------------------------
-    */
-
-    'commentsNestedLevel' => 4,
-
-    /*
-    |--------------------------------------------------------------------------
-    | Number parent comments to show each time
-    |--------------------------------------------------------------------------
-    */
-
-    'numberParentComments' => 2,    
+//    /*
+//    |--------------------------------------------------------------------------
+//    | Pagination Configuration
+//    |--------------------------------------------------------------------------
+//    */
+//
+//    'nbrPages' => [
+//        'front' => [
+//            'posts' => 6,
+//        ],
+//        'back' => [
+//            'posts' => 5,
+//            'users' => 8,
+//            'comments' => 3,
+//            'contacts' => 3,
+//        ],
+//    ],
+//
+//    /*
+//    |--------------------------------------------------------------------------
+//    | Comments nesting level
+//    |--------------------------------------------------------------------------
+//    */
+//
+//    'commentsNestedLevel' => 4,
+//
+//    /*
+//    |--------------------------------------------------------------------------
+//    | Number parent comments to show each time
+//    |--------------------------------------------------------------------------
+//    */
+//
+//    'numberParentComments' => 2,
 
 ];
