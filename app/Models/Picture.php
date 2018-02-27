@@ -2,9 +2,9 @@
 
 namespace App\Models;
 
-use App\Product;
 use App\Traits\ImageableTrait;
 use Illuminate\Database\Eloquent\Model;
+
 
 class Picture extends Model
 {

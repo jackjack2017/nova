@@ -5,7 +5,7 @@
     "license": "MIT",
     "type": "project",
     "require": {
-        "php": ">=7.0.0",
+        "php": ">=7.1.0",
         "barryvdh/laravel-elfinder": "^0.3.11",
         "baum/baum": "^1.1",
         "bestmomo/laravel-email-confirmation": "^1.0",

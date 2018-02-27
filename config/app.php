@@ -164,23 +164,24 @@ return [
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
 
-        /*
-         * Package Service Providers...
-         */
-        Creativeorange\Gravatar\GravatarServiceProvider::class,
-        Baum\Providers\BaumServiceProvider::class,
-
-        /*
-         * Application Service Providers...
-         */
-        App\Providers\AppServiceProvider::class,
-        App\Providers\AuthServiceProvider::class,
-        // App\Providers\BroadcastServiceProvider::class,
-        App\Providers\EventServiceProvider::class,
-        App\Providers\RouteServiceProvider::class,
-        App\Providers\ElfinderServiceProvider::class,
+//        /*
+//         * Package Service Providers...
+//         */
+//        Creativeorange\Gravatar\GravatarServiceProvider::class,
+//        Baum\Providers\BaumServiceProvider::class,
+//
+//        /*
+//         * Application Service Providers...
+//         */
+//        App\Providers\AppServiceProvider::class,
+//        App\Providers\AuthServiceProvider::class,
+//        // App\Providers\BroadcastServiceProvider::class,
+//        App\Providers\EventServiceProvider::class,
+//        App\Providers\RouteServiceProvider::class,
+//        App\Providers\ElfinderServiceProvider::class,
 
         Collective\Html\HtmlServiceProvider::class,
+        Intervention\Image\ImageServiceProvider::class
     ],
 
     /*
@@ -232,6 +233,7 @@ return [
         'Gravatar' => Creativeorange\Gravatar\Facades\Gravatar::class,
         'Form' => Collective\Html\FormFacade::class,
         'Html' => Collective\Html\HtmlFacade::class,
+        'Image' => Intervention\Image\Facades\Image::class
     ],
 
 //    /*
