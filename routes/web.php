@@ -64,8 +64,8 @@ Route::prefix('admin')->namespace('Back')->group(function () {
         // Medias
         Route::view('medias', 'back.medias')->name('medias.index');
 
-        // Categories
-        Route::resource('categories', 'CategoryController', ['except' => 'show']);
+//        // Categories
+//        Route::resource('categories', 'CategoryController', ['except' => 'show']);
 
 
         // Settings
@@ -104,6 +104,16 @@ Route::prefix('admin')->namespace('Back')->group(function () {
                 ]]
         );
 
+        Route::resource('categories', 'CategoryController', [
+                'except' => ['show'],
+                'names' => [
+                    'create'  => 'categories.create',
+                    'store'   => 'categories.store',
+                    'edit'    => 'categories.edit',
+                    'update'  => 'categories.update',
+                    'destroy' => 'categories.destroy'
+                ]]
+        );
     });
 
 

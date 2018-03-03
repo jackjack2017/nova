@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Back;
 
 use Illuminate\Http\Request;
 use App\{
-    Http\Controllers\Controller, Http\Requests, Models\Category, Product
+    Http\Controllers\Controller, Models\Category, Models\Product
 };
 
 class ProductController extends Controller
@@ -15,12 +15,12 @@ class ProductController extends Controller
      * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
-    public function index($gender)
+    public function index()
     {
-//        $products = Product::where('gender', $gender)->get();
         $products = Product::all();
+        $categories = Category::all()->pluck('name', 'id');
 
-        return view('back.products.index', compact('products'));
+        return view('back.products.index', compact('products', 'categories'));
     }
 
     /**
@@ -30,7 +30,9 @@ class ProductController extends Controller
      */
     public function create()
     {
-        return view('back.products.create');
+        $categories = Category::where('active', 1)->get()->pluck('name', 'id');
+
+        return view('back.products.create', compact('categories'));
     }
 
     /**
@@ -41,7 +43,19 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        Product::create($request->all());
+        if(isset($request['active']))
+            $request['active'] = true;
+        if(isset($request['top']))
+            $request['top'] = true;
+        if(isset($request['new']))
+            $request['new'] = true;
+
+        $product = new Product();
+
+        $product->fill($request->all());
+        $product->slug = str_slug($request->get('name'), "-");
+
+        $product->save();
 
         return redirect(route('products.index'))->with('product-ok', __('The product has been successfully created'));
     }
@@ -54,7 +68,8 @@ class ProductController extends Controller
      */
     public function edit(Product $product)
     {
-        return view('back.products.edit', compact('product'));
+        $categories = Category::where('active', 1)->get()->pluck('name', 'id');
+        return view('back.products.edit', compact('product', 'categories'));
     }
 
     /**
@@ -66,9 +81,18 @@ class ProductController extends Controller
      */
     public function update(Request $request, Product $product)
     {
+        if(isset($request['active']))
+            $request['active'] = true;
+        if(isset($request['top']))
+            $request['top'] = true;
+        if(isset($request['new']))
+            $request['new'] = true;
+
+        $product->slug = str_slug($request->get('name'), "-");
+
         $product->update($request->all());
 
-        return redirect(route('categories.index'))->with('category-ok', __('The category has been successfully updated'));
+        return redirect(route('products.index'))->with('product-ok', __('The product has been successfully updated'));
     }
 
     /**
@@ -81,6 +105,6 @@ class ProductController extends Controller
     {
         $product->delete();
 
-        return response()->json();
+        return redirect(route('products.index'));
     }
 }

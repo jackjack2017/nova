@@ -15,17 +15,9 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // Users
-        User::create(
-            [
-                'name' => 'GreatAdmin',
-                'email' => 'admin@la.fr',
-                'password' => bcrypt('admin'),
-                'role' => 'admin',
-                'valid' => true,
-                'confirmed' => true,
-                'remember_token' => str_random(10),
-            ]
-        );
+        $this->call(CategoriesTableSeeder::class);
+        $this->call(ProductsTableSeeder::class);
+        $this->call(OptionsTableSeeder::class);
+        $this->call(UsersTableSeeder::class);
     }
 }

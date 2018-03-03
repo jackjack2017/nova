@@ -5,18 +5,19 @@ namespace App\Http\Controllers\Back;
 
 use App\ {
     Http\Controllers\Controller,
-    Http\Requests\CategoryRequest as Request,
     Models\Category
 };
+use Illuminate\Http\Request;
 
 class CategoryController extends Controller
 {
+
     /**
      * Display list of models
      */
     public function index()
     {
-        $categories = Category::oldest('title')->get();
+        $categories = Category::all();
 
         return view('back.categories.index', compact('categories'));
     }
@@ -38,7 +39,12 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        Category::create($request->all());
+        Category::create([
+            'active' => isset($request['active']) ? true : false,
+            'name' => $request->get('name'),
+            'description' => $request->get('description'),
+            'slug'=> str_slug($request->get('name'), "-")
+        ]);
 
         return view('back.categories.index')->with('category-ok', __('The category has been successfully created'));
     }
@@ -58,13 +64,18 @@ class CategoryController extends Controller
     /**
      * Update the specified model in storage.
      *
-     * @param  \App\Http\Requests\CategoryRequest $request
+     * @param Request $request
      * @param  \App\Models\Category $category
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Category $category)
     {
-        $category->update($request->all());
+        $category->update([
+            'active' => isset($request['active']) ? true : false,
+            'name' => $request->get('name'),
+            'description' => $request->get('description'),
+            'slug'=> str_slug($request->get('name'), "-")
+        ]);
 
         return redirect(route('categories.index'))->with('category-ok', __('The category has been successfully updated'));
     }
@@ -79,6 +90,6 @@ class CategoryController extends Controller
     {
         $category->delete();
 
-        return response()->json();
+        return  redirect(route('categories.index'));
     }
 }

@@ -170,15 +170,15 @@ return [
 //        Creativeorange\Gravatar\GravatarServiceProvider::class,
 //        Baum\Providers\BaumServiceProvider::class,
 //
-//        /*
-//         * Application Service Providers...
-//         */
-//        App\Providers\AppServiceProvider::class,
-//        App\Providers\AuthServiceProvider::class,
-//        // App\Providers\BroadcastServiceProvider::class,
-//        App\Providers\EventServiceProvider::class,
-//        App\Providers\RouteServiceProvider::class,
-//        App\Providers\ElfinderServiceProvider::class,
+        /*
+         * Application Service Providers...
+         */
+        App\Providers\AppServiceProvider::class,
+        App\Providers\AuthServiceProvider::class,
+        // App\Providers\BroadcastServiceProvider::class,
+        App\Providers\EventServiceProvider::class,
+        App\Providers\RouteServiceProvider::class,
+        App\Providers\ElfinderServiceProvider::class,
 
         Collective\Html\HtmlServiceProvider::class,
         Intervention\Image\ImageServiceProvider::class

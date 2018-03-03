@@ -62,31 +62,31 @@
         {{--@admin--}}
         {{----}}
         <li><a href="{{ route('categories.index') }}"><i class="fa fa-list"></i> <span>@lang('Categories')</span></a></li>
-        {{--<li><a href="{{ route('products.index') }}"><i class="fa fa-list"></i> <span>@lang('Products')</span></a></li>--}}
+        <li><a href="{{ route('products.index') }}"><i class="fa fa-list"></i> <span>@lang('Products')</span></a></li>
 
         {{--@endadmin--}}
 
-        @include('back.partials.treeview', [
-          'icon' => 'file-text',
-          'type' => 'product',
-          'items' => [
-            [
-              'route' => route('products.index', 'men'),
-              'command' => 'men',
-              'color' => 'blue',
-            ],
-            [
-              'route' => route('products.index', 'women'),
-              'command' => 'women',
-              'color' => 'yellow',
-            ],
-            [
-              'route' => route('products.index', 'children'),
-              'command' => 'children',
-              'color' => 'green',
-            ],
-          ],
-        ])
+        {{--@include('back.partials.treeview', [--}}
+          {{--'icon' => 'file-text',--}}
+          {{--'type' => 'product',--}}
+          {{--'items' => [--}}
+            {{--[--}}
+              {{--'route' => route('products.index', 'men'),--}}
+              {{--'command' => 'men',--}}
+              {{--'color' => 'blue',--}}
+            {{--],--}}
+            {{--[--}}
+              {{--'route' => route('products.index', 'women'),--}}
+              {{--'command' => 'women',--}}
+              {{--'color' => 'yellow',--}}
+            {{--],--}}
+            {{--[--}}
+              {{--'route' => route('products.index', 'children'),--}}
+              {{--'command' => 'children',--}}
+              {{--'color' => 'green',--}}
+            {{--],--}}
+          {{--],--}}
+        {{--])--}}
 
         <li><a href="{{ route('medias.index') }}"><i class="fa fa-image"></i> <span>@lang('Medias')</span></a></li>
 

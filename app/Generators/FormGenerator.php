@@ -46,4 +46,7 @@ class FormGenerator
         return view('back.components.checkbox', compact('name', 'label', 'value', 'status', 'options'))->render();
     }
 
+
+
+
 }

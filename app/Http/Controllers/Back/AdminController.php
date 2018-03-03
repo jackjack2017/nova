@@ -20,18 +20,7 @@ class AdminController extends Controller
      */
     public function index()
     {
-        $pannels = [];
-
-        foreach (config('pannels') as $pannel) {
-
-            $panelAdmin = new PannelAdmin($pannel);
-
-            if ($panelAdmin->nbr) {
-                $pannels[] = $panelAdmin;
-            }
-        }
-
-        return view('back.index', compact('pannels'));
+        return view('back.index');
     }
 
     /**

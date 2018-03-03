@@ -1,112 +1,36 @@
 @extends('back.layout')
 
-@section('css')
-    <link rel="stylesheet" href="//cdn.jsdelivr.net/sweetalert2/6.3.8/sweetalert2.min.css">
-    <style>
-        input, th span {
-            cursor: pointer;
-        }
-    </style>
-@endsection
+@section('title', 'Товары')
 
-@section('button')
-    <a class="btn btn-primary" href="{{ route('products.create') }}">New product</a>
-@endsection
 
 @section('main')
-
     <div class="row">
         <div class="col-md-12">
-            @if (session('product-ok'))
-                @component('back.components.alert')
-                    @slot('type')
-                        success
-                    @endslot
-                    {!! session('product-ok') !!}
-                @endcomponent
-            @endif
-            <div class="box">
-                <div class="box-header with-border">
-                    <div id="spinner" class="text-center"></div>
+            <div class="box box-solid">
+                <div class="clearfix">
+                    <a href="{{ route('products.create') }}"
+                       class="btn btn-sm btn-success pull-right products-btn" title="Создать новый отвар"><i
+                                class="fa fa-plus"> </i> Добавить</a>
                 </div>
-                <div class="box-body table-responsive">
-                    <table id="users" class="table table-striped table-bordered">
+                <div class="box-body">
+                    <table class="table table-bordered table-hover dataTable">
                         <thead>
-                        <tr>
-                            <th>#</th>
-                            <th>@lang('Title')</th>
-                            <th>@lang('Slug')</th>
-                            <th>@lang('Total')</th>
+                        <tr role="row">
+                            <th>ID</th>
+                            <th>Название</th>
+                            <th>Категория</th>
+                            <th></th>
                             <th></th>
                             <th></th>
                         </tr>
                         </thead>
-                        <tfoot>
-                        <tr>
-                            <th>#</th>
-                            <th>@lang('Title')</th>
-                            <th>@lang('Slug')</th>
-                            <th>@lang('Total')</th>
-                            <th></th>
-                            <th></th>
-                        </tr>
-                        </tfoot>
-                        {{--<tbody id="pannel">--}}
-                            {{--@include('back.products.table', compact('products'))--}}
-                        {{--</tbody>--}}
+                        <tbody>
+                        @include('back.products._table')
+                        </tbody>
                     </table>
                 </div>
             </div>
-            <!-- /.box -->
         </div>
-        <!-- /.col -->
     </div>
-    <!-- /.row -->
 
-@endsection
-
-@section('js')
-    <script src="{{ asset('adminlte/js/back.js') }}"></script>
-    <script>
-
-        var category = (function () {
-
-            var onReady = function () {
-                $('#pannel').on('click', 'td a.btn-danger', function (event) {
-                    var that = $(this)
-                    event.preventDefault()
-                    swal({
-                        title: '@lang('Really destroy product ?')',
-                        type: "warning",
-                        showCancelButton: true,
-                        confirmButtonColor: '#DD6B55',
-                        confirmButtonText: '@lang('Yes')',
-                        cancelButtonText: '@lang('No')'
-                    }).then(function () {
-                        back.spin()
-                        $.ajax({
-                            url: that.attr('href'),
-                            type: 'DELETE'
-                        })
-                            .done(function () {
-                                that.parents('tr').remove()
-                                back.unSpin()
-                            })
-                            .fail(function () {
-                                back.fail('@lang('Looks like there is a server issue...')')
-                            }
-                        )
-                    })
-                })
-            }
-
-            return {
-                onReady: onReady
-            }
-
-        })()
-
-        $(document).ready(product.onReady)
-
-    </script>
 @endsection

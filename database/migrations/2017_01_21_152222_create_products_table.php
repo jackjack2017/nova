@@ -16,21 +16,23 @@ class CreateProductsTable extends Migration
         Schema::create('products', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
-            $table->string('price');
-            $table->string('discount');
-            $table->string('price_with_discount');
-            $table->text('description');
+            $table->string('price')->nullable();
+            $table->string('discount')->nullable();
+            $table->string('price_with_discount')->nullable();
+            $table->text('description')->nullable();
             $table->integer('category_id');
-            $table->string('brand');
-            $table->string('season');
-            $table->string('style');
-            $table->string('textile');
-            $table->text('comment');
+            $table->string('brand')->nullable();
+            $table->string('season')->nullable();
+            $table->string('style')->nullable();
+            $table->string('textile')->nullable();
+            $table->text('comment')->nullable();
             $table->string('gender');
 
-            $table->boolean('new');
-            $table->boolean('top');
-            $table->boolean('active');
+            $table->string('slug');
+
+            $table->boolean('new')->default(true);
+            $table->boolean('top')->default(false);
+            $table->boolean('active')->default(false);
 
             $table->timestamps();
         });
