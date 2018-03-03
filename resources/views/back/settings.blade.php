@@ -352,6 +352,7 @@
                 }
             })
             $('a[href="#tab_{{ setTabActive () }}"]').tab('show')
+            
         })
     </script>
 @endsection
