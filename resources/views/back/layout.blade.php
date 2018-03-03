@@ -59,40 +59,11 @@
         <li {{ currentRouteBootstrap('admin') }}>
           <a href="{{ route('admin') }}"><i class="fa fa-fw fa-dashboard"></i> <span>@lang('Dashboard')</span></a>
         </li>
-        {{--@admin--}}
-        {{----}}
+
         <li><a href="{{ route('categories.index') }}"><i class="fa fa-list"></i> <span>@lang('Categories')</span></a></li>
         <li><a href="{{ route('products.index') }}"><i class="fa fa-list"></i> <span>@lang('Products')</span></a></li>
 
-        {{--@endadmin--}}
-
-        {{--@include('back.partials.treeview', [--}}
-          {{--'icon' => 'file-text',--}}
-          {{--'type' => 'product',--}}
-          {{--'items' => [--}}
-            {{--[--}}
-              {{--'route' => route('products.index', 'men'),--}}
-              {{--'command' => 'men',--}}
-              {{--'color' => 'blue',--}}
-            {{--],--}}
-            {{--[--}}
-              {{--'route' => route('products.index', 'women'),--}}
-              {{--'command' => 'women',--}}
-              {{--'color' => 'yellow',--}}
-            {{--],--}}
-            {{--[--}}
-              {{--'route' => route('products.index', 'children'),--}}
-              {{--'command' => 'children',--}}
-              {{--'color' => 'green',--}}
-            {{--],--}}
-          {{--],--}}
-        {{--])--}}
-
         <li><a href="{{ route('medias.index') }}"><i class="fa fa-image"></i> <span>@lang('Medias')</span></a></li>
-
-
-        <li><a href="{{ route('settings.edit') }}"><i class="fa fa-cog"></i> <span>@lang('Settings')</span></a></li>
-
 
       </ul>
       <!-- /.sidebar-menu -->

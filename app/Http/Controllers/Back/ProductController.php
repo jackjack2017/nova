@@ -49,6 +49,8 @@ class ProductController extends Controller
             $request['top'] = true;
         if(isset($request['new']))
             $request['new'] = true;
+        if(isset($request['main']))
+            $request['main'] = true;
 
         $product = new Product();
 
@@ -87,6 +89,8 @@ class ProductController extends Controller
             $request['top'] = true;
         if(isset($request['new']))
             $request['new'] = true;
+        if(isset($request['main']))
+            $request['main'] = true;
 
         $product->slug = str_slug($request->get('name'), "-");
 

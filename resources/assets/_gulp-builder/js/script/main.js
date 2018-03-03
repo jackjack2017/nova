@@ -49,5 +49,9 @@ class App{
             mouseDrag: false,
             dotsContainer: '.js_product-slider-dots-container'
         });
+
+        $('#tab_4').on('click',function () {
+            console.log('click');
+        })
     }
 }; 
