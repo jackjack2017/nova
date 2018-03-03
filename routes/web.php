@@ -86,5 +86,8 @@ Route::prefix('admin')->namespace('Back')->group(function () {
 */
 
 Route::prefix('cart')->namespace('Back')->group(function () {
-    Route::name('cart::add')->get('add', 'CartController@add');
+    Route::name('cart::add')->post('add', 'CartController@add');
+    Route::name('cart::remove')->post('remove', 'CartController@remove');
+    Route::name('cart::all')->get('all', 'CartController@getAll');
+    Route::name('cart::destroy')->post('destroy', 'CartController@destroy');
 });
