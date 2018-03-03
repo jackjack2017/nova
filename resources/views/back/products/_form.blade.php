@@ -21,6 +21,9 @@
                         <div class="col-md-4">
                             {!! $form->checkbox('new', 'Новый',  null, isset($product) ? $product->new : false) !!}
                         </div>
+                        <div class="col-md-4">
+                            {!! $form->checkbox('main', 'Основной',  null, isset($product) ? $product->main : false) !!}
+                        </div>
                     </div>
                     <div class="row">
                         <div class="col-md-4">
@@ -28,9 +31,6 @@
                         </div>
                         <div class="col-md-2">
                             {!! $form->select('gender', ['Мужской', 'Женский', "Дети"], null, 'Пол') !!}
-                        </div>
-                        <div class="col-md-2">
-                            {!! $form->text('article', null, 'Артикул') !!}
                         </div>
                     </div>
                     <div class="row">
@@ -89,24 +89,24 @@
                 </div>
 
                 <div class="tab-pane" id="tab_3">
-                    @foreach($product->options as $option)
-                        <div class="row">
-                            <div class="col-md-4">
-                                {!! $form->text('article', $option->article, 'Артикул') !!}
-                            </div>
-                            <div class="col-md-4">
-                                {!! $form->select('color', ['black' => 'черный', 'red' => 'красный', 'green' => 'зеленый'], $option->color, 'Цвет') !!}
-                            </div>
-                            <div class="col-md-4">
-                                {!! $form->text('size', $option->size, 'Размер') !!}
-                            </div>
+
+                    <div class="row">
+                        <div class="col-md-4">
+                            {!! $form->text('article', $product->article, 'Артикул') !!}
                         </div>
-                    @endforeach
+                        <div class="col-md-4">
+                            {!! $form->select('color', ['black' => 'черный', 'red' => 'красный', 'green' => 'зеленый'], $product->color, 'Цвет') !!}
+                        </div>
+                        <div class="col-md-4">
+                            {!! $form->text('size', $product->size, 'Размер') !!}
+                        </div>
+                    </div>
+
                 </div>
                 <div class="tab-pane" id="tab_4">
                     @if(isset($product->gallery))
-                     {!! $form->imageLoad('images', 'Галерея', isset($product) ? $product->gallery : '', ['multiple' => '']) !!}
-                        @endif
+                        {!! $form->imageLoad('images', 'Галерея', isset($product) ? $product->gallery : '', ['multiple' => '']) !!}
+                    @endif
                 </div>
             </div>
         </div>
