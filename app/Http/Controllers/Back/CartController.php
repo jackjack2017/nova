@@ -12,15 +12,40 @@ class CartController extends Controller
     public function add(Request $request)
     {
         $product = Product::find($request->get('product_id'));
-        Cart::add($product, 1);
+        $cart_item = [
+            'id' => $product->id,
+            'name' => $product->name,
+            'qty' => 1,
+            'price' => $product->price,
+            'options' => [
+                'size' => $product->size,
+                'color' => $product->color,
+                'artcile' => $product->article,
+            ]
+        ];
+        Cart::add($cart_item);
 
         return $this->getCart();
     }
 
 
-    public function getCart()
+    public function getAll()
     {
         $cart = Cart::content();
-        return view('', compact('cart'));
+        $total = Cart::subtotal();
+        return view('parts/_header-cart', compact('cart', 'total'));
+    }
+
+
+    public function remove(Request $request)
+    {
+        Cart::remove($request->get('item_id'));
+        return $this->getCart();
+    }
+
+    public function destroy()
+    {
+        Cart::destroy();
+        return $this->getCart();
     }
 }
