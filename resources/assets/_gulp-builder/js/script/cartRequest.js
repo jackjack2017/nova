@@ -19,10 +19,9 @@ export class CartRequest{
 
         $('.js_cart-btn').on('click', function(event) {  
             event.preventDefault();
-            let productId = $(this).closest('.product-row').data('id');
-            console.log(productId);
+            let productID = $(this).closest('.product-row').data('id');
             let url = '/cart/add';
-            _this.request(url, productId); 
+            _this.request(url, productID); 
         })
     }
 
@@ -34,10 +33,12 @@ export class CartRequest{
             url: url,
             method: this.method,
             data: {
-                productId: productId,
+                product_id: productId,
                 _token: this.token
             },
-            success: this.success()
+            success: function(data){
+                $('.js_header-cart-blk').append(data);
+            }
         });
 
     }
@@ -45,9 +46,8 @@ export class CartRequest{
     /**
      * On success request
      */
-    success() {
-        // let info = JSON.parse(data);
-        console.log('success');
+    success(data) {
+       console.log(data);
     }
 
 }

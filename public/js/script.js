@@ -2730,13 +2730,10 @@
 	
 	            $('.js_product-colour').on('change', function () {
 	
-	                var colorId = $(this).data('color');
 	                var productId = $(this).closest('.product-row').data('id');
 	                var url = '/product/test';
-	                console.log(this);
-	                console.log(productId);
-	                console.log(colorId);
-	                _this.request(url, colorId, productId);
+	
+	                _this.request(url, productId);
 	            });
 	        }
 	
@@ -2746,12 +2743,11 @@
 	
 	    }, {
 	        key: 'request',
-	        value: function request(url, colorId, productId) {
+	        value: function request(url, productId) {
 	            $.ajax({
 	                url: url,
 	                method: this.method,
 	                data: {
-	                    colorId: colorId,
 	                    productId: productId,
 	                    _token: this.token
 	                },
@@ -2945,10 +2941,9 @@
 	
 	            $('.js_cart-btn').on('click', function (event) {
 	                event.preventDefault();
-	                var productId = $(this).closest('.product-row').data('id');
-	                console.log(productId);
+	                var productID = $(this).closest('.product-row').data('id');
 	                var url = '/cart/add';
-	                _this.request(url, productId);
+	                _this.request(url, productID);
 	            });
 	        }
 	
@@ -2963,10 +2958,12 @@
 	                url: url,
 	                method: this.method,
 	                data: {
-	                    productId: productId,
+	                    product_id: productId,
 	                    _token: this.token
 	                },
-	                success: this.success()
+	                success: function success(data) {
+	                    $('.js_header-cart-blk').append(data);
+	                }
 	            });
 	        }
 	
@@ -2976,9 +2973,8 @@
 	
 	    }, {
 	        key: 'success',
-	        value: function success() {
-	            // let info = JSON.parse(data);
-	            console.log('success');
+	        value: function success(data) {
+	            console.log(data);
 	        }
 	    }]);
 	    return CartRequest;

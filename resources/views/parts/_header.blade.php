@@ -20,8 +20,8 @@
 				<a href="#" class="header-like"><span class="header-like-txt">Избранное</span><span class="header-like-num">(0)</span></a>
 				<div class="header-basket-blk">
 					<a href="#" class="header-basket-lnk"><span class="header-basket-txt">Корзина</span> <span class="header-basket-num">(0)</span></a>
-					<div class="header-basket-inner">
-						@include('/parts/_header-cart')
+					<div class="header-basket-inner js_header-cart-blk">
+							@include('/parts/_header-cart')
 					</div>
 				</div>
 			</div>

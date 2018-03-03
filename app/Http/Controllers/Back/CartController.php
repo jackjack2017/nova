@@ -25,7 +25,7 @@ class CartController extends Controller
         ];
         Cart::add($cart_item);
 
-        return $this->getCart();
+        return $this->getAll();
     }
 
 
@@ -33,6 +33,7 @@ class CartController extends Controller
     {
         $cart = Cart::content();
         $total = Cart::subtotal();
+       
         return view('parts/_header-cart', compact('cart', 'total'));
     }
 
@@ -40,12 +41,12 @@ class CartController extends Controller
     public function remove(Request $request)
     {
         Cart::remove($request->get('item_id'));
-        return $this->getCart();
+        return $this->getAll();
     }
 
     public function destroy()
     {
         Cart::destroy();
-        return $this->getCart();
+        return $this->getAll();
     }
 }
