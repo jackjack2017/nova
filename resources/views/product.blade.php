@@ -5,7 +5,7 @@
 
 <div class="product">
     	<div class="product-container">
-    		<div class="product-row js-product" data-id="21">
+    		<div class="product-row js-product" data-id="1">
     			<div class="product-img">
                     <div class="product-slider owl-carousel owl-theme js_slider-product js_gallery-product">
                         <a href="{{asset('img/product-img1.jpg')}}" class="product-slider-i">
@@ -94,7 +94,7 @@
                     </div>
                     <a href="#" class="product-s-lnk" target="blank">Размерная сетка</a>
                     <div class="product-btn-wrap">
-                        <a href="#" class="product-btn-inverse">Добавить в корзину</a>
+                        <a href="#" class="product-btn-inverse js_cart-btn">Добавить в корзину</a>
                     </div>
                      <div class="product-btn-wrap">
                         <a href="#" class="product-btn">В избранное</a>

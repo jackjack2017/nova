@@ -3,6 +3,7 @@ import {ui} from './ui';
 import {getToken} from "../libs/getToken";
 import {ChangeProductRequest} from "./changeProductRequest";
 import {ShowMoreRequest} from "./showMoreRequest";
+import {CartRequest} from "./cartRequest";
 
 $( document ).ready(function() {
     if(NODE_ENV === 'dev'){
@@ -24,6 +25,9 @@ class App{
 
         let changeProductRequest = new ChangeProductRequest;
         changeProductRequest.init();
+
+        let cartRequest = new CartRequest;
+        cartRequest.init();
 
         let requestProducts = new ShowMoreRequest({
             url: '/product/test',
@@ -49,9 +53,5 @@ class App{
             mouseDrag: false,
             dotsContainer: '.js_product-slider-dots-container'
         });
-
-        $('#tab_4').on('click',function () {
-            console.log('click');
-        })
     }
 }; 

@@ -1364,6 +1364,8 @@
 	
 	var _showMoreRequest = __webpack_require__(110);
 	
+	var _cartRequest = __webpack_require__(111);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	$(document).ready(function () {
@@ -1390,6 +1392,9 @@
 	
 	            var changeProductRequest = new _changeProductRequest.ChangeProductRequest();
 	            changeProductRequest.init();
+	
+	            var cartRequest = new _cartRequest.CartRequest();
+	            cartRequest.init();
 	
 	            var requestProducts = new _showMoreRequest.ShowMoreRequest({
 	                url: '/product/test',
@@ -2892,6 +2897,91 @@
 	        }
 	    }]);
 	    return ShowMoreRequest;
+	}();
+
+/***/ },
+/* 111 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	exports.CartRequest = undefined;
+	
+	var _classCallCheck2 = __webpack_require__(79);
+	
+	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+	
+	var _createClass2 = __webpack_require__(80);
+	
+	var _createClass3 = _interopRequireDefault(_createClass2);
+	
+	var _getToken = __webpack_require__(108);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var CartRequest = exports.CartRequest = function () {
+	    function CartRequest() {
+	        var method = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 'POST';
+	        (0, _classCallCheck3.default)(this, CartRequest);
+	
+	
+	        this.method = method;
+	        this.token = (0, _getToken.getToken)();
+	    }
+	
+	    /**
+	     * Init btn
+	     */
+	
+	
+	    (0, _createClass3.default)(CartRequest, [{
+	        key: 'init',
+	        value: function init() {
+	
+	            var _this = this;
+	
+	            $('.js_cart-btn').on('click', function (event) {
+	                event.preventDefault();
+	                var productId = $(this).closest('.product-row').data('id');
+	                console.log(productId);
+	                var url = '/cart/add';
+	                _this.request(url, productId);
+	            });
+	        }
+	
+	        /**
+	         * Change product by colour ajax request
+	         */
+	
+	    }, {
+	        key: 'request',
+	        value: function request(url, productId) {
+	            $.ajax({
+	                url: url,
+	                method: this.method,
+	                data: {
+	                    productId: productId,
+	                    _token: this.token
+	                },
+	                success: this.success()
+	            });
+	        }
+	
+	        /**
+	         * On success request
+	         */
+	
+	    }, {
+	        key: 'success',
+	        value: function success() {
+	            // let info = JSON.parse(data);
+	            console.log('success');
+	        }
+	    }]);
+	    return CartRequest;
 	}();
 
 /***/ }
