@@ -127,6 +127,7 @@
 
 <!-- AdminLTE App -->
 <script src="{{ asset('adminlte/js/app.min.js') }}"></script>
+<script src="{{ asset('js/admin.js') }}"></script>
 
 <!-- Commom -->
 {{--<script src="/adminlte/js/common.js"></script>--}}

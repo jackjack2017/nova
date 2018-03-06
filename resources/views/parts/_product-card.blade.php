@@ -1,7 +1,7 @@
-<a href="#" class="product-card">
+<a href="#" class="product-card" data-id="1">
 	<div class="product-card-t">
 		<img src="{{asset('img/product-img2.jpg')}}" alt="banner">
-		<button class="product-card-t-ic __favourite fa fa-heart-o fa-2x"  aria-hidden="true"></button >
+		<button class="product-card-t-ic __favourite fa fa-heart-o fa-2x js_like-btn"  aria-hidden="true"></button >
 		<span class="product-card-t-ic __new"  aria-hidden="true">NEW</span >
 		<span class="product-card-t-ic __top"  aria-hidden="true">TOP</span >
 		<span class="product-card-t-ic __discount fa fa-percent fa-2x"  aria-hidden="true"></span >

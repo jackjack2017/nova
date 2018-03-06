@@ -4,6 +4,7 @@ import {getToken} from "../libs/getToken";
 import {ChangeProductRequest} from "./changeProductRequest";
 import {ShowMoreRequest} from "./showMoreRequest";
 import {CartRequest} from "./cartRequest";
+import {LikeRequest} from "./likeRequest";
 
 $( document ).ready(function() {
     if(NODE_ENV === 'dev'){
@@ -28,6 +29,9 @@ class App{
 
         let cartRequest = new CartRequest;
         cartRequest.init();
+
+        let likeRequest = new LikeRequest;
+        likeRequest.init();
 
         let requestProducts = new ShowMoreRequest({
             url: '/product/test',
