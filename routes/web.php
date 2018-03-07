@@ -28,13 +28,16 @@ Route::get('/page', function () {
     return view('page');
 });
 
-Route::get('/product', function () {
-    return view('product');
-});
+//Route::get('/product', function () {
+//    return view('product');
+//});
+Route::name('product')->get('/product/{product_id}', 'FrontController@product');
 
-Route::get('/category', function () {
-    return view('category');
-});
+
+//Route::get('/category', function () {
+//    return view('category');
+//});
+Route::name('category')->get('/category', 'FrontController@category');
 
 Route::post('/product/test', function () {
     return view('test');

@@ -8,9 +8,8 @@ class Product extends Model
 {
    protected $fillable = [
        'name', 'price', 'price_with_discount', 'description',
-       'category_id', 'slug', 'brand', 'season', 'style', 'textile', 'new', 'top', 'active', 'main',
-       'gender', 'discount',
-       'article', 'size', 'color'
+       'category_id', 'slug', 'brand', 'season', 'style', 'textile', 'new', 'top', 'active',
+       'gender', 'discount', 'product_id'
    ];
 
 
@@ -30,4 +29,11 @@ class Product extends Model
         return $this->belongsTo(Category::class);
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\hasMany
+     */
+    public function products()
+    {
+        return $this->hasMany(Product::class);
+    }
 }

@@ -43,14 +43,14 @@
                     </div>
 	    		</div>
 	    		<div class="product-info">
-	    			<p class="product-name">Плaтье с рисунком</p>
-                    <p class="product-price">2 999 грн</p>
-                    <p class="product-article">Артикул: 23456789</p>
+	    			<p class="product-name">{{ $product->name }}</p>
+                    <p class="product-price">{{ $product->price }} грн</p>
+                    <p class="product-article">Артикул: {{ $product->artcile }}</p>
                     <p class="product-c">Цвет:</p>
                     <div class="product-c-wrap">
                         <div class="product-c-i">
                             <input type="radio" name="color" id="color" data-color="1" class="product-c-inp js_product-colour" checked>
-                            <label for="color" class="product-c-inp-lbl"></label>
+                            <label for="color" class="product-c-inp-lbl" ></label>
                         </div>
                         <div class="product-c-i">
                             <input type="radio" name="color" id="color2" data-color="2" class="product-c-inp js_product-colour">

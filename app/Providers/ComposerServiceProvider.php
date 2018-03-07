@@ -18,6 +18,9 @@ class ComposerServiceProvider extends ServiceProvider
         View::composer(
             'parts._header', 'App\Http\ViewComposers\CartComposer'
         );
+//        View::composer(
+//            'parts._header', 'App\Http\ViewComposers\MenuComposer'
+//        );
 
     }
 

@@ -17,9 +17,9 @@
                         <thead>
                         <tr role="row">
                             <th>ID</th>
+                            <th>Артикул</th>
                             <th>Название</th>
                             <th>Категория</th>
-                            <th></th>
                             <th></th>
                             <th></th>
                         </tr>

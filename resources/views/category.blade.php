@@ -118,39 +118,41 @@
 					<a href="#" class="category-cnt-filter-lnk">Все</a>
 				</div>
 				<div class="category-row">
+					@foreach($products as $product)
 					<div class="category-col">
-						@include('parts/_product-card')
+						@include('parts/_product-card', $product)
 					</div>
-					<div class="category-col">
-						@include('parts/_product-card')
-					</div>
-					<div class="category-col">
-						@include('parts/_product-card')
-					</div>
-					<div class="category-col">
-						@include('parts/_product-card')
-					</div>
-					<div class="category-col">
-						@include('parts/_product-card')
-					</div>
-					<div class="category-col">
-						@include('parts/_product-card')
-					</div>
-					<div class="category-col">
-						@include('parts/_product-card')
-					</div>
-					<div class="category-col">
-						@include('parts/_product-card')
-					</div>
-					<div class="category-col">
-						@include('parts/_product-card')
-					</div>
-					<div class="category-col">
-						@include('parts/_product-card')
-					</div>
-					<div class="category-col">
-						@include('parts/_product-card')
-					</div>
+					@endforeach
+					{{--<div class="category-col">--}}
+						{{--@include('parts/_product-card')--}}
+					{{--</div>--}}
+					{{--<div class="category-col">--}}
+						{{--@include('parts/_product-card')--}}
+					{{--</div>--}}
+					{{--<div class="category-col">--}}
+						{{--@include('parts/_product-card')--}}
+					{{--</div>--}}
+					{{--<div class="category-col">--}}
+						{{--@include('parts/_product-card')--}}
+					{{--</div>--}}
+					{{--<div class="category-col">--}}
+						{{--@include('parts/_product-card')--}}
+					{{--</div>--}}
+					{{--<div class="category-col">--}}
+						{{--@include('parts/_product-card')--}}
+					{{--</div>--}}
+					{{--<div class="category-col">--}}
+						{{--@include('parts/_product-card')--}}
+					{{--</div>--}}
+					{{--<div class="category-col">--}}
+						{{--@include('parts/_product-card')--}}
+					{{--</div>--}}
+					{{--<div class="category-col">--}}
+						{{--@include('parts/_product-card')--}}
+					{{--</div>--}}
+					{{--<div class="category-col">--}}
+						{{--@include('parts/_product-card')--}}
+					{{--</div>--}}
 				</div>
 				
 				<div class="category-btn-show-wrap">
