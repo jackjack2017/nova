@@ -3067,15 +3067,16 @@
 	
 	            var _this = this;
 	
-	            $('.js_like-btn').on('click', function (event) {
+	            $('body').on('click', '.js_like-btn', function (event) {
 	                event.preventDefault();
 	                var productID = $(this).closest('.product-card').data('id');
 	                var url = '/like/add';
 	                _this.requestAdd(url, productID);
 	            });
 	
-	            $('.js_like-btn-remove').on('click', function (event) {
+	            $('body').on('click', '.js_like-btn-remove', function (event) {
 	                event.preventDefault();
+	                console.log('yeaahh');
 	                var item_id = $(this).closest('.like-product-card').data('item-id');
 	                var url = '/like/remove';
 	                _this.requestRemove(url, item_id);

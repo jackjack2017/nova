@@ -66,7 +66,7 @@ export class CartRequest{
             success: function(data){
                 console.log('yeahh');
                 let cartCount = +$('.js_cart-count').html();
-                cartCount--
+                cartCount--;
                 $('.js_cart-count').empty();
                 $('.js_cart-count').append(cartCount--);
             },

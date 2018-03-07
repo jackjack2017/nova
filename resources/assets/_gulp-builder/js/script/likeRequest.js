@@ -16,15 +16,16 @@ export class LikeRequest{
 
         let _this = this;
 
-        $('.js_like-btn').on('click', function(event) {
+        $('body').on('click', '.js_like-btn', function(event) {
             event.preventDefault();
             let productID = $(this).closest('.product-card').data('id');
             let url = '/like/add';
             _this.requestAdd(url, productID);
         });
 
-        $('.js_like-btn-remove').on('click', function(event) {
+        $('body').on('click','.js_like-btn-remove', function(event) {
             event.preventDefault();
+            console.log('yeaahh');
             let item_id = $(this).closest('.like-product-card').data('item-id');
             let url = '/like/remove';
             _this.requestRemove(url, item_id);
