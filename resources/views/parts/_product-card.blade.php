@@ -1,10 +1,12 @@
 
     <a href="#" class="product-card" data-id="1">
         <div class="product-card-t">
+            <div class="product-card-lbl-blk">
+                <span class="product-card-lbl"> <i class="fa fa-bell"></i>New</span>
+                <span class="product-card-lbl"><i class="fa fa-diamond"></i>Top</span>
+                <span class="product-card-lbl"><i class="fa fa-percent"></i>Discount</span>
+            </div>
             <img src="{{asset('img/product-img2.jpg')}}" alt="banner">
-            <span class="product-card-t-ic __new" aria-hidden="true">NEW</span>
-            <span class="product-card-t-ic __top" aria-hidden="true">TOP</span>
-            <span class="product-card-t-ic __discount fa fa-percent fa-2x" aria-hidden="true"></span>
         </div>
         <div class="product-card-b">
             <div class="product-card-btn-wrap">

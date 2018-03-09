@@ -1369,6 +1369,8 @@
 	
 	var _likeRequest = __webpack_require__(113);
 	
+	var _amount = __webpack_require__(114);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	$(document).ready(function () {
@@ -1392,6 +1394,7 @@
 	            //used in Product slider block (Product page)
 	            _ui.ui.galleryPopupInit('.js_gallery-product');
 	            _ui.ui.tabsInit('.js_ui-tab-nav', '.js_ui-tabs-cnt', '.js_ui-tabs');
+	            _amount.amount.init('.js_ui-amount-inp', '.js_ui-amount-btn-dec', '.js_ui-amount-btn-inc');
 	
 	            var changeProductRequest = new _changeProductRequest.ChangeProductRequest();
 	            changeProductRequest.init();
@@ -1415,6 +1418,13 @@
 	                nav: true,
 	                dots: true,
 	                items: 4,
+	                margin: 10
+	            });
+	
+	            new _slider.Slider('.js_slider-main-big', {
+	                nav: true,
+	                dots: true,
+	                items: 6,
 	                margin: 10
 	            });
 	
@@ -3141,6 +3151,68 @@
 	    }]);
 	    return LikeRequest;
 	}();
+
+/***/ },
+/* 114 */
+/***/ function(module, exports) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+	var amount = exports.amount = {
+		init: function init(el, btnDec, btnInc) {
+			var min = $(el).data('min') || false,
+			    max = $(el).data('max') || false;
+			if (!$(el).attr('disabled')) {
+				$('body').on('click', btnDec, function (event) {
+					event.preventDefault();
+					var inp = $(this).parent().find(el);
+					amount.decrement(inp, min);
+					amount.checkedDisabled(inp, $(this), min, btnInc, max);
+				});
+				$('body').on('click', btnInc, function (event) {
+					event.preventDefault();
+					var inp = $(this).parent().find(el);
+					amount.increment(inp, max);
+					amount.checkedDisabled(inp, btnDec, min, $(this), max);
+				});
+			}
+		},
+	
+		// count reduction
+		decrement: function decrement(el, min) {
+			var value = parseInt(el.val());
+			value--;
+			if (value >= min) {
+				el.val(value--);
+			}
+		},
+		//count increase
+		increment: function increment(el, max) {
+			var value = parseInt(el.val());
+			value++;
+			if (value <= max) {
+				el.val(value++);
+			}
+		},
+		//check the button on the activity
+		checkedDisabled: function checkedDisabled(el, btnDec, min, btnInc, max) {
+			$(el).each(function (index, el) {
+				var value = parseInt($(el).val());
+				$(el).parent().find(btnDec).removeClass('__disabled');
+				$(el).parent().find(btnInc).removeClass('__disabled');
+				if (value <= min) {
+					$(el).parent().find(btnDec).addClass('__disabled');
+				}
+				if (value >= max) {
+					$(el).parent().find(btnInc).addClass('__disabled');
+				}
+			});
+		}
+	
+	};
 
 /***/ }
 /******/ ]);

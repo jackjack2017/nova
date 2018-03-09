@@ -1,4 +1,4 @@
-<div class="category-sidebar">
+<div class="sidebar">
     <p class="category-sidebar-txt">Тип платья:</p>
     <div class="checkbox-wrap">
         <input id="subcategoryKind1" class="checkbox-inp" type="checkbox">

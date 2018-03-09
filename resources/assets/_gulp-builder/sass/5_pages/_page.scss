@@ -1,17 +1,5 @@
 .page{
 	padding-bottom: 20px;
-	&-container{
-		@extend .container-category;
-		&-main{
-			@extend .container;
-		}
-	}
-	&-sidebar{
-		@extend .main-sidebar;
-	}
-	&-cnt{
-		@extend .main-cnt;
-	}
 	&-lst{
 		span{
 			text-transform: uppercase;
@@ -62,13 +50,6 @@
 				@extend .btn-inverse;
 			}
 		}
-	}
-	&-ttl{
-		font-size: 18px;
-		font-weight: bold;
-		text-transform: uppercase;
-		text-align: center;
-		color: black;
 	}
 	&-slider{
 		&.owl-carousel .owl-nav .owl-prev{

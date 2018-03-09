@@ -1,8 +1,5 @@
 .product{
 	padding: 25px 0;
-	&-container{
-		@extend .container;
-	}
 	&-row{
 		@include make-row();
 		margin: 0;
@@ -55,7 +52,12 @@
 	&-price{
 		@extend .product-txt;
 		font-size: 24px;
-		font-weight: bold;
+		&-num{
+			font-weight: bold;
+		}
+		&-total{
+			font-size: 20px;
+		}
 	}
 	&-article{
 		@extend .product-txt;
@@ -107,6 +109,10 @@
 				text-decoration: none;
 			}
 		}
+	}
+	&-q{
+		@extend .product-txt;
+		padding-top: 10px;
 	}
 	&-btn{
 		@extend .btn;

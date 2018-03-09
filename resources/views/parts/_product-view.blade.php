@@ -37,7 +37,8 @@
 	    		</div>
 	    		<div class="product-info">
 	    			<p class="product-name">Плaтье с рисунком</p>
-                    <p class="product-price">2 999 грн</p>
+                    <p class="product-price"><span class="product-price-num">999</span> грн.</p>
+                    <p class="product-price-total">Итого: <span class="product-price-num">999</span> грн.</p>
                     <p class="product-article">Артикул: 23456789</p>
                     <p class="product-c">Цвет:</p>
                     <div class="product-c-wrap">
@@ -83,6 +84,14 @@
                         <div class="product-s-i">
                             <input type="radio" name="size" id="size5" class="product-s-inp">
                             <label for="size5" class="product-s-inp-lbl">112</label>
+                        </div>
+                    </div>
+                    <p class="product-q">Количество:</p>
+                    <div class="count-wrap">
+                        <div class="count-num">
+                            <a href="#" class="count-min js_ui-amount-btn-dec __disabled"></a>
+                            <input type="number" class="amount js_ui-amount-inp js_cart-amount" value="1" data-min="1" min="1" data-max="999" max="999">
+                            <a href="#" class="count-plus js_ui-amount-btn-inc"></a>
                         </div>
                     </div>
                     <a href="#" class="product-s-lnk" target="blank">Размерная сетка</a>

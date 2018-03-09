@@ -1,4 +1,4 @@
-<div class="page-sidebar">
+<div class="sidebar">
     <ul class="page-lst default-cnt">
         <li><a href="#">
                 <span>Новые поступления</span>

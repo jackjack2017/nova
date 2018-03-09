@@ -16,29 +16,15 @@
 | Frontend
 |--------------------------------------------------------------------------|
 */
-Route::get('/', function () {
-    return view('main');
-});
 
-Route::get('/model', function () {
-    return view('model');
-});
+Route::view('/', 'main');
+Route::view('/page', 'page');
+Route::view('/product', 'product');
+Route::view('/category', 'category');
+Route::view('/cart', 'cart');
+Route::view('/deal', 'deal');
+Route::view('/favourite', 'favourite');
 
-Route::get('/page', function () {
-    return view('page');
-});
-
-Route::get('/product', function () {
-    return view('product');
-});
-
-Route::get('/category', function () {
-    return view('category');
-});
-
-Route::post('/product/test', function () {
-    return view('test');
-});
 
 
 // Authentification
