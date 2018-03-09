@@ -1,0 +1,14 @@
+.deal{
+  padding-bottom: 50px;
+  &-row{
+    @include make-row();
+  }
+  &-col{
+    @include make-col-ready($grid-columns);
+    @include make-col(6);
+  }
+  &-form{
+    border: 1px solid $c-border;
+    padding: 20px;
+  }
+}

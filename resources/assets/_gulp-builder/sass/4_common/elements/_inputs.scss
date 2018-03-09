@@ -1,3 +1,55 @@
+input, textarea{
+	display: block;
+	width: 100%;
+	border: 1px solid $c-border;
+	color: $c-main;
+	padding: 0 10px;
+	font-family: $base-font;
+	border-radius: 0;
+	font-size: 16px;
+	&:focus{
+		outline: none;
+		border: 1px solid $c-main;
+	}
+	&::-webkit-input-placeholder {
+		color: $c-grey;
+		font-size: 12px;
+	}
+	&::-moz-placeholder{
+		color: $c-grey;
+		font-size: 12px;
+	}/* Firefox 19+ */
+	&:-moz-placeholder{
+		color: $c-grey;
+		font-size: 12px;
+	}/* Firefox 18- */
+	&:-ms-input-placeholder{
+		color: $c-grey;
+		font-size: 12px;
+	}
+}
+input{
+	height: 50px;
+	line-height: 50px;
+}
+
+label{
+	font-size: 14px;
+	font-weight: bold;
+}
+
+.inp{
+	&-wrap{
+		margin-bottom: 10px;
+	}
+}
+
+textarea{
+	resize: vertical;
+	padding: 10px;
+}
+
+
 .inp-c{
 	display: none;
 	&-lbl{

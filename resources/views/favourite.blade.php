@@ -4,7 +4,7 @@
     @include('parts/_breadcrumbs')
     <section class="favourite">
         <div class="container">
-            <div class="ttl-L">Мои будущие покупки</div>
+            <h1 class="ttl-L">Мои будущие покупки</h1>
             <div class="card-cart-row">
                 @include('blocks/_card-like')
                 @include('blocks/_card-like')
