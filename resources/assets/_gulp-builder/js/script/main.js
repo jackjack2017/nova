@@ -30,6 +30,14 @@ class App{
             sortable: true,
             padding: 2
         });
+        $('.js_select').select2({
+            placeholder: 'Выбор перевозчика'
+        });
+        $('.js_select-payment').select2({
+            placeholder: 'Выбор способа оплаты'
+        });
+
+
         let changeProductRequest = new ChangeProductRequest;
         changeProductRequest.init();
 
