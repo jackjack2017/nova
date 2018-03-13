@@ -11,6 +11,7 @@
 
             <div class="tab-content">
                 <div class="tab-pane active" id="tab_1">
+                        <form action="/file-upload" class="dropzone" id="dropzone1"></form>
                     <div class="row">
                         <div class="col-md-4">
                             {!! $form->checkbox('active', 'Активный', null, isset($product) ? $product->active : false) !!}
@@ -104,6 +105,9 @@
 
                 </div>
                 <div class="tab-pane" id="tab_4">
+
+                    <form action="/file-upload" class="dropzone" id="dropzone"></form>
+
                     @if(isset($product->gallery))
                         {!! $form->imageLoad('images', 'Галерея', isset($product) ? $product->gallery : '', ['multiple' => '']) !!}
                     @endif

@@ -25,8 +25,11 @@ class App{
         ui.galleryPopupInit('.js_gallery-product');
         ui.tabsInit('.js_ui-tab-nav', '.js_ui-tabs-cnt', '.js_ui-tabs');
         amount.init('.js_ui-amount-inp', '.js_ui-amount-btn-dec', '.js_ui-amount-btn-inc');
-
-
+        $('.my-container').sortablePhotos({
+            selector: '> .my-item',
+            sortable: true,
+            padding: 2
+        });
         let changeProductRequest = new ChangeProductRequest;
         changeProductRequest.init();
 
