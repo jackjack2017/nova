@@ -21,11 +21,11 @@
     <div class="header-basket-inner-b-price-line">
         <span class="header-basket-inner-b-price-line-txt">Стоимость заказа</span><span class="header-basket-inner-b-price-line-txt">4 999 грн</span>
     </div>
-    <div class="header-basket-inner-b-price-line">
-        <span class="header-basket-inner-b-price-line-txt">Доставка</span><span class="header-basket-inner-b-price-line-txt">99 грн</span>
-    </div>
+    {{--<div class="header-basket-inner-b-price-line">--}}
+        {{--<span class="header-basket-inner-b-price-line-txt">Доставка</span><span class="header-basket-inner-b-price-line-txt">99 грн</span>--}}
+    {{--</div>--}}
     <div class="header-basket-inner-b-price-line-total">
-        <span class="header-basket-inner-b-price-line-total-txt">Доставка</span><span class="header-basket-inner-b-price-line-total-txt">99 грн</span>
+        <span class="header-basket-inner-b-price-line-total-txt">Итого</span><span class="header-basket-inner-b-price-line-total-txt">99 грн</span>
     </div>
     <div class="header-basket-inner-b-btn-wrap">
         <a href="#" class="header-basket-inner-b-btn-inverse">Оформить заказ</a>

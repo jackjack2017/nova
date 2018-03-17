@@ -8,25 +8,25 @@
         <div class="container-with-sidebar">
 
             <div class="cnt">
-                <form action="#" class="deal-form">
+                <form action="{{url('test')}}" method="post" class="deal-form js_sendform-form-deal">
                     <h2 class="ttl">Личные данные</h2>
                     <div class="deal-row">
                         <div class="deal-col">
                             <div class="inp-wrap">
                                 <label for="deal-inp-name">ФИО *</label>
-                                <input type="text" name="deal-inp-name">
+                                <input type="text" name="deal-inp-name" required>
                             </div>
                         </div>
                         <div class="deal-col">
                             <div class="inp-wrap">
                                 <label for="deal-inp-city">Город *</label>
-                                <input type="tel" name="deal-inp-city">
+                                <input type="text" name="deal-inp-city" required>
                             </div>
                         </div>
                         <div class="deal-col">
                             <div class="inp-wrap">
                                 <label for="deal-inp-tel">Телефон *</label>
-                                <input type="tel" name="deal-inp-tel">
+                                <input type="tel" name="deal-inp-tel" required>
                             </div>
                         </div>
                         <div class="deal-col">
@@ -41,50 +41,50 @@
                         <div class="deal-col">
                             <div class="inp-wrap">
                                 <label for="deal-sel-delivery" class="lbl">Выберите способ доставки *</label>
-                                <select class="js_select" name="deal-sel-delivery" style="width:100%;" required>
+                                <select class="js_select  js_delivery" name="deal-sel-delivery" style="width:100%;" required>
                                     <option></option>
-                                    <option value="Новая почта">Новая почта</option>
-                                    <option value="Укрпочта">Укрпочта</option>
-                                    <option value="Самовывоз">Самовывоз</option>
+                                    <option value=".js_delivery-np">Новая почта</option>
+                                    <option value=".js_delivery-ukr">Укрпочта</option>
+                                    <option value=".js_delivery-self">Самовывоз</option>
                                 </select>
 
                             </div>
                         </div>
                     </div>
-                    <div class="deal-row js_delivery-ukr">
+                    <div class="deal-row js_delivery-form js_delivery-ukr">
                         <div class="deal-col">
                             <div class="inp-wrap">
                                 <label for="deal-inp-address">Адрес *</label>
-                                <input type="text" name="deal-inp-address">
+                                <input type="text" name="deal-inp-address" class="js_required-field">
                             </div>
                         </div>
                         <div class="deal-col">
                             <div class="inp-wrap">
                                 <label for="deal-inp-index">Индекс *</label>
-                                <input type="text" name="deal-inp-index">
+                                <input type="text" name="deal-inp-index" class="js_required-field">
                             </div>
                         </div>
                         <div class="deal-col">
                             <div class="inp-wrap">
                                 <label for="deal-sel-payment-ukr" class="lbl">Выберите способ оплаты *</label>
-                                <select class="js_select-payment" name="deal-sel-payment-ukr" style="width:100%;" required>
+                                <select class="js_select-payment js_required-field" name="deal-sel-payment-ukr" style="width:100%;">
                                     <option></option>
                                     <option value="Перевод на карту">Перевод на карту</option>
                                 </select>
                             </div>
                         </div>
                     </div>
-                    <div class="deal-row js_delivery-np">
+                    <div class="deal-row js_delivery-form js_delivery-np">
                         <div class="deal-col">
                             <div class="inp-wrap">
                                 <label for="deal-inp-branch">Отделение *</label>
-                                <input type="text" name="deal-inp-branch">
+                                <input type="text" name="deal-inp-branch" class="js_required-field">
                             </div>
                         </div>
                         <div class="deal-col">
                             <div class="inp-wrap">
                                 <label for="deal-sel-payment-np" class="lbl">Выберите способ оплаты *</label>
-                                <select class="js_select-payment" name="deal-sel-payment-np" style="width:100%;" required>
+                                <select class="js_select-payment js_required-field" name="deal-sel-payment-np" style="width:100%;" class="js_required-field">
                                     <option></option>
                                     <option value="Перевод на карту">Перевод на карту</option>
                                     <option value="Наложенный платеж">Наложенный платеж</option>
@@ -100,9 +100,13 @@
                             </div>
                         </div>
                     </div>
+                    <div class="deal-btn-wrap">
+                        <button type="submit" class="btn-inverse-L">Завершить покупку</button>
+                    </div>
                 </form>
             </div>
-            @include('blocks/_sidebar-menu')
+
+            @include('blocks/_sidebar-deal')
         </div>
     </div>
 

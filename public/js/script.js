@@ -1505,6 +1505,8 @@
 	
 	var _ui = __webpack_require__(113);
 	
+	var _sendform = __webpack_require__(120);
+	
 	var _getToken = __webpack_require__(114);
 	
 	var _changeProductRequest = __webpack_require__(115);
@@ -1540,6 +1542,8 @@
 	            //used in Product slider block (Product page)
 	            _ui.ui.galleryPopupInit('.js_gallery-product');
 	            _ui.ui.tabsInit('.js_ui-tab-nav', '.js_ui-tabs-cnt', '.js_ui-tabs');
+	            _ui.ui.initPhoneMask();
+	            _ui.ui.accordion('.js_deal-detail-btn', '.js_deal-detail-blk');
 	            _amount.amount.init('.js_ui-amount-inp', '.js_ui-amount-btn-dec', '.js_ui-amount-btn-inc');
 	            $('.my-container').sortablePhotos({
 	                selector: '> .my-item',
@@ -1547,11 +1551,32 @@
 	                padding: 2
 	            });
 	            $('.js_select').select2({
-	                placeholder: 'Выбор перевозчика'
+	                placeholder: 'Выбор перевозчика',
+	                minimumResultsForSearch: Infinity
 	            });
 	            $('.js_select-payment').select2({
-	                placeholder: 'Выбор способа оплаты'
+	                placeholder: 'Выбор способа оплаты',
+	                minimumResultsForSearch: Infinity
 	            });
+	
+	            $('body').on('change', '.js_delivery', function () {
+	                var deliveryForm = $('.js_delivery').val() + '';
+	                var allrequiredFields = $('.js_required-field');
+	                var currentRequiredFields = $(deliveryForm).find('.js_required-field');
+	
+	                $(allrequiredFields).each(function (i, el) {
+	                    el.required = false;
+	                });
+	
+	                $('.js_delivery-form').hide();
+	                $(deliveryForm).slideDown().css('display', 'flex');
+	
+	                $(currentRequiredFields).each(function (i, el) {
+	                    el.required = true;
+	                });
+	            });
+	
+	            this.sendFormInit();
 	
 	            var changeProductRequest = new _changeProductRequest.ChangeProductRequest();
 	            changeProductRequest.init();
@@ -1593,6 +1618,19 @@
 	                mouseDrag: false,
 	                dotsContainer: '.js_product-slider-dots-container'
 	            });
+	        }
+	    }, {
+	        key: 'sendFormInit',
+	        value: function sendFormInit() {
+	
+	            //used in the order form of the site
+	            var formDeal = new _sendform.Sendform('.js_sendform-form-deal', {
+	                success: successSend
+	            });
+	
+	            function successSend() {
+	                _ui.ui.openPopup('#modal-success');
+	            }
 	        }
 	    }]);
 	    return App;
@@ -2629,6 +2667,66 @@
 	    value: true
 	});
 	var ui = exports.ui = {
+	    //PHONE MASK
+	
+	    initPhoneMask: function initPhoneMask() {
+	        $('input[type="tel"]').mask('+38 (999) 999-99-99');
+	    },
+	    //POPUPS
+	
+	    /**
+	     * function opens popup by id
+	     *
+	     * @param modalEL - id of the element
+	     */
+	
+	    openPopup: function openPopup(modalEL) {
+	        $.magnificPopup.open({
+	            showCloseBtn: false,
+	            type: 'inline',
+	            tLoading: 'Загрузка...',
+	            items: {
+	                src: modalEL
+	            }
+	        });
+	    },
+	
+	
+	    /**
+	     * function opens popup by id
+	     *
+	     * @param el - the element which closes popup when you click on it
+	     */
+	
+	    closePopup: function closePopup(el) {
+	        $('body').on('click', el, function (event) {
+	            event.preventDefault();
+	            $.magnificPopup.close();
+	        });
+	    },
+	
+	
+	    //ACCORDEON
+	
+	    /**Accordeon functionality
+	     *
+	     * @param accordionTtl - an element which you click on
+	     * @param accordionCnt - the content of the define element
+	     * @param activeClassTtl - active class witch change styles
+	     */
+	    accordion: function accordion(accordionTtl, accordionCnt) {
+	        var activeClassTtl = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : '__active';
+	
+	        $('body').on('click', accordionTtl, function (event) {
+	            event.preventDefault();
+	            if ($(accordionTtl).hasClass(activeClassTtl) && !$(this).hasClass(activeClassTtl)) {
+	                $(accordionTtl).removeClass(activeClassTtl);
+	                $(accordionCnt).slideUp(400);
+	            }
+	            $(this).toggleClass(activeClassTtl);
+	            $(this).next(accordionCnt).slideToggle(400);
+	        });
+	    },
 	    //POPUP GALLERY
 	
 	    /**
@@ -3228,6 +3326,882 @@
 			});
 		}
 	
+	};
+
+/***/ },
+/* 120 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _form = __webpack_require__(121);
+	
+	Object.defineProperty(exports, 'Sendform', {
+	  enumerable: true,
+	  get: function get() {
+	    return _interopRequireDefault(_form).default;
+	  }
+	});
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+/***/ },
+/* 121 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	
+	var _assign = __webpack_require__(102);
+	
+	var _assign2 = _interopRequireDefault(_assign);
+	
+	var _from = __webpack_require__(122);
+	
+	var _from2 = _interopRequireDefault(_from);
+	
+	var _classCallCheck2 = __webpack_require__(99);
+	
+	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+	
+	var _createClass2 = __webpack_require__(100);
+	
+	var _createClass3 = _interopRequireDefault(_createClass2);
+	
+	var _field = __webpack_require__(131);
+	
+	var _field2 = _interopRequireDefault(_field);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var Form = function () {
+	    /**
+	     * @param formClass {string} - class of form.
+	     * @param settings {Object} - settings object.
+	     * @param reference {Object} - reference for validation.
+	     */
+	    function Form(formClass, settings, reference) {
+	        var _this = this;
+	
+	        (0, _classCallCheck3.default)(this, Form);
+	
+	        this.form = document.querySelector(formClass);
+	        if (this.form == null || undefined) return;
+	        this.inputs = (0, _from2.default)(this.form.querySelectorAll('input:not([type="hidden"]), select, textarea'));
+	        /**
+	         * Set action(url for request)
+	         */
+	        var action = this.form.getAttribute('action');
+	
+	        this.action = action != null ? action : '/';
+	
+	        // Form state if it contain errors
+	        this.state = true;
+	        //determine if there are any mistakes now.    
+	        this.error = false;
+	        // Show spunner activity
+	        this.isSpinnerActive = false;
+	        // Text of status field.
+	        this.statusText = null;
+	        // Contain all field of this form
+	        this.items = [];
+	        // Contain errors field with position
+	        this.errorItems = {};
+	        // settings
+	        var customSettings = {
+	            resetAfterSubmit: true,
+	            onlyValidate: false,
+	            statusId: 'form-status',
+	            statusErrorClass: 'with_error',
+	            statusSuccessClass: 'with_success',
+	            errorClass: 'error',
+	            successClass: 'success-valid',
+	            validateClass: '.js_sendform-validate',
+	            requiredClass: 'form-required',
+	            modalOpen: true,
+	            modalId: '#thanks',
+	            msgSend: 'Отправка данных',
+	            msgDone: 'Данные успешно отправлены',
+	            msgError: 'Ошибка отправки',
+	            msgValError: 'Одно из полей не заполено',
+	            spinnerColor: '#000',
+	            formPosition: 'relative',
+	            resetClass: '.js_senform-reset',
+	            method: 'POST',
+	            success: function success(data) {
+	                _this.successSubmit();
+	            },
+	            error: function error(data) {
+	                _this.errorSubmit();
+	            },
+	            validationSuccess: function validationSuccess() {},
+	            validationError: function validationError() {
+	                _this.validationErrorCallback();
+	            }
+	        };
+	        // validation rules
+	        var customReference = {
+	            email: ['isEmail', 'isEmpty'],
+	            text: ['isEmpty'],
+	            textarea: ['isEmpty'],
+	            phone: ['minLength'],
+	            required: ['isEmpty'],
+	            checkbox: ['isChecked'],
+	            radio: ['isCheckedRadio']
+	        };
+	
+	        this.settings = (0, _assign2.default)(customSettings, settings);
+	        this.reference = (0, _assign2.default)(customReference, reference);
+	
+	        this.onInit();
+	    }
+	
+	    /**
+	     * On initialize class.
+	     * Creating all inputs of this form.
+	     * if setting for only validate true init this func.
+	     * else init function on submitting.
+	     * creating status text field.
+	     * init function for reset field.
+	     */
+	
+	
+	    (0, _createClass3.default)(Form, [{
+	        key: 'onInit',
+	        value: function onInit() {
+	            var _this2 = this;
+	
+	            this.createInputsValidate();
+	
+	            if (this.settings.onlyValidate) {
+	                this.onValidate();
+	            } else {
+	                this.form.addEventListener('submit', function (event) {
+	                    event.preventDefault();
+	                    _this2.preSubmit();
+	                });
+	            }
+	            this.createStatusField();
+	            this.onReset();
+	        }
+	
+	        /**
+	         * Creating for each input, select, checkboxes own class.
+	         * And pushing this classes into array.
+	        */
+	
+	    }, {
+	        key: 'createInputsValidate',
+	        value: function createInputsValidate() {
+	            var _this3 = this;
+	
+	            this.inputs.forEach(function (el, i) {
+	                var item = new _field2.default(el, _this3.state, _this3.reference, _this3.settings, i);
+	                _this3.items.push(item);
+	            });
+	        }
+	        /**
+	         * Create hidden field for status text.
+	         */
+	
+	    }, {
+	        key: 'createStatusField',
+	        value: function createStatusField() {
+	            var div = document.createElement('div');
+	            div.innerHTML = '';
+	            div.id = this.settings.statusId;
+	            this.form.appendChild(div);
+	            this.statusText = this.form.querySelector('#' + this.settings.statusId);
+	        }
+	
+	        /**
+	         * checking on error.
+	         * prepare for submitting:
+	         * add spinner, add status text.
+	         * call submit function.
+	         */
+	
+	    }, {
+	        key: 'preSubmit',
+	        value: function preSubmit() {
+	            this.validateField();
+	            if (!this.state) {
+	                this.errorOnForm();
+	                return;
+	            }
+	
+	            this.error = false;
+	            if (!this.isSpinnerActive) this.addSpinner();
+	            this.statusText.innerHTML = this.settings.msgSend;
+	            this.submitData();
+	        }
+	
+	        /**
+	         * Foreach in all items call validation function.
+	         * @param result {object} - variable keep return from
+	         * validation function.Object contain 2 attr
+	         * result.valid {boolean} -show is field pass validation.
+	         * result.position {string} - position of field.
+	         * 
+	         */
+	
+	    }, {
+	        key: 'validateField',
+	        value: function validateField() {
+	            var _this4 = this;
+	
+	            var localState = true;
+	            this.items.forEach(function (item) {
+	                var result = item.validate();
+	                if (result == undefined) return;
+	                localState = localState * result.valid;
+	
+	                if (localState) {
+	                    delete _this4.errorItems[result.position];
+	                } else {
+	                    _this4.errorItems[result.position] = false;
+	                }
+	            });
+	
+	            this.state = localState;
+	            if (this.state) {
+	                this.removeStatusText();
+	            }
+	        }
+	
+	        /**
+	         * Call reset method on all items.
+	         */
+	
+	    }, {
+	        key: 'resetField',
+	        value: function resetField() {
+	            this.items.forEach(function (item) {
+	                item.resetSelf();
+	            });
+	        }
+	
+	        /**
+	         * Adding spinner.
+	         */
+	
+	    }, {
+	        key: 'addSpinner',
+	        value: function addSpinner() {
+	            var div = document.createElement('div');
+	            div.innerHTML = '<div class="form-loading"></div>';
+	            div.id = 'formsendHover';
+	            this.form.appendChild(div);
+	            this.isSpinnerActive = true;
+	        }
+	
+	        /**
+	         * Removing spinner.
+	         */
+	
+	    }, {
+	        key: 'removeSpinner',
+	        value: function removeSpinner() {
+	            document.querySelector('#formsendHover').remove();
+	            this.isSpinnerActive = false;
+	        }
+	
+	        /**
+	         * init validation by press on btn.
+	         */
+	
+	    }, {
+	        key: 'onValidate',
+	        value: function onValidate() {
+	            var _this5 = this;
+	
+	            var validateBtn = this.form.querySelector(this.settings.validateClass);
+	            validateBtn.addEventListener('click', function (event) {
+	                event.preventDefault();
+	                _this5.validateField();
+	                if (_this5.state) {
+	                    _this5.settings.validationSuccess();
+	                    return;
+	                }
+	                _this5.settings.validationError();
+	            });
+	        }
+	
+	        /**
+	         * init function reseting by press btn.
+	         */
+	
+	    }, {
+	        key: 'onReset',
+	        value: function onReset() {
+	            var _this6 = this;
+	
+	            var resetClass = this.form.querySelector(this.settings.resetClass);
+	            if (resetClass == null || undefined) return;
+	            resetClass.addEventListener('click', function () {
+	                _this6.resetField();
+	            });
+	        }
+	
+	        /**
+	         * Add text and set error on true.
+	         * And add text error.
+	         */
+	
+	    }, {
+	        key: 'errorOnForm',
+	        value: function errorOnForm() {
+	            if (this.error) return;
+	            this.error = true;
+	            this.statusText.innerHTML = this.settings.msgValError;
+	            this.statusText.classList.add('with_error');
+	        }
+	
+	        /**
+	         * On error validation
+	         */
+	
+	    }, {
+	        key: 'validationErrorCallback',
+	        value: function validationErrorCallback() {
+	            this.errorStatusClass();
+	            this.printText(this.settings.msgValError);
+	        }
+	
+	        /**
+	         * Set text in status in form.
+	         * @param text{string}
+	         */
+	
+	    }, {
+	        key: 'printText',
+	        value: function printText(text) {
+	            this.statusText.innerHTML = text;
+	        }
+	
+	        /**
+	         * Clean status text
+	         */
+	
+	    }, {
+	        key: 'removeStatusText',
+	        value: function removeStatusText() {
+	            this.statusText.innerHTML = '';
+	            this.statusText.classList = '';
+	        }
+	
+	        /**
+	         * Set error class on status text in form
+	         */
+	
+	    }, {
+	        key: 'errorStatusClass',
+	        value: function errorStatusClass() {
+	            this.statusText.classList.add(this.settings.statusErrorClass);
+	        }
+	
+	        /**
+	         * Set success class on status text in form
+	         */
+	
+	    }, {
+	        key: 'successStatusClass',
+	        value: function successStatusClass() {
+	            this.statusText.classList.add(this.settings.statusSuccessClass);
+	        }
+	
+	        /**
+	         * Submitting data
+	         * @param event
+	         */
+	
+	    }, {
+	        key: 'submitData',
+	        value: function submitData(event) {
+	            var _this7 = this;
+	
+	            var request = new XMLHttpRequest();
+	            request.open(this.settings.method, this.action, true);
+	            var data = new FormData(this.form);
+	            request.onload = function (data) {
+	                if (request.status >= 200 && request.status < 400) {
+	                    // Success!
+	                    _this7.settings.success();
+	                } else {
+	                    // We reached our target server, but it returned an error
+	                    _this7.settings.error();
+	                }
+	                _this7.removeSpinner();
+	            };
+	            request.send(data);
+	        }
+	
+	        /**
+	         * On error submit
+	         */
+	
+	    }, {
+	        key: 'errorSubmit',
+	        value: function errorSubmit() {
+	            this.errorStatusClass();
+	            this.printText(this.settings.msgError);
+	        }
+	
+	        /**
+	         * On success submit
+	         */
+	
+	    }, {
+	        key: 'successSubmit',
+	        value: function successSubmit() {
+	            this.successStatusClass();
+	            this.printText(this.settings.msgDone);
+	        }
+	    }]);
+	    return Form;
+	}();
+	
+	exports.default = Form;
+
+/***/ },
+/* 122 */
+/***/ function(module, exports, __webpack_require__) {
+
+	module.exports = { "default": __webpack_require__(123), __esModule: true };
+
+/***/ },
+/* 123 */
+/***/ function(module, exports, __webpack_require__) {
+
+	__webpack_require__(6);
+	__webpack_require__(124);
+	module.exports = __webpack_require__(14).Array.from;
+
+/***/ },
+/* 124 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	var ctx            = __webpack_require__(15)
+	  , $export        = __webpack_require__(12)
+	  , toObject       = __webpack_require__(49)
+	  , call           = __webpack_require__(125)
+	  , isArrayIter    = __webpack_require__(126)
+	  , toLength       = __webpack_require__(39)
+	  , createProperty = __webpack_require__(127)
+	  , getIterFn      = __webpack_require__(128);
+	
+	$export($export.S + $export.F * !__webpack_require__(130)(function(iter){ Array.from(iter); }), 'Array', {
+	  // 22.1.2.1 Array.from(arrayLike, mapfn = undefined, thisArg = undefined)
+	  from: function from(arrayLike/*, mapfn = undefined, thisArg = undefined*/){
+	    var O       = toObject(arrayLike)
+	      , C       = typeof this == 'function' ? this : Array
+	      , aLen    = arguments.length
+	      , mapfn   = aLen > 1 ? arguments[1] : undefined
+	      , mapping = mapfn !== undefined
+	      , index   = 0
+	      , iterFn  = getIterFn(O)
+	      , length, result, step, iterator;
+	    if(mapping)mapfn = ctx(mapfn, aLen > 2 ? arguments[2] : undefined, 2);
+	    // if object isn't iterable or it's array with default iterator - use simple case
+	    if(iterFn != undefined && !(C == Array && isArrayIter(iterFn))){
+	      for(iterator = iterFn.call(O), result = new C; !(step = iterator.next()).done; index++){
+	        createProperty(result, index, mapping ? call(iterator, mapfn, [step.value, index], true) : step.value);
+	      }
+	    } else {
+	      length = toLength(O.length);
+	      for(result = new C(length); length > index; index++){
+	        createProperty(result, index, mapping ? mapfn(O[index], index) : O[index]);
+	      }
+	    }
+	    result.length = index;
+	    return result;
+	  }
+	});
+
+
+/***/ },
+/* 125 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// call something on iterator step with safe closing on error
+	var anObject = __webpack_require__(19);
+	module.exports = function(iterator, fn, value, entries){
+	  try {
+	    return entries ? fn(anObject(value)[0], value[1]) : fn(value);
+	  // 7.4.6 IteratorClose(iterator, completion)
+	  } catch(e){
+	    var ret = iterator['return'];
+	    if(ret !== undefined)anObject(ret.call(iterator));
+	    throw e;
+	  }
+	};
+
+/***/ },
+/* 126 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// check on default Array iterator
+	var Iterators  = __webpack_require__(29)
+	  , ITERATOR   = __webpack_require__(47)('iterator')
+	  , ArrayProto = Array.prototype;
+	
+	module.exports = function(it){
+	  return it !== undefined && (Iterators.Array === it || ArrayProto[ITERATOR] === it);
+	};
+
+/***/ },
+/* 127 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	var $defineProperty = __webpack_require__(18)
+	  , createDesc      = __webpack_require__(26);
+	
+	module.exports = function(object, index, value){
+	  if(index in object)$defineProperty.f(object, index, createDesc(0, value));
+	  else object[index] = value;
+	};
+
+/***/ },
+/* 128 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var classof   = __webpack_require__(129)
+	  , ITERATOR  = __webpack_require__(47)('iterator')
+	  , Iterators = __webpack_require__(29);
+	module.exports = __webpack_require__(14).getIteratorMethod = function(it){
+	  if(it != undefined)return it[ITERATOR]
+	    || it['@@iterator']
+	    || Iterators[classof(it)];
+	};
+
+/***/ },
+/* 129 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// getting tag from 19.1.3.6 Object.prototype.toString()
+	var cof = __webpack_require__(37)
+	  , TAG = __webpack_require__(47)('toStringTag')
+	  // ES3 wrong here
+	  , ARG = cof(function(){ return arguments; }()) == 'Arguments';
+	
+	// fallback for IE11 Script Access Denied error
+	var tryGet = function(it, key){
+	  try {
+	    return it[key];
+	  } catch(e){ /* empty */ }
+	};
+	
+	module.exports = function(it){
+	  var O, T, B;
+	  return it === undefined ? 'Undefined' : it === null ? 'Null'
+	    // @@toStringTag case
+	    : typeof (T = tryGet(O = Object(it), TAG)) == 'string' ? T
+	    // builtinTag case
+	    : ARG ? cof(O)
+	    // ES3 arguments fallback
+	    : (B = cof(O)) == 'Object' && typeof O.callee == 'function' ? 'Arguments' : B;
+	};
+
+/***/ },
+/* 130 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var ITERATOR     = __webpack_require__(47)('iterator')
+	  , SAFE_CLOSING = false;
+	
+	try {
+	  var riter = [7][ITERATOR]();
+	  riter['return'] = function(){ SAFE_CLOSING = true; };
+	  Array.from(riter, function(){ throw 2; });
+	} catch(e){ /* empty */ }
+	
+	module.exports = function(exec, skipClosing){
+	  if(!skipClosing && !SAFE_CLOSING)return false;
+	  var safe = false;
+	  try {
+	    var arr  = [7]
+	      , iter = arr[ITERATOR]();
+	    iter.next = function(){ return {done: safe = true}; };
+	    arr[ITERATOR] = function(){ return iter; };
+	    exec(arr);
+	  } catch(e){ /* empty */ }
+	  return safe;
+	};
+
+/***/ },
+/* 131 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	
+	var _toConsumableArray2 = __webpack_require__(132);
+	
+	var _toConsumableArray3 = _interopRequireDefault(_toConsumableArray2);
+	
+	var _assign = __webpack_require__(102);
+	
+	var _assign2 = _interopRequireDefault(_assign);
+	
+	var _classCallCheck2 = __webpack_require__(99);
+	
+	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+	
+	var _createClass2 = __webpack_require__(100);
+	
+	var _createClass3 = _interopRequireDefault(_createClass2);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	/**
+	 * Class Field.
+	 */
+	var Field = function () {
+	    function Field(field, state, reference, settings, position) {
+	        (0, _classCallCheck3.default)(this, Field);
+	
+	        this.field = field;
+	        this.reference = (0, _assign2.default)({}, reference);
+	        this.isValid = true;
+	        var attribute = this.field.getAttribute('type');
+	        this.type = attribute ? attribute.toLowerCase() : this.field.tagName.toLowerCase();
+	        this.isRequired = this.field.hasAttribute('required');
+	        this.firstCheck = true;
+	        this.settings = settings;
+	        this.regularExp = this.field.getAttribute('pattern');
+	        this.position = position;
+	
+	        this.removeRequired();
+	        this.onKeyUp();
+	        this.onChange();
+	        if (this.regularExp != null) {
+	            this.createValidation();
+	        }
+	    }
+	
+	    (0, _createClass3.default)(Field, [{
+	        key: 'createValidation',
+	        value: function createValidation() {
+	            this.field.removeAttribute('pattern');
+	            if (this.reference[this.type] == undefined || null) {
+	                this.reference[this.type] = ['regExp'];
+	                return;
+	            }
+	            this.reference[this.type] = [].concat((0, _toConsumableArray3.default)(this.reference[this.type]), ['regExp']);
+	        }
+	    }, {
+	        key: 'removeRequired',
+	        value: function removeRequired() {
+	            if (!this.isRequired) return;
+	
+	            this.field.removeAttribute("required");
+	            this.field.classList.add(this.settings.requiredClass);
+	        }
+	    }, {
+	        key: 'onKeyUp',
+	        value: function onKeyUp() {
+	            var _this = this;
+	
+	            this.field.addEventListener('keyup', function (el) {
+	                if (_this.firstCheck) return;
+	                var value = el.target.value;
+	                _this.validate(value);
+	            });
+	        }
+	    }, {
+	        key: 'onChange',
+	        value: function onChange() {
+	            var _this2 = this;
+	
+	            this.field.addEventListener('change', function (el) {
+	                var value = el.target.value;
+	                _this2.validate(value);
+	                _this2.firstCheck = false;
+	            });
+	        }
+	    }, {
+	        key: 'validate',
+	        value: function validate() {
+	            var _this3 = this;
+	
+	            if (!this.needValidate()) {
+	                this.removeError();
+	                return;
+	            }
+	
+	            var value = this.field.value;
+	            var validationFunc = this.reference[this.type];
+	            var valid = true;
+	
+	            if (validationFunc == undefined) {
+	                validationFunc = this.reference['required'];
+	            }
+	            validationFunc.forEach(function (func) {
+	                var result = _this3[func](value);
+	                valid = valid * result;
+	            });
+	
+	            if (valid) {
+	                this.removeError();
+	            } else {
+	                this.addError();
+	            }
+	            this.isValid = valid;
+	            return {
+	                valid: this.isValid,
+	                position: this.position
+	            };
+	        }
+	    }, {
+	        key: 'addError',
+	        value: function addError() {
+	            this.field.classList.add(this.settings.errorClass);
+	            this.field.classList.remove(this.settings.successClass);
+	        }
+	    }, {
+	        key: 'removeError',
+	        value: function removeError() {
+	            this.field.classList.remove(this.settings.errorClass);
+	            this.field.classList.add(this.settings.successClass);
+	        }
+	    }, {
+	        key: 'needValidate',
+	        value: function needValidate() {
+	            var noEmpty = this.field.value != 0;
+	
+	            if (this.isRequired) {
+	                return true;
+	            }
+	
+	            if (noEmpty && this.type == 'email') {
+	                return true;
+	            }
+	
+	            if (noEmpty && this.regularExp != null) {
+	                return true;
+	            }
+	
+	            return false;
+	        }
+	    }, {
+	        key: 'resetSelf',
+	        value: function resetSelf() {
+	            this.field.value = '';
+	            this.field.checked = false;
+	        }
+	
+	        //Is on no empty value testing
+	
+	    }, {
+	        key: 'isEmpty',
+	        value: function isEmpty(val) {
+	            if (val == '') {
+	                return false;
+	            } else {
+	                return true;
+	            }
+	        }
+	
+	        //Is email testing
+	
+	    }, {
+	        key: 'isEmail',
+	        value: function isEmail(val) {
+	            var email = /^[-\w.]+@([A-z0-9]+\.)+[A-z]{2,4}$/;
+	            return email.test(val);
+	        }
+	
+	        //Is url testing
+	
+	    }, {
+	        key: 'isUrl',
+	        value: function isUrl(element) {
+	            var url = /[^\s\.]+\.[^\s]{2,}|www\.[^\s]+\.[^\s]{2,}/;
+	            return url.test($(element).val());
+	        }
+	
+	        //Is min 5 charachter
+	
+	    }, {
+	        key: 'minLength',
+	        value: function minLength(val) {
+	            if (val.length > 5) return true;
+	        }
+	    }, {
+	        key: 'isChecked',
+	        value: function isChecked() {
+	            if (this.field.checked) {
+	                return true;
+	            }
+	            return false;
+	        }
+	
+	        //Is cyrillic testing
+	
+	    }, {
+	        key: 'isCyr',
+	        value: function isCyr(val) {
+	            var cyr = /[\u0400-\u04FF]/gi;
+	            return cyr.test(val);
+	        }
+	    }, {
+	        key: 'isCheckedRadio',
+	        value: function isCheckedRadio() {
+	            var collection = document.querySelectorAll('input[name=' + this.field.name + ']');
+	            var isSomeChecked = false;
+	            collection.forEach(function (el) {
+	                if (el.checked) isSomeChecked = true;
+	            });
+	            return isSomeChecked;
+	        }
+	    }, {
+	        key: 'regExp',
+	        value: function regExp(val) {
+	            var reqular = new RegExp(this.regularExp);
+	            return reqular.test(val);
+	        }
+	    }]);
+	    return Field;
+	}();
+	
+	exports.default = Field;
+
+/***/ },
+/* 132 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+	
+	exports.__esModule = true;
+	
+	var _from = __webpack_require__(122);
+	
+	var _from2 = _interopRequireDefault(_from);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	exports.default = function (arr) {
+	  if (Array.isArray(arr)) {
+	    for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) {
+	      arr2[i] = arr[i];
+	    }
+	
+	    return arr2;
+	  } else {
+	    return (0, _from2.default)(arr);
+	  }
 	};
 
 /***/ }

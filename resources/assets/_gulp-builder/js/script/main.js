@@ -1,5 +1,6 @@
 import { Slider } from '../libs/slider';
 import {ui} from './ui';
+import {Sendform} from '../libs/sendform/sendform2';
 import {getToken} from "../libs/getToken";
 import {ChangeProductRequest} from "./changeProductRequest";
 import {ShowMoreRequest} from "./showMoreRequest";
@@ -24,6 +25,8 @@ class App{
         //used in Product slider block (Product page)
         ui.galleryPopupInit('.js_gallery-product');
         ui.tabsInit('.js_ui-tab-nav', '.js_ui-tabs-cnt', '.js_ui-tabs');
+        ui.initPhoneMask();
+        ui.accordion('.js_deal-detail-btn', '.js_deal-detail-blk');
         amount.init('.js_ui-amount-inp', '.js_ui-amount-btn-dec', '.js_ui-amount-btn-inc');
         $('.my-container').sortablePhotos({
             selector: '> .my-item',
@@ -31,12 +34,34 @@ class App{
             padding: 2
         });
         $('.js_select').select2({
-            placeholder: 'Выбор перевозчика'
+            placeholder: 'Выбор перевозчика',
+            minimumResultsForSearch: Infinity
         });
         $('.js_select-payment').select2({
-            placeholder: 'Выбор способа оплаты'
+            placeholder: 'Выбор способа оплаты',
+            minimumResultsForSearch: Infinity
         });
 
+        $('body').on('change', '.js_delivery', function () {
+            let deliveryForm = $('.js_delivery').val() + '';
+            let allrequiredFields = $('.js_required-field');
+            let currentRequiredFields = $(deliveryForm).find('.js_required-field');
+
+            $(allrequiredFields).each(function (i, el) {
+                el.required = false;
+            });
+
+            $('.js_delivery-form').hide();
+            $(deliveryForm).slideDown().css('display', 'flex');
+
+
+            $(currentRequiredFields).each(function (i, el) {
+                el.required = true;
+            });
+
+        });
+
+        this.sendFormInit();
 
         let changeProductRequest = new ChangeProductRequest;
         changeProductRequest.init();
@@ -78,5 +103,17 @@ class App{
             mouseDrag: false,
             dotsContainer: '.js_product-slider-dots-container'
         });
+    }
+
+    sendFormInit(){
+
+        //used in the order form of the site
+        let formDeal = new Sendform('.js_sendform-form-deal', {
+            success: successSend
+        });
+
+        function successSend() {
+            ui.openPopup('#modal-success');
+        }
     }
 }; 
