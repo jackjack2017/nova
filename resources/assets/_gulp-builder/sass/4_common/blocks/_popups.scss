@@ -1,7 +1,10 @@
 .popup{
   border: 1px solid #000;
-  padding: 50px;
+  padding: 30px;
   position: relative;
+  max-width: 700px;
+  margin: 0 auto;
+  background-color: #fff;
   &-btn{
     &-close{
       position: absolute;
@@ -25,5 +28,13 @@
         transform-origin: 50% 50%;
       }
     }
+  }
+  &-ttl{
+    padding-top: 0;
+  }
+  &-txt{
+    text-align: center;
+    font-weight: bold;
+    font-size: 16px;
   }
 }

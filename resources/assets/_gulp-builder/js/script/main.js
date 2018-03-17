@@ -7,6 +7,7 @@ import {ShowMoreRequest} from "./showMoreRequest";
 import {CartRequest} from "./cartRequest";
 import {LikeRequest} from "./likeRequest";
 import { amount } from './amount';
+import {MfPopup} from '../libs/popup/mfpopup';
 
 $( document ).ready(function() {
     if(NODE_ENV === 'dev'){
@@ -41,6 +42,8 @@ class App{
             placeholder: 'Выбор способа оплаты',
             minimumResultsForSearch: Infinity
         });
+
+        new MfPopup('.js_mfpopup-popup-success');
 
         $('body').on('change', '.js_delivery', function () {
             let deliveryForm = $('.js_delivery').val() + '';

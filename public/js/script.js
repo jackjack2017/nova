@@ -1505,19 +1505,21 @@
 	
 	var _ui = __webpack_require__(113);
 	
-	var _sendform = __webpack_require__(120);
+	var _sendform = __webpack_require__(114);
 	
-	var _getToken = __webpack_require__(114);
+	var _getToken = __webpack_require__(127);
 	
-	var _changeProductRequest = __webpack_require__(115);
+	var _changeProductRequest = __webpack_require__(128);
 	
-	var _showMoreRequest = __webpack_require__(116);
+	var _showMoreRequest = __webpack_require__(129);
 	
-	var _cartRequest = __webpack_require__(117);
+	var _cartRequest = __webpack_require__(130);
 	
-	var _likeRequest = __webpack_require__(118);
+	var _likeRequest = __webpack_require__(131);
 	
-	var _amount = __webpack_require__(119);
+	var _amount = __webpack_require__(132);
+	
+	var _mfpopup = __webpack_require__(133);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -1558,6 +1560,8 @@
 	                placeholder: 'Выбор способа оплаты',
 	                minimumResultsForSearch: Infinity
 	            });
+	
+	            new _mfpopup.MfPopup('.js_mfpopup-popup-success');
 	
 	            $('body').on('change', '.js_delivery', function () {
 	                var deliveryForm = $('.js_delivery').val() + '';
@@ -2802,534 +2806,6 @@
 
 /***/ },
 /* 114 */
-/***/ function(module, exports) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	    value: true
-	});
-	exports.getToken = getToken;
-	function getToken() {
-	    return $('#_token-csrf').html();
-	}
-
-/***/ },
-/* 115 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	    value: true
-	});
-	exports.ChangeProductRequest = undefined;
-	
-	var _classCallCheck2 = __webpack_require__(99);
-	
-	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
-	
-	var _createClass2 = __webpack_require__(100);
-	
-	var _createClass3 = _interopRequireDefault(_createClass2);
-	
-	var _getToken = __webpack_require__(114);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	var ChangeProductRequest = exports.ChangeProductRequest = function () {
-	    function ChangeProductRequest() {
-	        var method = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 'POST';
-	        (0, _classCallCheck3.default)(this, ChangeProductRequest);
-	
-	
-	        this.method = method;
-	        this.token = (0, _getToken.getToken)();
-	    }
-	
-	    /**
-	     * Init btn
-	     */
-	
-	
-	    (0, _createClass3.default)(ChangeProductRequest, [{
-	        key: 'init',
-	        value: function init() {
-	
-	            var _this = this;
-	
-	            $('.js_product-colour').on('change', function () {
-	
-	                var productId = $(this).closest('.product-row').data('id');
-	                var url = '/product/test';
-	
-	                _this.request(url, productId);
-	            });
-	        }
-	
-	        /**
-	         * Change product by colour ajax request
-	         */
-	
-	    }, {
-	        key: 'request',
-	        value: function request(url, productId) {
-	            $.ajax({
-	                url: url,
-	                method: this.method,
-	                data: {
-	                    productId: productId,
-	                    _token: this.token
-	                },
-	                success: this.success()
-	            });
-	        }
-	
-	        /**
-	         * On success request
-	         */
-	
-	    }, {
-	        key: 'success',
-	        value: function success() {
-	            // let info = JSON.parse(data);
-	            console.log('success');
-	        }
-	    }]);
-	    return ChangeProductRequest;
-	}();
-
-/***/ },
-/* 116 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	    value: true
-	});
-	exports.ShowMoreRequest = undefined;
-	
-	var _assign = __webpack_require__(102);
-	
-	var _assign2 = _interopRequireDefault(_assign);
-	
-	var _classCallCheck2 = __webpack_require__(99);
-	
-	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
-	
-	var _createClass2 = __webpack_require__(100);
-	
-	var _createClass3 = _interopRequireDefault(_createClass2);
-	
-	var _getToken = __webpack_require__(114);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	var ShowMoreRequest = exports.ShowMoreRequest = function () {
-	
-	    /**
-	     * Send request to get data and append data according to the show more functionality
-	     *
-	     * @param settings{object} - param for set up
-	     */
-	    function ShowMoreRequest(settings) {
-	        (0, _classCallCheck3.default)(this, ShowMoreRequest);
-	
-	
-	        //make a token for secure data sending
-	        var token = (0, _getToken.getToken)();
-	
-	        // default settings
-	        var defaultSettings = {
-	            url: '',
-	            method: 'POST',
-	            btnClass: '',
-	            blockClass: '',
-	            params: {
-	                qty: 12,
-	                page: 2,
-	                _token: token
-	            },
-	            success: this.success
-	        };
-	
-	        // all object's settings (if there are no users settings the default)
-	        this.settings = (0, _assign2.default)({}, defaultSettings, settings);
-	
-	        this.url = this.settings.url;
-	        this.method = this.settings.method;
-	        this.blockClass = this.settings.blockClass;
-	        this.btnClass = this.settings.btnClass;
-	
-	        this.successFn = this.settings.success;
-	
-	        this.params = (0, _assign2.default)({}, defaultSettings.params, this.settings.params);
-	    }
-	
-	    /**
-	     * Init btn
-	     */
-	
-	
-	    (0, _createClass3.default)(ShowMoreRequest, [{
-	        key: 'init',
-	        value: function init() {
-	
-	            var _this = this;
-	
-	            $('body').on('click', this.btnClass, function (event) {
-	                event.preventDefault();
-	                _this.request();
-	            });
-	        }
-	
-	        /**
-	         * Sending ajax request
-	         */
-	
-	    }, {
-	        key: 'request',
-	        value: function request() {
-	            $.ajax({
-	                url: this.url,
-	                data: this.params,
-	                method: this.method,
-	                // success: (data)=>{
-	                //     // call callback user function if define
-	                //     this.successFn.call(this, data);
-	                // }
-	                success: this.success()
-	            });
-	        }
-	
-	        /**
-	         * On success request
-	         * @param data
-	         */
-	
-	    }, {
-	        key: 'success',
-	        value: function success(data) {
-	            // $(this.blockClass).append(data);
-	            console.log('success');
-	            this.params.page++;
-	
-	            // check is it last page
-	            // let isLastPage = $('.js_request-last-page').length;
-	            // if(isLastPage){
-	            //     $(this.btnClass).hide();
-	            // }
-	        }
-	    }]);
-	    return ShowMoreRequest;
-	}();
-
-/***/ },
-/* 117 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	    value: true
-	});
-	exports.CartRequest = undefined;
-	
-	var _classCallCheck2 = __webpack_require__(99);
-	
-	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
-	
-	var _createClass2 = __webpack_require__(100);
-	
-	var _createClass3 = _interopRequireDefault(_createClass2);
-	
-	var _getToken = __webpack_require__(114);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	var CartRequest = exports.CartRequest = function () {
-	    function CartRequest() {
-	        var method = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 'POST';
-	        (0, _classCallCheck3.default)(this, CartRequest);
-	
-	
-	        this.method = method;
-	        this.token = (0, _getToken.getToken)();
-	    }
-	
-	    /**
-	     * Init btn
-	     */
-	
-	
-	    (0, _createClass3.default)(CartRequest, [{
-	        key: 'init',
-	        value: function init() {
-	
-	            var _this = this;
-	
-	            $('.js_cart-btn').on('click', function (event) {
-	                event.preventDefault();
-	                var productID = $(this).closest('.product-row').data('id');
-	                var url = '/cart/add';
-	                _this.requestAdd(url, productID);
-	            });
-	
-	            $('.js_header-cart-delete-btn').on('click', function (event) {
-	                event.preventDefault();
-	                console.log(this);
-	                var item_id = $(this).closest('.header-basket-inner-t').data('item-id');
-	                var url = '/cart/remove';
-	                _this.requestRemove(url, item_id);
-	            });
-	        }
-	
-	        /**
-	         * Change product by colour ajax request
-	         */
-	
-	    }, {
-	        key: 'requestAdd',
-	        value: function requestAdd(url, productId) {
-	            $.ajax({
-	                url: url,
-	                method: this.method,
-	                data: {
-	                    product_id: productId,
-	                    _token: this.token
-	                },
-	                success: function success(data) {
-	                    $('.js_header-cart-blk').append(data);
-	                    var cartCount = +$('.js_cart-count').html();
-	                    cartCount++;
-	                    $('.js_cart-count').empty();
-	                    $('.js_cart-count').append(cartCount++);
-	                }
-	            });
-	        }
-	    }, {
-	        key: 'requestRemove',
-	        value: function requestRemove(url, itemId) {
-	            $.ajax({
-	                url: url,
-	                method: this.method,
-	                data: {
-	                    item_id: itemId,
-	                    _token: this.token
-	                },
-	                success: function success(data) {
-	                    console.log('yeahh');
-	                    var cartCount = +$('.js_cart-count').html();
-	                    cartCount--;
-	                    $('.js_cart-count').empty();
-	                    $('.js_cart-count').append(cartCount--);
-	                },
-	                error: function error() {
-	                    var cartCount = +$('.js_cart-count').html();
-	                    console.log(cartCount--);
-	                    $('.js_cart-count').empty();
-	                    $('.js_cart-count').append(cartCount--);
-	                }
-	            });
-	        }
-	
-	        /**
-	         * On success request
-	         */
-	
-	    }, {
-	        key: 'success',
-	        value: function success(data) {
-	            console.log(data);
-	        }
-	    }]);
-	    return CartRequest;
-	}();
-
-/***/ },
-/* 118 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	    value: true
-	});
-	exports.LikeRequest = undefined;
-	
-	var _classCallCheck2 = __webpack_require__(99);
-	
-	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
-	
-	var _createClass2 = __webpack_require__(100);
-	
-	var _createClass3 = _interopRequireDefault(_createClass2);
-	
-	var _getToken = __webpack_require__(114);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	var LikeRequest = exports.LikeRequest = function () {
-	    function LikeRequest() {
-	        var method = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 'POST';
-	        (0, _classCallCheck3.default)(this, LikeRequest);
-	
-	
-	        this.method = method;
-	        this.token = (0, _getToken.getToken)();
-	    }
-	
-	    /**
-	     * Init btn
-	     */
-	
-	
-	    (0, _createClass3.default)(LikeRequest, [{
-	        key: 'init',
-	        value: function init() {
-	
-	            var _this = this;
-	
-	            $('body').on('click', '.js_like-btn', function (event) {
-	                event.preventDefault();
-	                var productID = $(this).closest('.product-card').data('id');
-	                var url = '/like/add';
-	                _this.requestAdd(url, productID);
-	            });
-	
-	            $('body').on('click', '.js_like-btn-remove', function (event) {
-	                event.preventDefault();
-	                console.log('yeaahh');
-	                var item_id = $(this).closest('.like-product-card').data('item-id');
-	                var url = '/like/remove';
-	                _this.requestRemove(url, item_id);
-	            });
-	        }
-	
-	        /**
-	         * Change product by colour ajax request
-	         */
-	
-	    }, {
-	        key: 'requestAdd',
-	        value: function requestAdd(url, productId) {
-	            $.ajax({
-	                url: url,
-	                method: this.method,
-	                data: {
-	                    product_id: productId,
-	                    _token: this.token
-	                },
-	                success: function success(data) {
-	                    console.log('success');
-	                    var likeCount = +$('.js_like-count').html();
-	                    $('.js_like-count').empty();
-	                    $('.js_like-count').append(likeCount++);
-	                },
-	                error: function error() {
-	                    console.log('error');
-	                    var likeCount = +$('.js_like-count').html();
-	                    console.log(likeCount++);
-	                    $('.js_like-count').empty();
-	                    $('.js_like-count').append(likeCount++);
-	                }
-	            });
-	        }
-	    }, {
-	        key: 'requestRemove',
-	        value: function requestRemove(url, itemId) {
-	            $.ajax({
-	                url: url,
-	                method: this.method,
-	                data: {
-	                    item_id: itemId,
-	                    _token: this.token
-	                },
-	                success: function success(data) {
-	                    console.log('success');
-	                },
-	                error: function error() {
-	                    console.log('error');
-	                }
-	            });
-	        }
-	
-	        /**
-	         * On success request
-	         */
-	        // success(data) {
-	        //    console.log(data);
-	        // }
-	
-	    }]);
-	    return LikeRequest;
-	}();
-
-/***/ },
-/* 119 */
-/***/ function(module, exports) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-		value: true
-	});
-	var amount = exports.amount = {
-		init: function init(el, btnDec, btnInc) {
-			var min = $(el).data('min') || false,
-			    max = $(el).data('max') || false;
-			if (!$(el).attr('disabled')) {
-				$('body').on('click', btnDec, function (event) {
-					event.preventDefault();
-					var inp = $(this).parent().find(el);
-					amount.decrement(inp, min);
-					amount.checkedDisabled(inp, $(this), min, btnInc, max);
-				});
-				$('body').on('click', btnInc, function (event) {
-					event.preventDefault();
-					var inp = $(this).parent().find(el);
-					amount.increment(inp, max);
-					amount.checkedDisabled(inp, btnDec, min, $(this), max);
-				});
-			}
-		},
-	
-		// count reduction
-		decrement: function decrement(el, min) {
-			var value = parseInt(el.val());
-			value--;
-			if (value >= min) {
-				el.val(value--);
-			}
-		},
-		//count increase
-		increment: function increment(el, max) {
-			var value = parseInt(el.val());
-			value++;
-			if (value <= max) {
-				el.val(value++);
-			}
-		},
-		//check the button on the activity
-		checkedDisabled: function checkedDisabled(el, btnDec, min, btnInc, max) {
-			$(el).each(function (index, el) {
-				var value = parseInt($(el).val());
-				$(el).parent().find(btnDec).removeClass('__disabled');
-				$(el).parent().find(btnInc).removeClass('__disabled');
-				if (value <= min) {
-					$(el).parent().find(btnDec).addClass('__disabled');
-				}
-				if (value >= max) {
-					$(el).parent().find(btnInc).addClass('__disabled');
-				}
-			});
-		}
-	
-	};
-
-/***/ },
-/* 120 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -3338,7 +2814,7 @@
 	  value: true
 	});
 	
-	var _form = __webpack_require__(121);
+	var _form = __webpack_require__(115);
 	
 	Object.defineProperty(exports, 'Sendform', {
 	  enumerable: true,
@@ -3350,7 +2826,7 @@
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /***/ },
-/* 121 */
+/* 115 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -3363,7 +2839,7 @@
 	
 	var _assign2 = _interopRequireDefault(_assign);
 	
-	var _from = __webpack_require__(122);
+	var _from = __webpack_require__(116);
 	
 	var _from2 = _interopRequireDefault(_from);
 	
@@ -3375,7 +2851,7 @@
 	
 	var _createClass3 = _interopRequireDefault(_createClass2);
 	
-	var _field = __webpack_require__(131);
+	var _field = __webpack_require__(125);
 	
 	var _field2 = _interopRequireDefault(_field);
 	
@@ -3771,34 +3247,34 @@
 	exports.default = Form;
 
 /***/ },
-/* 122 */
+/* 116 */
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = { "default": __webpack_require__(123), __esModule: true };
+	module.exports = { "default": __webpack_require__(117), __esModule: true };
 
 /***/ },
-/* 123 */
+/* 117 */
 /***/ function(module, exports, __webpack_require__) {
 
 	__webpack_require__(6);
-	__webpack_require__(124);
+	__webpack_require__(118);
 	module.exports = __webpack_require__(14).Array.from;
 
 /***/ },
-/* 124 */
+/* 118 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	var ctx            = __webpack_require__(15)
 	  , $export        = __webpack_require__(12)
 	  , toObject       = __webpack_require__(49)
-	  , call           = __webpack_require__(125)
-	  , isArrayIter    = __webpack_require__(126)
+	  , call           = __webpack_require__(119)
+	  , isArrayIter    = __webpack_require__(120)
 	  , toLength       = __webpack_require__(39)
-	  , createProperty = __webpack_require__(127)
-	  , getIterFn      = __webpack_require__(128);
+	  , createProperty = __webpack_require__(121)
+	  , getIterFn      = __webpack_require__(122);
 	
-	$export($export.S + $export.F * !__webpack_require__(130)(function(iter){ Array.from(iter); }), 'Array', {
+	$export($export.S + $export.F * !__webpack_require__(124)(function(iter){ Array.from(iter); }), 'Array', {
 	  // 22.1.2.1 Array.from(arrayLike, mapfn = undefined, thisArg = undefined)
 	  from: function from(arrayLike/*, mapfn = undefined, thisArg = undefined*/){
 	    var O       = toObject(arrayLike)
@@ -3828,7 +3304,7 @@
 
 
 /***/ },
-/* 125 */
+/* 119 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// call something on iterator step with safe closing on error
@@ -3845,7 +3321,7 @@
 	};
 
 /***/ },
-/* 126 */
+/* 120 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// check on default Array iterator
@@ -3858,7 +3334,7 @@
 	};
 
 /***/ },
-/* 127 */
+/* 121 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -3871,10 +3347,10 @@
 	};
 
 /***/ },
-/* 128 */
+/* 122 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var classof   = __webpack_require__(129)
+	var classof   = __webpack_require__(123)
 	  , ITERATOR  = __webpack_require__(47)('iterator')
 	  , Iterators = __webpack_require__(29);
 	module.exports = __webpack_require__(14).getIteratorMethod = function(it){
@@ -3884,7 +3360,7 @@
 	};
 
 /***/ },
-/* 129 */
+/* 123 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// getting tag from 19.1.3.6 Object.prototype.toString()
@@ -3912,7 +3388,7 @@
 	};
 
 /***/ },
-/* 130 */
+/* 124 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var ITERATOR     = __webpack_require__(47)('iterator')
@@ -3938,7 +3414,7 @@
 	};
 
 /***/ },
-/* 131 */
+/* 125 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -3947,7 +3423,7 @@
 	    value: true
 	});
 	
-	var _toConsumableArray2 = __webpack_require__(132);
+	var _toConsumableArray2 = __webpack_require__(126);
 	
 	var _toConsumableArray3 = _interopRequireDefault(_toConsumableArray2);
 	
@@ -4179,14 +3655,14 @@
 	exports.default = Field;
 
 /***/ },
-/* 132 */
+/* 126 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
 	
 	exports.__esModule = true;
 	
-	var _from = __webpack_require__(122);
+	var _from = __webpack_require__(116);
 	
 	var _from2 = _interopRequireDefault(_from);
 	
@@ -4203,6 +3679,780 @@
 	    return (0, _from2.default)(arr);
 	  }
 	};
+
+/***/ },
+/* 127 */
+/***/ function(module, exports) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	exports.getToken = getToken;
+	function getToken() {
+	    return $('#_token-csrf').html();
+	}
+
+/***/ },
+/* 128 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	exports.ChangeProductRequest = undefined;
+	
+	var _classCallCheck2 = __webpack_require__(99);
+	
+	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+	
+	var _createClass2 = __webpack_require__(100);
+	
+	var _createClass3 = _interopRequireDefault(_createClass2);
+	
+	var _getToken = __webpack_require__(127);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var ChangeProductRequest = exports.ChangeProductRequest = function () {
+	    function ChangeProductRequest() {
+	        var method = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 'POST';
+	        (0, _classCallCheck3.default)(this, ChangeProductRequest);
+	
+	
+	        this.method = method;
+	        this.token = (0, _getToken.getToken)();
+	    }
+	
+	    /**
+	     * Init btn
+	     */
+	
+	
+	    (0, _createClass3.default)(ChangeProductRequest, [{
+	        key: 'init',
+	        value: function init() {
+	
+	            var _this = this;
+	
+	            $('.js_product-colour').on('change', function () {
+	
+	                var productId = $(this).closest('.product-row').data('id');
+	                var url = '/product/test';
+	
+	                _this.request(url, productId);
+	            });
+	        }
+	
+	        /**
+	         * Change product by colour ajax request
+	         */
+	
+	    }, {
+	        key: 'request',
+	        value: function request(url, productId) {
+	            $.ajax({
+	                url: url,
+	                method: this.method,
+	                data: {
+	                    productId: productId,
+	                    _token: this.token
+	                },
+	                success: this.success()
+	            });
+	        }
+	
+	        /**
+	         * On success request
+	         */
+	
+	    }, {
+	        key: 'success',
+	        value: function success() {
+	            // let info = JSON.parse(data);
+	            console.log('success');
+	        }
+	    }]);
+	    return ChangeProductRequest;
+	}();
+
+/***/ },
+/* 129 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	exports.ShowMoreRequest = undefined;
+	
+	var _assign = __webpack_require__(102);
+	
+	var _assign2 = _interopRequireDefault(_assign);
+	
+	var _classCallCheck2 = __webpack_require__(99);
+	
+	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+	
+	var _createClass2 = __webpack_require__(100);
+	
+	var _createClass3 = _interopRequireDefault(_createClass2);
+	
+	var _getToken = __webpack_require__(127);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var ShowMoreRequest = exports.ShowMoreRequest = function () {
+	
+	    /**
+	     * Send request to get data and append data according to the show more functionality
+	     *
+	     * @param settings{object} - param for set up
+	     */
+	    function ShowMoreRequest(settings) {
+	        (0, _classCallCheck3.default)(this, ShowMoreRequest);
+	
+	
+	        //make a token for secure data sending
+	        var token = (0, _getToken.getToken)();
+	
+	        // default settings
+	        var defaultSettings = {
+	            url: '',
+	            method: 'POST',
+	            btnClass: '',
+	            blockClass: '',
+	            params: {
+	                qty: 12,
+	                page: 2,
+	                _token: token
+	            },
+	            success: this.success
+	        };
+	
+	        // all object's settings (if there are no users settings the default)
+	        this.settings = (0, _assign2.default)({}, defaultSettings, settings);
+	
+	        this.url = this.settings.url;
+	        this.method = this.settings.method;
+	        this.blockClass = this.settings.blockClass;
+	        this.btnClass = this.settings.btnClass;
+	
+	        this.successFn = this.settings.success;
+	
+	        this.params = (0, _assign2.default)({}, defaultSettings.params, this.settings.params);
+	    }
+	
+	    /**
+	     * Init btn
+	     */
+	
+	
+	    (0, _createClass3.default)(ShowMoreRequest, [{
+	        key: 'init',
+	        value: function init() {
+	
+	            var _this = this;
+	
+	            $('body').on('click', this.btnClass, function (event) {
+	                event.preventDefault();
+	                _this.request();
+	            });
+	        }
+	
+	        /**
+	         * Sending ajax request
+	         */
+	
+	    }, {
+	        key: 'request',
+	        value: function request() {
+	            $.ajax({
+	                url: this.url,
+	                data: this.params,
+	                method: this.method,
+	                // success: (data)=>{
+	                //     // call callback user function if define
+	                //     this.successFn.call(this, data);
+	                // }
+	                success: this.success()
+	            });
+	        }
+	
+	        /**
+	         * On success request
+	         * @param data
+	         */
+	
+	    }, {
+	        key: 'success',
+	        value: function success(data) {
+	            // $(this.blockClass).append(data);
+	            console.log('success');
+	            this.params.page++;
+	
+	            // check is it last page
+	            // let isLastPage = $('.js_request-last-page').length;
+	            // if(isLastPage){
+	            //     $(this.btnClass).hide();
+	            // }
+	        }
+	    }]);
+	    return ShowMoreRequest;
+	}();
+
+/***/ },
+/* 130 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	exports.CartRequest = undefined;
+	
+	var _classCallCheck2 = __webpack_require__(99);
+	
+	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+	
+	var _createClass2 = __webpack_require__(100);
+	
+	var _createClass3 = _interopRequireDefault(_createClass2);
+	
+	var _getToken = __webpack_require__(127);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var CartRequest = exports.CartRequest = function () {
+	    function CartRequest() {
+	        var method = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 'POST';
+	        (0, _classCallCheck3.default)(this, CartRequest);
+	
+	
+	        this.method = method;
+	        this.token = (0, _getToken.getToken)();
+	    }
+	
+	    /**
+	     * Init btn
+	     */
+	
+	
+	    (0, _createClass3.default)(CartRequest, [{
+	        key: 'init',
+	        value: function init() {
+	
+	            var _this = this;
+	
+	            $('.js_cart-btn').on('click', function (event) {
+	                event.preventDefault();
+	                var productID = $(this).closest('.product-row').data('id');
+	                var url = '/cart/add';
+	                _this.requestAdd(url, productID);
+	            });
+	
+	            $('.js_header-cart-delete-btn').on('click', function (event) {
+	                event.preventDefault();
+	                console.log(this);
+	                var item_id = $(this).closest('.header-basket-inner-t').data('item-id');
+	                var url = '/cart/remove';
+	                _this.requestRemove(url, item_id);
+	            });
+	        }
+	
+	        /**
+	         * Change product by colour ajax request
+	         */
+	
+	    }, {
+	        key: 'requestAdd',
+	        value: function requestAdd(url, productId) {
+	            $.ajax({
+	                url: url,
+	                method: this.method,
+	                data: {
+	                    product_id: productId,
+	                    _token: this.token
+	                },
+	                success: function success(data) {
+	                    $('.js_header-cart-blk').append(data);
+	                    var cartCount = +$('.js_cart-count').html();
+	                    cartCount++;
+	                    $('.js_cart-count').empty();
+	                    $('.js_cart-count').append(cartCount++);
+	                }
+	            });
+	        }
+	    }, {
+	        key: 'requestRemove',
+	        value: function requestRemove(url, itemId) {
+	            $.ajax({
+	                url: url,
+	                method: this.method,
+	                data: {
+	                    item_id: itemId,
+	                    _token: this.token
+	                },
+	                success: function success(data) {
+	                    console.log('yeahh');
+	                    var cartCount = +$('.js_cart-count').html();
+	                    cartCount--;
+	                    $('.js_cart-count').empty();
+	                    $('.js_cart-count').append(cartCount--);
+	                },
+	                error: function error() {
+	                    var cartCount = +$('.js_cart-count').html();
+	                    console.log(cartCount--);
+	                    $('.js_cart-count').empty();
+	                    $('.js_cart-count').append(cartCount--);
+	                }
+	            });
+	        }
+	
+	        /**
+	         * On success request
+	         */
+	
+	    }, {
+	        key: 'success',
+	        value: function success(data) {
+	            console.log(data);
+	        }
+	    }]);
+	    return CartRequest;
+	}();
+
+/***/ },
+/* 131 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	exports.LikeRequest = undefined;
+	
+	var _classCallCheck2 = __webpack_require__(99);
+	
+	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+	
+	var _createClass2 = __webpack_require__(100);
+	
+	var _createClass3 = _interopRequireDefault(_createClass2);
+	
+	var _getToken = __webpack_require__(127);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var LikeRequest = exports.LikeRequest = function () {
+	    function LikeRequest() {
+	        var method = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 'POST';
+	        (0, _classCallCheck3.default)(this, LikeRequest);
+	
+	
+	        this.method = method;
+	        this.token = (0, _getToken.getToken)();
+	    }
+	
+	    /**
+	     * Init btn
+	     */
+	
+	
+	    (0, _createClass3.default)(LikeRequest, [{
+	        key: 'init',
+	        value: function init() {
+	
+	            var _this = this;
+	
+	            $('body').on('click', '.js_like-btn', function (event) {
+	                event.preventDefault();
+	                var productID = $(this).closest('.product-card').data('id');
+	                var url = '/like/add';
+	                _this.requestAdd(url, productID);
+	            });
+	
+	            $('body').on('click', '.js_like-btn-remove', function (event) {
+	                event.preventDefault();
+	                console.log('yeaahh');
+	                var item_id = $(this).closest('.like-product-card').data('item-id');
+	                var url = '/like/remove';
+	                _this.requestRemove(url, item_id);
+	            });
+	        }
+	
+	        /**
+	         * Change product by colour ajax request
+	         */
+	
+	    }, {
+	        key: 'requestAdd',
+	        value: function requestAdd(url, productId) {
+	            $.ajax({
+	                url: url,
+	                method: this.method,
+	                data: {
+	                    product_id: productId,
+	                    _token: this.token
+	                },
+	                success: function success(data) {
+	                    console.log('success');
+	                    var likeCount = +$('.js_like-count').html();
+	                    $('.js_like-count').empty();
+	                    $('.js_like-count').append(likeCount++);
+	                },
+	                error: function error() {
+	                    console.log('error');
+	                    var likeCount = +$('.js_like-count').html();
+	                    console.log(likeCount++);
+	                    $('.js_like-count').empty();
+	                    $('.js_like-count').append(likeCount++);
+	                }
+	            });
+	        }
+	    }, {
+	        key: 'requestRemove',
+	        value: function requestRemove(url, itemId) {
+	            $.ajax({
+	                url: url,
+	                method: this.method,
+	                data: {
+	                    item_id: itemId,
+	                    _token: this.token
+	                },
+	                success: function success(data) {
+	                    console.log('success');
+	                },
+	                error: function error() {
+	                    console.log('error');
+	                }
+	            });
+	        }
+	
+	        /**
+	         * On success request
+	         */
+	        // success(data) {
+	        //    console.log(data);
+	        // }
+	
+	    }]);
+	    return LikeRequest;
+	}();
+
+/***/ },
+/* 132 */
+/***/ function(module, exports) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+	var amount = exports.amount = {
+		init: function init(el, btnDec, btnInc) {
+			var min = $(el).data('min') || false,
+			    max = $(el).data('max') || false;
+			if (!$(el).attr('disabled')) {
+				$('body').on('click', btnDec, function (event) {
+					event.preventDefault();
+					var inp = $(this).parent().find(el);
+					amount.decrement(inp, min);
+					amount.checkedDisabled(inp, $(this), min, btnInc, max);
+				});
+				$('body').on('click', btnInc, function (event) {
+					event.preventDefault();
+					var inp = $(this).parent().find(el);
+					amount.increment(inp, max);
+					amount.checkedDisabled(inp, btnDec, min, $(this), max);
+				});
+			}
+		},
+	
+		// count reduction
+		decrement: function decrement(el, min) {
+			var value = parseInt(el.val());
+			value--;
+			if (value >= min) {
+				el.val(value--);
+			}
+		},
+		//count increase
+		increment: function increment(el, max) {
+			var value = parseInt(el.val());
+			value++;
+			if (value <= max) {
+				el.val(value++);
+			}
+		},
+		//check the button on the activity
+		checkedDisabled: function checkedDisabled(el, btnDec, min, btnInc, max) {
+			$(el).each(function (index, el) {
+				var value = parseInt($(el).val());
+				$(el).parent().find(btnDec).removeClass('__disabled');
+				$(el).parent().find(btnInc).removeClass('__disabled');
+				if (value <= min) {
+					$(el).parent().find(btnDec).addClass('__disabled');
+				}
+				if (value >= max) {
+					$(el).parent().find(btnInc).addClass('__disabled');
+				}
+			});
+		}
+	
+	};
+
+/***/ },
+/* 133 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	exports.MfPopup = undefined;
+	
+	var _getPrototypeOf = __webpack_require__(77);
+	
+	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
+	
+	var _classCallCheck2 = __webpack_require__(99);
+	
+	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+	
+	var _createClass2 = __webpack_require__(100);
+	
+	var _createClass3 = _interopRequireDefault(_createClass2);
+	
+	var _possibleConstructorReturn2 = __webpack_require__(106);
+	
+	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
+	
+	var _inherits2 = __webpack_require__(107);
+	
+	var _inherits3 = _interopRequireDefault(_inherits2);
+	
+	var _popup = __webpack_require__(134);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var MfPopup = exports.MfPopup = function (_Popup) {
+	    (0, _inherits3.default)(MfPopup, _Popup);
+	
+	    function MfPopup() {
+	        (0, _classCallCheck3.default)(this, MfPopup);
+	        return (0, _possibleConstructorReturn3.default)(this, (MfPopup.__proto__ || (0, _getPrototypeOf2.default)(MfPopup)).apply(this, arguments));
+	    }
+	
+	    (0, _createClass3.default)(MfPopup, [{
+	        key: 'openPopup',
+	        value: function openPopup() {
+	            $.magnificPopup.open({
+	                showCloseBtn: false,
+	                type: 'inline',
+	                tLoading: 'Загрузка...',
+	                items: {
+	                    src: this.popupId
+	                }
+	            });
+	        }
+	    }, {
+	        key: 'closePopup',
+	        value: function closePopup() {
+	            $.magnificPopup.close();
+	        }
+	    }]);
+	    return MfPopup;
+	}(_popup.Popup);
+
+/***/ },
+/* 134 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	exports.Popup = undefined;
+	
+	var _getPrototypeOf = __webpack_require__(77);
+	
+	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
+	
+	var _classCallCheck2 = __webpack_require__(99);
+	
+	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+	
+	var _createClass2 = __webpack_require__(100);
+	
+	var _createClass3 = _interopRequireDefault(_createClass2);
+	
+	var _possibleConstructorReturn2 = __webpack_require__(106);
+	
+	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
+	
+	var _inherits2 = __webpack_require__(107);
+	
+	var _inherits3 = _interopRequireDefault(_inherits2);
+	
+	var _component = __webpack_require__(112);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var Popup = exports.Popup = function (_Component) {
+	    (0, _inherits3.default)(Popup, _Component);
+	
+	    /**
+	     *
+	     * @param callClass{string} - class on open popup
+	     * @param closeClass{string} - class on close
+	     */
+	    function Popup(callClass, closeClass) {
+	        (0, _classCallCheck3.default)(this, Popup);
+	
+	        // check on parent errors
+	        var _this2 = (0, _possibleConstructorReturn3.default)(this, (Popup.__proto__ || (0, _getPrototypeOf2.default)(Popup)).call(this, callClass));
+	
+	        if (_this2.errors) return (0, _possibleConstructorReturn3.default)(_this2);
+	        // get url of popup if exist
+	        _this2.popupAjaxUrl = _this2.element.data('url');
+	        // get id of popup if exist
+	        _this2.popupId = _this2.element.data('popup');
+	        _this2.closeClass = closeClass ? closeClass : '.js_popup-close';
+	        // if url for ajax does not exist check
+	        // for existing id of modal
+	        if (!_this2.popupAjaxUrl) {
+	            _this2.checkOnExistPopupElements();
+	        }
+	        if (_this2.errors) return (0, _possibleConstructorReturn3.default)(_this2);
+	        _this2.dataPush = null;
+	        _this2.identificator = callClass;
+	        _this2.initPopup();
+	        return _this2;
+	    }
+	
+	    /**
+	     * Init all settings for popup
+	     */
+	
+	
+	    (0, _createClass3.default)(Popup, [{
+	        key: 'initPopup',
+	        value: function initPopup() {
+	            var _this = this;
+	            // On click open popup
+	            $('body').on('click', this.identificator, function (event) {
+	                event.preventDefault();
+	                // get data for hidden inputs
+	                _this.dataPush = $(this).data('info');
+	
+	                if (_this.dataPush) _this.pushData();
+	                this.dataPush = null;
+	                _this.openPopup();
+	            })
+	            // On close popup
+	            .on('click', this.closeClass, function (event) {
+	                event.preventDefault();
+	                _this.closePopup();
+	            });
+	        }
+	
+	        /**
+	         * Preparing and add data for hidden inputs into forms
+	         */
+	
+	    }, {
+	        key: 'pushData',
+	        value: function pushData() {
+	            if (!this.validateData(this.dataPush)) return;
+	            var arr = this.breakStr();
+	            var form = $(this.popupId).find('form');
+	
+	            if (typeof arr[0] === 'string') {
+	                form.append('<input type="hidden" name="' + arr[0] + '" value="' + arr[1] + '">');
+	                return;
+	            }
+	            arr.forEach(function (el) {
+	                console.log(el);
+	                form.append('<input type="hidden" name="' + el[0] + '" value="' + el[1] + '">');
+	            });
+	        }
+	
+	        /**
+	         * Validating data for hidden inputs
+	         *
+	         * @param str
+	         * @returns {boolean}
+	         */
+	
+	    }, {
+	        key: 'validateData',
+	        value: function validateData(str) {
+	            if (typeof str !== 'string') {
+	                console.warn(' Warning in Popup ' + this.identificator + ':the value ' + str + ' should be string ');
+	                return false;
+	            }
+	            if (str.indexOf(':') < 0) {
+	                console.warn(' Warning in Popup ' + this.identificator + ':the value ' + str + ' should contain ":"');
+	                return false;
+	            }
+	
+	            return true;
+	        }
+	
+	        /**
+	         * Break string for array
+	         *
+	         * @returns {Array}
+	         */
+	
+	    }, {
+	        key: 'breakStr',
+	        value: function breakStr() {
+	            var _this3 = this;
+	
+	            if (this.dataPush.indexOf(',') < 0) {
+	                return this.dataPush.split(':');
+	            }
+	
+	            return this.dataPush.split(',').map(function (el) {
+	                if (_this3.validateData(el)) {
+	                    return el.split(':');
+	                }
+	                return [];
+	            });
+	        }
+	    }, {
+	        key: 'openPopup',
+	        value: function openPopup() {
+	            console.warn('Warn in Popup: you use default function of open popup, you should redeclare it');
+	        }
+	    }, {
+	        key: 'closePopup',
+	        value: function closePopup() {
+	            console.warn('Warn in Popup: you use default function of close popup, you should redeclare it');
+	        }
+	    }, {
+	        key: 'checkOnExistPopupElements',
+	        value: function checkOnExistPopupElements() {
+	            if (this.checkOnExistElement(this.closeClass)) {
+	                console.warn('on ' + this.identificator + ' wrong close class element ' + this.closeClass);
+	            }
+	            if (!this.checkOnExistElement(this.popupId)) {
+	                console.warn('on ' + this.identificator + ' do not set or wrong set data-popup or data-url');
+	            }
+	        }
+	    }]);
+	    return Popup;
+	}(_component.Component); /*POPUP*/
 
 /***/ }
 /******/ ]);

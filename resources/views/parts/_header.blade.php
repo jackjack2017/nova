@@ -19,7 +19,7 @@
 					<input type="hidden" name="_token" value="{{csrf_token()}}">
 					<button type="submit" class="header-search-form-ic fa fa-search"></button>
 				</form>
-				<a href="#" class="header-like"><span class="header-like-txt">Избранное</span>(<span class="header-like-num js_like-count">0</span>)</a>
+				<a href="#" class="header-like js_mfpopup-popup-success" data-popup="#modal-success"><span class="header-like-txt">Избранное</span>(<span class="header-like-num js_like-count">0</span>)</a>
 				<div class="header-basket-blk">
 					<a href="#" class="header-basket-lnk"><span class="header-basket-txt">Корзина</span>(<span class="header-basket-num js_cart-count">0</span>)</a>
 					<div class="header-basket-inner js_header-cart-blk">
