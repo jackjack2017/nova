@@ -19,25 +19,21 @@ export class ChangeProductRequest{
 
         $('.js_product-colour').on('change', function() {
 
-            let colorId = $(this).data('color');
             let productId = $(this).closest('.product-row').data('id');
             let url = '/product/test';
-            console.log(this);
-            console.log(productId);
-            console.log(colorId);
-            _this.request(url, colorId, productId);
+
+            _this.request(url, productId);
         })
     }
 
     /**
      * Change product by colour ajax request
      */
-    request(url, colorId, productId){
+    request(url, productId){
         $.ajax({
             url: url,
             method: this.method,
             data: {
-                colorId: colorId,
                 productId: productId,
                 _token: this.token
             },

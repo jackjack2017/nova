@@ -3,7 +3,6 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use App\Models\Post;
 
 class Category extends Model {
 
@@ -13,26 +12,17 @@ class Category extends Model {
     * @var array
     */
     protected $fillable = [
-        'title', 'slug'
+        'name', 'description', 'slug', 'active'
     ];
 
-	/**
-	 * Get the route key for the model.
-	 *
-	 * @return string
-	 */
-	public function getRouteKeyName()
-	{
-	    return request()->segment(1) === 'admin' ? 'id' : 'slug';
-	}
 
 	/**
      * Many to Many relation
      *
-     * @return \Illuminate\Database\Eloquent\Relations\belongsToMany
+
      */
-	public function posts()
+	public function products()
 	{
-		return $this->belongsToMany(Post::class);
+		return $this->hasMany(Product::class);
 	}
 }

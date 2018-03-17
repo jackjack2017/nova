@@ -36,20 +36,27 @@ body{
  	@include make-container(); /* align center, add default padding*/
  	padding-left: 40px;
  	padding-right: 40px;
- 	&-category{
+ 	&-with-sidebar{
  		@include make-row();
  		margin: 0;
  	}
 }
 
-.main-sidebar{
+.withPad{
+	padding-top: 50px;
+	&-S{
+		padding-top: 30px;
+	}
+}
+
+.sidebar{
 	@include make-col-ready($grid-columns);
 	@include make-col(3);
 	width: 100%;
 	padding: 0;
 }
 
-.main-cnt{
+.cnt{
 	@include make-col-ready($grid-columns);
 	@include make-col(9);
 	width: 100%;

@@ -22,5 +22,9 @@ return [
         'create' => 'categoryCreate',
         'edit' => 'categoryEdit',
     ],
-
+    'products' => [
+        'index' => 'products',
+        'create' => 'create',
+        'edit' => 'edit',
+    ],
 ];

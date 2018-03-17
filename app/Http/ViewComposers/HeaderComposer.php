@@ -20,7 +20,6 @@ class HeaderComposer
         // Breadcrumb
         $elements = config ('breadcrumbs');
         $segments = request()->segments();
-
         foreach ($segments as $segment) {
             if (!is_numeric($segment)) {
                 $elements[$segment]['name'] = __('admin.breadcrumbs.' . $elements[$segment]['name'] . '-name');
@@ -34,10 +33,10 @@ class HeaderComposer
         // Title
         $title = config('titles.' . Route::currentRouteName());
         $title = __('admin.titles.' . $title);
-
-        // Notifications
-        $countNotifications = auth()->user()->unreadNotifications()->count();
-
+//
+//        // Notifications
+//        $countNotifications = auth()->user()->unreadNotifications()->count();
+//
         $view->with(compact('breadcrumbs', 'title', 'countNotifications'));
     }
 }

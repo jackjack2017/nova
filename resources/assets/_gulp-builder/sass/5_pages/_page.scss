@@ -1,17 +1,5 @@
 .page{
 	padding-bottom: 20px;
-	&-container{
-		@extend .container-category;
-		&-main{
-			@extend .container;
-		}
-	}
-	&-sidebar{
-		@extend .main-sidebar;
-	}
-	&-cnt{
-		@extend .main-cnt;
-	}
 	&-lst{
 		span{
 			text-transform: uppercase;
@@ -24,6 +12,9 @@
 	&-banner{
 		position: relative;
 		padding-bottom: 25px;
+		img{
+			width: 100%;
+		}
 		&.__left{
 			.page-banner-txt{
 				left: 10%;
@@ -59,13 +50,6 @@
 				@extend .btn-inverse;
 			}
 		}
-	}
-	&-ttl{
-		font-size: 18px;
-		font-weight: bold;
-		text-transform: uppercase;
-		text-align: center;
-		color: black;
 	}
 	&-slider{
 		&.owl-carousel .owl-nav .owl-prev{

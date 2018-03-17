@@ -1,0 +1,16 @@
+.cart{
+  padding-bottom: 50px;
+  &-total{
+    text-align: right;
+    font-size: 32px;
+    &-num{
+      font-weight: bold;
+    }
+  }
+  &-btn{
+    &-wrap{
+      max-width: 300px;
+      margin: 0 auto;
+    }
+  }
+}

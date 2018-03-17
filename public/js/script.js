@@ -46,7 +46,7 @@
 
 	'use strict';
 	
-	__webpack_require__(78);
+	__webpack_require__(98);
 
 /***/ },
 /* 1 */,
@@ -1340,29 +1340,186 @@
 /* 74 */,
 /* 75 */,
 /* 76 */,
-/* 77 */,
+/* 77 */
+/***/ function(module, exports, __webpack_require__) {
+
+	module.exports = { "default": __webpack_require__(78), __esModule: true };
+
+/***/ },
 /* 78 */
+/***/ function(module, exports, __webpack_require__) {
+
+	__webpack_require__(79);
+	module.exports = __webpack_require__(14).Object.getPrototypeOf;
+
+/***/ },
+/* 79 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// 19.1.2.9 Object.getPrototypeOf(O)
+	var toObject        = __webpack_require__(49)
+	  , $getPrototypeOf = __webpack_require__(48);
+	
+	__webpack_require__(80)('getPrototypeOf', function(){
+	  return function getPrototypeOf(it){
+	    return $getPrototypeOf(toObject(it));
+	  };
+	});
+
+/***/ },
+/* 80 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// most Object methods by ES6 should accept primitives
+	var $export = __webpack_require__(12)
+	  , core    = __webpack_require__(14)
+	  , fails   = __webpack_require__(23);
+	module.exports = function(KEY, exec){
+	  var fn  = (core.Object || {})[KEY] || Object[KEY]
+	    , exp = {};
+	  exp[KEY] = exec(fn);
+	  $export($export.S + $export.F * fails(function(){ fn(1); }), 'Object', exp);
+	};
+
+/***/ },
+/* 81 */
+/***/ function(module, exports, __webpack_require__) {
+
+	module.exports = { "default": __webpack_require__(82), __esModule: true };
+
+/***/ },
+/* 82 */
+/***/ function(module, exports, __webpack_require__) {
+
+	__webpack_require__(83);
+	var $Object = __webpack_require__(14).Object;
+	module.exports = function defineProperty(it, key, desc){
+	  return $Object.defineProperty(it, key, desc);
+	};
+
+/***/ },
+/* 83 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var $export = __webpack_require__(12);
+	// 19.1.2.4 / 15.2.3.6 Object.defineProperty(O, P, Attributes)
+	$export($export.S + $export.F * !__webpack_require__(22), 'Object', {defineProperty: __webpack_require__(18).f});
+
+/***/ },
+/* 84 */
+/***/ function(module, exports, __webpack_require__) {
+
+	module.exports = { "default": __webpack_require__(85), __esModule: true };
+
+/***/ },
+/* 85 */
+/***/ function(module, exports, __webpack_require__) {
+
+	__webpack_require__(86);
+	module.exports = __webpack_require__(14).Object.setPrototypeOf;
+
+/***/ },
+/* 86 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// 19.1.3.19 Object.setPrototypeOf(O, proto)
+	var $export = __webpack_require__(12);
+	$export($export.S, 'Object', {setPrototypeOf: __webpack_require__(87).set});
+
+/***/ },
+/* 87 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// Works with __proto__ only. Old v8 can't work with null proto objects.
+	/* eslint-disable no-proto */
+	var isObject = __webpack_require__(20)
+	  , anObject = __webpack_require__(19);
+	var check = function(O, proto){
+	  anObject(O);
+	  if(!isObject(proto) && proto !== null)throw TypeError(proto + ": can't set as prototype!");
+	};
+	module.exports = {
+	  set: Object.setPrototypeOf || ('__proto__' in {} ? // eslint-disable-line
+	    function(test, buggy, set){
+	      try {
+	        set = __webpack_require__(15)(Function.call, __webpack_require__(67).f(Object.prototype, '__proto__').set, 2);
+	        set(test, []);
+	        buggy = !(test instanceof Array);
+	      } catch(e){ buggy = true; }
+	      return function setPrototypeOf(O, proto){
+	        check(O, proto);
+	        if(buggy)O.__proto__ = proto;
+	        else set(O, proto);
+	        return O;
+	      };
+	    }({}, false) : undefined),
+	  check: check
+	};
+
+/***/ },
+/* 88 */
+/***/ function(module, exports, __webpack_require__) {
+
+	module.exports = { "default": __webpack_require__(89), __esModule: true };
+
+/***/ },
+/* 89 */
+/***/ function(module, exports, __webpack_require__) {
+
+	__webpack_require__(90);
+	var $Object = __webpack_require__(14).Object;
+	module.exports = function create(P, D){
+	  return $Object.create(P, D);
+	};
+
+/***/ },
+/* 90 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var $export = __webpack_require__(12)
+	// 19.1.2.2 / 15.2.3.5 Object.create(O [, Properties])
+	$export($export.S, 'Object', {create: __webpack_require__(31)});
+
+/***/ },
+/* 91 */,
+/* 92 */,
+/* 93 */,
+/* 94 */,
+/* 95 */,
+/* 96 */,
+/* 97 */,
+/* 98 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(global) {'use strict';
 	
-	var _classCallCheck2 = __webpack_require__(79);
+	var _classCallCheck2 = __webpack_require__(99);
 	
 	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
 	
-	var _createClass2 = __webpack_require__(80);
+	var _createClass2 = __webpack_require__(100);
 	
 	var _createClass3 = _interopRequireDefault(_createClass2);
 	
-	var _slider = __webpack_require__(84);
+	var _slider = __webpack_require__(101);
 	
-	var _ui = __webpack_require__(107);
+	var _ui = __webpack_require__(113);
 	
-	var _getToken = __webpack_require__(108);
+	var _sendform = __webpack_require__(114);
 	
-	var _changeProductRequest = __webpack_require__(110);
+	var _getToken = __webpack_require__(127);
 	
-	var _showMoreRequest = __webpack_require__(111);
+	var _changeProductRequest = __webpack_require__(128);
+	
+	var _showMoreRequest = __webpack_require__(129);
+	
+	var _cartRequest = __webpack_require__(130);
+	
+	var _likeRequest = __webpack_require__(131);
+	
+	var _amount = __webpack_require__(132);
+	
+	var _mfpopup = __webpack_require__(133);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -1387,9 +1544,87 @@
 	            //used in Product slider block (Product page)
 	            _ui.ui.galleryPopupInit('.js_gallery-product');
 	            _ui.ui.tabsInit('.js_ui-tab-nav', '.js_ui-tabs-cnt', '.js_ui-tabs');
+	            _ui.ui.initPhoneMask();
+	            _ui.ui.accordion('.js_deal-detail-btn', '.js_deal-detail-blk');
+	            _amount.amount.init('.js_ui-amount-inp', '.js_ui-amount-btn-dec', '.js_ui-amount-btn-inc');
+	            $('.my-container').sortablePhotos({
+	                selector: '> .my-item',
+	                sortable: true,
+	                padding: 2
+	            });
+	            $('.js_select').select2({
+	                placeholder: 'Выбор перевозчика',
+	                minimumResultsForSearch: Infinity
+	            });
+	            $('.js_select-payment').select2({
+	                placeholder: 'Выбор способа оплаты',
+	                minimumResultsForSearch: Infinity
+	            });
+	
+	            new _mfpopup.MfPopup('.js_mfpopup-popup-success');
+	
+	            //for delivery on the deal page
+	
+	            $('body').on('change', '.js_delivery', function () {
+	                var deliveryForm = $('.js_delivery').val() + '';
+	                var allrequiredFields = $('.js_required-field');
+	                var currentRequiredFields = $(deliveryForm).find('.js_required-field');
+	
+	                $(allrequiredFields).each(function (i, el) {
+	                    el.required = false;
+	                });
+	
+	                $('.js_delivery-form').hide();
+	                $(deliveryForm).slideDown().css('display', 'flex');
+	
+	                $(currentRequiredFields).each(function (i, el) {
+	                    el.required = true;
+	                });
+	            });
+	
+	            //for an amount of products in a cart and on the product page
+	
+	            $('body').on('click', '.js_ui-amount-btn', function () {
+	                var productQty = $(this).siblings('.js_product-amount').val();
+	                var priceBlk = $(this).closest('.js_product-price-blk');
+	                var totalPriceStr = $(priceBlk).find('.js_product-price-total');
+	                var totalPriceStrAll = $('.js_product-price-total-cart');
+	                var price = $(priceBlk).find('.js_product-price').html();
+	                var totalPrice = price * productQty;
+	
+	                $(totalPriceStr).html(totalPrice);
+	
+	                if (totalPriceStrAll.length !== 0) {
+	                    (function () {
+	                        var allTotalPrices = $('.cart .js_product-price-total');
+	
+	                        var array = [];
+	                        var totalPriceAll = 0;
+	
+	                        $(allTotalPrices).each(function (i, el) {
+	                            array[i] = [];
+	                            array[i].push(+$(el).html());
+	                        });
+	
+	                        $(array).each(function (i, el) {
+	                            totalPriceAll += +el;
+	                        });
+	
+	                        $(totalPriceStrAll).html(totalPriceAll);
+	                    })();
+	                }
+	            });
+	
+	            this.sendFormInit();
 	
 	            var changeProductRequest = new _changeProductRequest.ChangeProductRequest();
 	            changeProductRequest.init();
+	
+	            var cartRequest = new _cartRequest.CartRequest();
+	            cartRequest.init();
+	
+	            var likeRequest = new _likeRequest.LikeRequest();
+	            likeRequest.init();
 	
 	            var requestProducts = new _showMoreRequest.ShowMoreRequest({
 	                url: '/product/test',
@@ -1407,6 +1642,13 @@
 	                margin: 10
 	            });
 	
+	            new _slider.Slider('.js_slider-main-big', {
+	                nav: true,
+	                dots: true,
+	                items: 6,
+	                margin: 10
+	            });
+	
 	            new _slider.Slider('.js_slider-product', {
 	                nav: false,
 	                dots: true,
@@ -1416,6 +1658,19 @@
 	                dotsContainer: '.js_product-slider-dots-container'
 	            });
 	        }
+	    }, {
+	        key: 'sendFormInit',
+	        value: function sendFormInit() {
+	
+	            //used in the order form of the site
+	            var formDeal = new _sendform.Sendform('.js_sendform-form-deal', {
+	                success: successSend
+	            });
+	
+	            function successSend() {
+	                _ui.ui.openPopup('#modal-success');
+	            }
+	        }
 	    }]);
 	    return App;
 	}();
@@ -1424,7 +1679,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
 
 /***/ },
-/* 79 */
+/* 99 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -1438,7 +1693,7 @@
 	};
 
 /***/ },
-/* 80 */
+/* 100 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -1470,31 +1725,7 @@
 	}();
 
 /***/ },
-/* 81 */
-/***/ function(module, exports, __webpack_require__) {
-
-	module.exports = { "default": __webpack_require__(82), __esModule: true };
-
-/***/ },
-/* 82 */
-/***/ function(module, exports, __webpack_require__) {
-
-	__webpack_require__(83);
-	var $Object = __webpack_require__(14).Object;
-	module.exports = function defineProperty(it, key, desc){
-	  return $Object.defineProperty(it, key, desc);
-	};
-
-/***/ },
-/* 83 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var $export = __webpack_require__(12);
-	// 19.1.2.4 / 15.2.3.6 Object.defineProperty(O, P, Attributes)
-	$export($export.S + $export.F * !__webpack_require__(22), 'Object', {defineProperty: __webpack_require__(18).f});
-
-/***/ },
-/* 84 */
+/* 101 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -1504,33 +1735,33 @@
 	});
 	exports.Slider = undefined;
 	
-	var _assign = __webpack_require__(85);
+	var _assign = __webpack_require__(102);
 	
 	var _assign2 = _interopRequireDefault(_assign);
 	
-	var _getPrototypeOf = __webpack_require__(89);
+	var _getPrototypeOf = __webpack_require__(77);
 	
 	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
 	
-	var _classCallCheck2 = __webpack_require__(79);
+	var _classCallCheck2 = __webpack_require__(99);
 	
 	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
 	
-	var _createClass2 = __webpack_require__(80);
+	var _createClass2 = __webpack_require__(100);
 	
 	var _createClass3 = _interopRequireDefault(_createClass2);
 	
-	var _possibleConstructorReturn2 = __webpack_require__(93);
+	var _possibleConstructorReturn2 = __webpack_require__(106);
 	
 	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
 	
-	var _inherits2 = __webpack_require__(94);
+	var _inherits2 = __webpack_require__(107);
 	
 	var _inherits3 = _interopRequireDefault(_inherits2);
 	
-	__webpack_require__(102);
+	__webpack_require__(108);
 	
-	var _component = __webpack_require__(106);
+	var _component = __webpack_require__(112);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -1607,29 +1838,29 @@
 	}(_component.Component);
 
 /***/ },
-/* 85 */
+/* 102 */
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = { "default": __webpack_require__(86), __esModule: true };
+	module.exports = { "default": __webpack_require__(103), __esModule: true };
 
 /***/ },
-/* 86 */
+/* 103 */
 /***/ function(module, exports, __webpack_require__) {
 
-	__webpack_require__(87);
+	__webpack_require__(104);
 	module.exports = __webpack_require__(14).Object.assign;
 
 /***/ },
-/* 87 */
+/* 104 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// 19.1.3.1 Object.assign(target, source)
 	var $export = __webpack_require__(12);
 	
-	$export($export.S + $export.F, 'Object', {assign: __webpack_require__(88)});
+	$export($export.S + $export.F, 'Object', {assign: __webpack_require__(105)});
 
 /***/ },
-/* 88 */
+/* 105 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -1667,49 +1898,7 @@
 	} : $assign;
 
 /***/ },
-/* 89 */
-/***/ function(module, exports, __webpack_require__) {
-
-	module.exports = { "default": __webpack_require__(90), __esModule: true };
-
-/***/ },
-/* 90 */
-/***/ function(module, exports, __webpack_require__) {
-
-	__webpack_require__(91);
-	module.exports = __webpack_require__(14).Object.getPrototypeOf;
-
-/***/ },
-/* 91 */
-/***/ function(module, exports, __webpack_require__) {
-
-	// 19.1.2.9 Object.getPrototypeOf(O)
-	var toObject        = __webpack_require__(49)
-	  , $getPrototypeOf = __webpack_require__(48);
-	
-	__webpack_require__(92)('getPrototypeOf', function(){
-	  return function getPrototypeOf(it){
-	    return $getPrototypeOf(toObject(it));
-	  };
-	});
-
-/***/ },
-/* 92 */
-/***/ function(module, exports, __webpack_require__) {
-
-	// most Object methods by ES6 should accept primitives
-	var $export = __webpack_require__(12)
-	  , core    = __webpack_require__(14)
-	  , fails   = __webpack_require__(23);
-	module.exports = function(KEY, exec){
-	  var fn  = (core.Object || {})[KEY] || Object[KEY]
-	    , exp = {};
-	  exp[KEY] = exec(fn);
-	  $export($export.S + $export.F * fails(function(){ fn(1); }), 'Object', exp);
-	};
-
-/***/ },
-/* 93 */
+/* 106 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -1731,18 +1920,18 @@
 	};
 
 /***/ },
-/* 94 */
+/* 107 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
 	
 	exports.__esModule = true;
 	
-	var _setPrototypeOf = __webpack_require__(95);
+	var _setPrototypeOf = __webpack_require__(84);
 	
 	var _setPrototypeOf2 = _interopRequireDefault(_setPrototypeOf);
 	
-	var _create = __webpack_require__(99);
+	var _create = __webpack_require__(88);
 	
 	var _create2 = _interopRequireDefault(_create);
 	
@@ -1769,87 +1958,12 @@
 	};
 
 /***/ },
-/* 95 */
-/***/ function(module, exports, __webpack_require__) {
-
-	module.exports = { "default": __webpack_require__(96), __esModule: true };
-
-/***/ },
-/* 96 */
-/***/ function(module, exports, __webpack_require__) {
-
-	__webpack_require__(97);
-	module.exports = __webpack_require__(14).Object.setPrototypeOf;
-
-/***/ },
-/* 97 */
-/***/ function(module, exports, __webpack_require__) {
-
-	// 19.1.3.19 Object.setPrototypeOf(O, proto)
-	var $export = __webpack_require__(12);
-	$export($export.S, 'Object', {setPrototypeOf: __webpack_require__(98).set});
-
-/***/ },
-/* 98 */
-/***/ function(module, exports, __webpack_require__) {
-
-	// Works with __proto__ only. Old v8 can't work with null proto objects.
-	/* eslint-disable no-proto */
-	var isObject = __webpack_require__(20)
-	  , anObject = __webpack_require__(19);
-	var check = function(O, proto){
-	  anObject(O);
-	  if(!isObject(proto) && proto !== null)throw TypeError(proto + ": can't set as prototype!");
-	};
-	module.exports = {
-	  set: Object.setPrototypeOf || ('__proto__' in {} ? // eslint-disable-line
-	    function(test, buggy, set){
-	      try {
-	        set = __webpack_require__(15)(Function.call, __webpack_require__(67).f(Object.prototype, '__proto__').set, 2);
-	        set(test, []);
-	        buggy = !(test instanceof Array);
-	      } catch(e){ buggy = true; }
-	      return function setPrototypeOf(O, proto){
-	        check(O, proto);
-	        if(buggy)O.__proto__ = proto;
-	        else set(O, proto);
-	        return O;
-	      };
-	    }({}, false) : undefined),
-	  check: check
-	};
-
-/***/ },
-/* 99 */
-/***/ function(module, exports, __webpack_require__) {
-
-	module.exports = { "default": __webpack_require__(100), __esModule: true };
-
-/***/ },
-/* 100 */
-/***/ function(module, exports, __webpack_require__) {
-
-	__webpack_require__(101);
-	var $Object = __webpack_require__(14).Object;
-	module.exports = function create(P, D){
-	  return $Object.create(P, D);
-	};
-
-/***/ },
-/* 101 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var $export = __webpack_require__(12)
-	// 19.1.2.2 / 15.2.3.5 Object.create(O [, Properties])
-	$export($export.S, 'Object', {create: __webpack_require__(31)});
-
-/***/ },
-/* 102 */
+/* 108 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
 	
-	var _getOwnPropertyNames = __webpack_require__(103);
+	var _getOwnPropertyNames = __webpack_require__(109);
 	
 	var _getOwnPropertyNames2 = _interopRequireDefault(_getOwnPropertyNames);
 	
@@ -2459,32 +2573,32 @@
 	}(window.Zepto || window.jQuery, window, document);
 
 /***/ },
-/* 103 */
+/* 109 */
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = { "default": __webpack_require__(104), __esModule: true };
+	module.exports = { "default": __webpack_require__(110), __esModule: true };
 
 /***/ },
-/* 104 */
+/* 110 */
 /***/ function(module, exports, __webpack_require__) {
 
-	__webpack_require__(105);
+	__webpack_require__(111);
 	var $Object = __webpack_require__(14).Object;
 	module.exports = function getOwnPropertyNames(it){
 	  return $Object.getOwnPropertyNames(it);
 	};
 
 /***/ },
-/* 105 */
+/* 111 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// 19.1.2.7 Object.getOwnPropertyNames(O)
-	__webpack_require__(92)('getOwnPropertyNames', function(){
+	__webpack_require__(80)('getOwnPropertyNames', function(){
 	  return __webpack_require__(65).f;
 	});
 
 /***/ },
-/* 106 */
+/* 112 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -2494,11 +2608,11 @@
 	});
 	exports.Component = undefined;
 	
-	var _classCallCheck2 = __webpack_require__(79);
+	var _classCallCheck2 = __webpack_require__(99);
 	
 	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
 	
-	var _createClass2 = __webpack_require__(80);
+	var _createClass2 = __webpack_require__(100);
 	
 	var _createClass3 = _interopRequireDefault(_createClass2);
 	
@@ -2583,7 +2697,7 @@
 	}();
 
 /***/ },
-/* 107 */
+/* 113 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -2592,6 +2706,66 @@
 	    value: true
 	});
 	var ui = exports.ui = {
+	    //PHONE MASK
+	
+	    initPhoneMask: function initPhoneMask() {
+	        $('input[type="tel"]').mask('+38 (999) 999-99-99');
+	    },
+	    //POPUPS
+	
+	    /**
+	     * function opens popup by id
+	     *
+	     * @param modalEL - id of the element
+	     */
+	
+	    openPopup: function openPopup(modalEL) {
+	        $.magnificPopup.open({
+	            showCloseBtn: false,
+	            type: 'inline',
+	            tLoading: 'Загрузка...',
+	            items: {
+	                src: modalEL
+	            }
+	        });
+	    },
+	
+	
+	    /**
+	     * function opens popup by id
+	     *
+	     * @param el - the element which closes popup when you click on it
+	     */
+	
+	    closePopup: function closePopup(el) {
+	        $('body').on('click', el, function (event) {
+	            event.preventDefault();
+	            $.magnificPopup.close();
+	        });
+	    },
+	
+	
+	    //ACCORDEON
+	
+	    /**Accordeon functionality
+	     *
+	     * @param accordionTtl - an element which you click on
+	     * @param accordionCnt - the content of the define element
+	     * @param activeClassTtl - active class witch change styles
+	     */
+	    accordion: function accordion(accordionTtl, accordionCnt) {
+	        var activeClassTtl = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : '__active';
+	
+	        $('body').on('click', accordionTtl, function (event) {
+	            event.preventDefault();
+	            if ($(accordionTtl).hasClass(activeClassTtl) && !$(this).hasClass(activeClassTtl)) {
+	                $(accordionTtl).removeClass(activeClassTtl);
+	                $(accordionCnt).slideUp(400);
+	            }
+	            $(this).toggleClass(activeClassTtl);
+	            $(this).next(accordionCnt).slideToggle(400);
+	        });
+	    },
 	    //POPUP GALLERY
 	
 	    /**
@@ -2666,7 +2840,883 @@
 	};
 
 /***/ },
-/* 108 */
+/* 114 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _form = __webpack_require__(115);
+	
+	Object.defineProperty(exports, 'Sendform', {
+	  enumerable: true,
+	  get: function get() {
+	    return _interopRequireDefault(_form).default;
+	  }
+	});
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+/***/ },
+/* 115 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	
+	var _assign = __webpack_require__(102);
+	
+	var _assign2 = _interopRequireDefault(_assign);
+	
+	var _from = __webpack_require__(116);
+	
+	var _from2 = _interopRequireDefault(_from);
+	
+	var _classCallCheck2 = __webpack_require__(99);
+	
+	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+	
+	var _createClass2 = __webpack_require__(100);
+	
+	var _createClass3 = _interopRequireDefault(_createClass2);
+	
+	var _field = __webpack_require__(125);
+	
+	var _field2 = _interopRequireDefault(_field);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var Form = function () {
+	    /**
+	     * @param formClass {string} - class of form.
+	     * @param settings {Object} - settings object.
+	     * @param reference {Object} - reference for validation.
+	     */
+	    function Form(formClass, settings, reference) {
+	        var _this = this;
+	
+	        (0, _classCallCheck3.default)(this, Form);
+	
+	        this.form = document.querySelector(formClass);
+	        if (this.form == null || undefined) return;
+	        this.inputs = (0, _from2.default)(this.form.querySelectorAll('input:not([type="hidden"]), select, textarea'));
+	        /**
+	         * Set action(url for request)
+	         */
+	        var action = this.form.getAttribute('action');
+	
+	        this.action = action != null ? action : '/';
+	
+	        // Form state if it contain errors
+	        this.state = true;
+	        //determine if there are any mistakes now.    
+	        this.error = false;
+	        // Show spunner activity
+	        this.isSpinnerActive = false;
+	        // Text of status field.
+	        this.statusText = null;
+	        // Contain all field of this form
+	        this.items = [];
+	        // Contain errors field with position
+	        this.errorItems = {};
+	        // settings
+	        var customSettings = {
+	            resetAfterSubmit: true,
+	            onlyValidate: false,
+	            statusId: 'form-status',
+	            statusErrorClass: 'with_error',
+	            statusSuccessClass: 'with_success',
+	            errorClass: 'error',
+	            successClass: 'success-valid',
+	            validateClass: '.js_sendform-validate',
+	            requiredClass: 'form-required',
+	            modalOpen: true,
+	            modalId: '#thanks',
+	            msgSend: 'Отправка данных',
+	            msgDone: 'Данные успешно отправлены',
+	            msgError: 'Ошибка отправки',
+	            msgValError: 'Одно из полей не заполено',
+	            spinnerColor: '#000',
+	            formPosition: 'relative',
+	            resetClass: '.js_senform-reset',
+	            method: 'POST',
+	            success: function success(data) {
+	                _this.successSubmit();
+	            },
+	            error: function error(data) {
+	                _this.errorSubmit();
+	            },
+	            validationSuccess: function validationSuccess() {},
+	            validationError: function validationError() {
+	                _this.validationErrorCallback();
+	            }
+	        };
+	        // validation rules
+	        var customReference = {
+	            email: ['isEmail', 'isEmpty'],
+	            text: ['isEmpty'],
+	            textarea: ['isEmpty'],
+	            phone: ['minLength'],
+	            required: ['isEmpty'],
+	            checkbox: ['isChecked'],
+	            radio: ['isCheckedRadio']
+	        };
+	
+	        this.settings = (0, _assign2.default)(customSettings, settings);
+	        this.reference = (0, _assign2.default)(customReference, reference);
+	
+	        this.onInit();
+	    }
+	
+	    /**
+	     * On initialize class.
+	     * Creating all inputs of this form.
+	     * if setting for only validate true init this func.
+	     * else init function on submitting.
+	     * creating status text field.
+	     * init function for reset field.
+	     */
+	
+	
+	    (0, _createClass3.default)(Form, [{
+	        key: 'onInit',
+	        value: function onInit() {
+	            var _this2 = this;
+	
+	            this.createInputsValidate();
+	
+	            if (this.settings.onlyValidate) {
+	                this.onValidate();
+	            } else {
+	                this.form.addEventListener('submit', function (event) {
+	                    event.preventDefault();
+	                    _this2.preSubmit();
+	                });
+	            }
+	            this.createStatusField();
+	            this.onReset();
+	        }
+	
+	        /**
+	         * Creating for each input, select, checkboxes own class.
+	         * And pushing this classes into array.
+	        */
+	
+	    }, {
+	        key: 'createInputsValidate',
+	        value: function createInputsValidate() {
+	            var _this3 = this;
+	
+	            this.inputs.forEach(function (el, i) {
+	                var item = new _field2.default(el, _this3.state, _this3.reference, _this3.settings, i);
+	                _this3.items.push(item);
+	            });
+	        }
+	        /**
+	         * Create hidden field for status text.
+	         */
+	
+	    }, {
+	        key: 'createStatusField',
+	        value: function createStatusField() {
+	            var div = document.createElement('div');
+	            div.innerHTML = '';
+	            div.id = this.settings.statusId;
+	            this.form.appendChild(div);
+	            this.statusText = this.form.querySelector('#' + this.settings.statusId);
+	        }
+	
+	        /**
+	         * checking on error.
+	         * prepare for submitting:
+	         * add spinner, add status text.
+	         * call submit function.
+	         */
+	
+	    }, {
+	        key: 'preSubmit',
+	        value: function preSubmit() {
+	            this.validateField();
+	            if (!this.state) {
+	                this.errorOnForm();
+	                return;
+	            }
+	
+	            this.error = false;
+	            if (!this.isSpinnerActive) this.addSpinner();
+	            this.statusText.innerHTML = this.settings.msgSend;
+	            this.submitData();
+	        }
+	
+	        /**
+	         * Foreach in all items call validation function.
+	         * @param result {object} - variable keep return from
+	         * validation function.Object contain 2 attr
+	         * result.valid {boolean} -show is field pass validation.
+	         * result.position {string} - position of field.
+	         * 
+	         */
+	
+	    }, {
+	        key: 'validateField',
+	        value: function validateField() {
+	            var _this4 = this;
+	
+	            var localState = true;
+	            this.items.forEach(function (item) {
+	                var result = item.validate();
+	                if (result == undefined) return;
+	                localState = localState * result.valid;
+	
+	                if (localState) {
+	                    delete _this4.errorItems[result.position];
+	                } else {
+	                    _this4.errorItems[result.position] = false;
+	                }
+	            });
+	
+	            this.state = localState;
+	            if (this.state) {
+	                this.removeStatusText();
+	            }
+	        }
+	
+	        /**
+	         * Call reset method on all items.
+	         */
+	
+	    }, {
+	        key: 'resetField',
+	        value: function resetField() {
+	            this.items.forEach(function (item) {
+	                item.resetSelf();
+	            });
+	        }
+	
+	        /**
+	         * Adding spinner.
+	         */
+	
+	    }, {
+	        key: 'addSpinner',
+	        value: function addSpinner() {
+	            var div = document.createElement('div');
+	            div.innerHTML = '<div class="form-loading"></div>';
+	            div.id = 'formsendHover';
+	            this.form.appendChild(div);
+	            this.isSpinnerActive = true;
+	        }
+	
+	        /**
+	         * Removing spinner.
+	         */
+	
+	    }, {
+	        key: 'removeSpinner',
+	        value: function removeSpinner() {
+	            document.querySelector('#formsendHover').remove();
+	            this.isSpinnerActive = false;
+	        }
+	
+	        /**
+	         * init validation by press on btn.
+	         */
+	
+	    }, {
+	        key: 'onValidate',
+	        value: function onValidate() {
+	            var _this5 = this;
+	
+	            var validateBtn = this.form.querySelector(this.settings.validateClass);
+	            validateBtn.addEventListener('click', function (event) {
+	                event.preventDefault();
+	                _this5.validateField();
+	                if (_this5.state) {
+	                    _this5.settings.validationSuccess();
+	                    return;
+	                }
+	                _this5.settings.validationError();
+	            });
+	        }
+	
+	        /**
+	         * init function reseting by press btn.
+	         */
+	
+	    }, {
+	        key: 'onReset',
+	        value: function onReset() {
+	            var _this6 = this;
+	
+	            var resetClass = this.form.querySelector(this.settings.resetClass);
+	            if (resetClass == null || undefined) return;
+	            resetClass.addEventListener('click', function () {
+	                _this6.resetField();
+	            });
+	        }
+	
+	        /**
+	         * Add text and set error on true.
+	         * And add text error.
+	         */
+	
+	    }, {
+	        key: 'errorOnForm',
+	        value: function errorOnForm() {
+	            if (this.error) return;
+	            this.error = true;
+	            this.statusText.innerHTML = this.settings.msgValError;
+	            this.statusText.classList.add('with_error');
+	        }
+	
+	        /**
+	         * On error validation
+	         */
+	
+	    }, {
+	        key: 'validationErrorCallback',
+	        value: function validationErrorCallback() {
+	            this.errorStatusClass();
+	            this.printText(this.settings.msgValError);
+	        }
+	
+	        /**
+	         * Set text in status in form.
+	         * @param text{string}
+	         */
+	
+	    }, {
+	        key: 'printText',
+	        value: function printText(text) {
+	            this.statusText.innerHTML = text;
+	        }
+	
+	        /**
+	         * Clean status text
+	         */
+	
+	    }, {
+	        key: 'removeStatusText',
+	        value: function removeStatusText() {
+	            this.statusText.innerHTML = '';
+	            this.statusText.classList = '';
+	        }
+	
+	        /**
+	         * Set error class on status text in form
+	         */
+	
+	    }, {
+	        key: 'errorStatusClass',
+	        value: function errorStatusClass() {
+	            this.statusText.classList.add(this.settings.statusErrorClass);
+	        }
+	
+	        /**
+	         * Set success class on status text in form
+	         */
+	
+	    }, {
+	        key: 'successStatusClass',
+	        value: function successStatusClass() {
+	            this.statusText.classList.add(this.settings.statusSuccessClass);
+	        }
+	
+	        /**
+	         * Submitting data
+	         * @param event
+	         */
+	
+	    }, {
+	        key: 'submitData',
+	        value: function submitData(event) {
+	            var _this7 = this;
+	
+	            var request = new XMLHttpRequest();
+	            request.open(this.settings.method, this.action, true);
+	            var data = new FormData(this.form);
+	            request.onload = function (data) {
+	                if (request.status >= 200 && request.status < 400) {
+	                    // Success!
+	                    _this7.settings.success();
+	                } else {
+	                    // We reached our target server, but it returned an error
+	                    _this7.settings.error();
+	                }
+	                _this7.removeSpinner();
+	            };
+	            request.send(data);
+	        }
+	
+	        /**
+	         * On error submit
+	         */
+	
+	    }, {
+	        key: 'errorSubmit',
+	        value: function errorSubmit() {
+	            this.errorStatusClass();
+	            this.printText(this.settings.msgError);
+	        }
+	
+	        /**
+	         * On success submit
+	         */
+	
+	    }, {
+	        key: 'successSubmit',
+	        value: function successSubmit() {
+	            this.successStatusClass();
+	            this.printText(this.settings.msgDone);
+	        }
+	    }]);
+	    return Form;
+	}();
+	
+	exports.default = Form;
+
+/***/ },
+/* 116 */
+/***/ function(module, exports, __webpack_require__) {
+
+	module.exports = { "default": __webpack_require__(117), __esModule: true };
+
+/***/ },
+/* 117 */
+/***/ function(module, exports, __webpack_require__) {
+
+	__webpack_require__(6);
+	__webpack_require__(118);
+	module.exports = __webpack_require__(14).Array.from;
+
+/***/ },
+/* 118 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	var ctx            = __webpack_require__(15)
+	  , $export        = __webpack_require__(12)
+	  , toObject       = __webpack_require__(49)
+	  , call           = __webpack_require__(119)
+	  , isArrayIter    = __webpack_require__(120)
+	  , toLength       = __webpack_require__(39)
+	  , createProperty = __webpack_require__(121)
+	  , getIterFn      = __webpack_require__(122);
+	
+	$export($export.S + $export.F * !__webpack_require__(124)(function(iter){ Array.from(iter); }), 'Array', {
+	  // 22.1.2.1 Array.from(arrayLike, mapfn = undefined, thisArg = undefined)
+	  from: function from(arrayLike/*, mapfn = undefined, thisArg = undefined*/){
+	    var O       = toObject(arrayLike)
+	      , C       = typeof this == 'function' ? this : Array
+	      , aLen    = arguments.length
+	      , mapfn   = aLen > 1 ? arguments[1] : undefined
+	      , mapping = mapfn !== undefined
+	      , index   = 0
+	      , iterFn  = getIterFn(O)
+	      , length, result, step, iterator;
+	    if(mapping)mapfn = ctx(mapfn, aLen > 2 ? arguments[2] : undefined, 2);
+	    // if object isn't iterable or it's array with default iterator - use simple case
+	    if(iterFn != undefined && !(C == Array && isArrayIter(iterFn))){
+	      for(iterator = iterFn.call(O), result = new C; !(step = iterator.next()).done; index++){
+	        createProperty(result, index, mapping ? call(iterator, mapfn, [step.value, index], true) : step.value);
+	      }
+	    } else {
+	      length = toLength(O.length);
+	      for(result = new C(length); length > index; index++){
+	        createProperty(result, index, mapping ? mapfn(O[index], index) : O[index]);
+	      }
+	    }
+	    result.length = index;
+	    return result;
+	  }
+	});
+
+
+/***/ },
+/* 119 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// call something on iterator step with safe closing on error
+	var anObject = __webpack_require__(19);
+	module.exports = function(iterator, fn, value, entries){
+	  try {
+	    return entries ? fn(anObject(value)[0], value[1]) : fn(value);
+	  // 7.4.6 IteratorClose(iterator, completion)
+	  } catch(e){
+	    var ret = iterator['return'];
+	    if(ret !== undefined)anObject(ret.call(iterator));
+	    throw e;
+	  }
+	};
+
+/***/ },
+/* 120 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// check on default Array iterator
+	var Iterators  = __webpack_require__(29)
+	  , ITERATOR   = __webpack_require__(47)('iterator')
+	  , ArrayProto = Array.prototype;
+	
+	module.exports = function(it){
+	  return it !== undefined && (Iterators.Array === it || ArrayProto[ITERATOR] === it);
+	};
+
+/***/ },
+/* 121 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	var $defineProperty = __webpack_require__(18)
+	  , createDesc      = __webpack_require__(26);
+	
+	module.exports = function(object, index, value){
+	  if(index in object)$defineProperty.f(object, index, createDesc(0, value));
+	  else object[index] = value;
+	};
+
+/***/ },
+/* 122 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var classof   = __webpack_require__(123)
+	  , ITERATOR  = __webpack_require__(47)('iterator')
+	  , Iterators = __webpack_require__(29);
+	module.exports = __webpack_require__(14).getIteratorMethod = function(it){
+	  if(it != undefined)return it[ITERATOR]
+	    || it['@@iterator']
+	    || Iterators[classof(it)];
+	};
+
+/***/ },
+/* 123 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// getting tag from 19.1.3.6 Object.prototype.toString()
+	var cof = __webpack_require__(37)
+	  , TAG = __webpack_require__(47)('toStringTag')
+	  // ES3 wrong here
+	  , ARG = cof(function(){ return arguments; }()) == 'Arguments';
+	
+	// fallback for IE11 Script Access Denied error
+	var tryGet = function(it, key){
+	  try {
+	    return it[key];
+	  } catch(e){ /* empty */ }
+	};
+	
+	module.exports = function(it){
+	  var O, T, B;
+	  return it === undefined ? 'Undefined' : it === null ? 'Null'
+	    // @@toStringTag case
+	    : typeof (T = tryGet(O = Object(it), TAG)) == 'string' ? T
+	    // builtinTag case
+	    : ARG ? cof(O)
+	    // ES3 arguments fallback
+	    : (B = cof(O)) == 'Object' && typeof O.callee == 'function' ? 'Arguments' : B;
+	};
+
+/***/ },
+/* 124 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var ITERATOR     = __webpack_require__(47)('iterator')
+	  , SAFE_CLOSING = false;
+	
+	try {
+	  var riter = [7][ITERATOR]();
+	  riter['return'] = function(){ SAFE_CLOSING = true; };
+	  Array.from(riter, function(){ throw 2; });
+	} catch(e){ /* empty */ }
+	
+	module.exports = function(exec, skipClosing){
+	  if(!skipClosing && !SAFE_CLOSING)return false;
+	  var safe = false;
+	  try {
+	    var arr  = [7]
+	      , iter = arr[ITERATOR]();
+	    iter.next = function(){ return {done: safe = true}; };
+	    arr[ITERATOR] = function(){ return iter; };
+	    exec(arr);
+	  } catch(e){ /* empty */ }
+	  return safe;
+	};
+
+/***/ },
+/* 125 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	
+	var _toConsumableArray2 = __webpack_require__(126);
+	
+	var _toConsumableArray3 = _interopRequireDefault(_toConsumableArray2);
+	
+	var _assign = __webpack_require__(102);
+	
+	var _assign2 = _interopRequireDefault(_assign);
+	
+	var _classCallCheck2 = __webpack_require__(99);
+	
+	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+	
+	var _createClass2 = __webpack_require__(100);
+	
+	var _createClass3 = _interopRequireDefault(_createClass2);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	/**
+	 * Class Field.
+	 */
+	var Field = function () {
+	    function Field(field, state, reference, settings, position) {
+	        (0, _classCallCheck3.default)(this, Field);
+	
+	        this.field = field;
+	        this.reference = (0, _assign2.default)({}, reference);
+	        this.isValid = true;
+	        var attribute = this.field.getAttribute('type');
+	        this.type = attribute ? attribute.toLowerCase() : this.field.tagName.toLowerCase();
+	        this.isRequired = this.field.hasAttribute('required');
+	        this.firstCheck = true;
+	        this.settings = settings;
+	        this.regularExp = this.field.getAttribute('pattern');
+	        this.position = position;
+	
+	        this.removeRequired();
+	        this.onKeyUp();
+	        this.onChange();
+	        if (this.regularExp != null) {
+	            this.createValidation();
+	        }
+	    }
+	
+	    (0, _createClass3.default)(Field, [{
+	        key: 'createValidation',
+	        value: function createValidation() {
+	            this.field.removeAttribute('pattern');
+	            if (this.reference[this.type] == undefined || null) {
+	                this.reference[this.type] = ['regExp'];
+	                return;
+	            }
+	            this.reference[this.type] = [].concat((0, _toConsumableArray3.default)(this.reference[this.type]), ['regExp']);
+	        }
+	    }, {
+	        key: 'removeRequired',
+	        value: function removeRequired() {
+	            if (!this.isRequired) return;
+	
+	            this.field.removeAttribute("required");
+	            this.field.classList.add(this.settings.requiredClass);
+	        }
+	    }, {
+	        key: 'onKeyUp',
+	        value: function onKeyUp() {
+	            var _this = this;
+	
+	            this.field.addEventListener('keyup', function (el) {
+	                if (_this.firstCheck) return;
+	                var value = el.target.value;
+	                _this.validate(value);
+	            });
+	        }
+	    }, {
+	        key: 'onChange',
+	        value: function onChange() {
+	            var _this2 = this;
+	
+	            this.field.addEventListener('change', function (el) {
+	                var value = el.target.value;
+	                _this2.validate(value);
+	                _this2.firstCheck = false;
+	            });
+	        }
+	    }, {
+	        key: 'validate',
+	        value: function validate() {
+	            var _this3 = this;
+	
+	            if (!this.needValidate()) {
+	                this.removeError();
+	                return;
+	            }
+	
+	            var value = this.field.value;
+	            var validationFunc = this.reference[this.type];
+	            var valid = true;
+	
+	            if (validationFunc == undefined) {
+	                validationFunc = this.reference['required'];
+	            }
+	            validationFunc.forEach(function (func) {
+	                var result = _this3[func](value);
+	                valid = valid * result;
+	            });
+	
+	            if (valid) {
+	                this.removeError();
+	            } else {
+	                this.addError();
+	            }
+	            this.isValid = valid;
+	            return {
+	                valid: this.isValid,
+	                position: this.position
+	            };
+	        }
+	    }, {
+	        key: 'addError',
+	        value: function addError() {
+	            this.field.classList.add(this.settings.errorClass);
+	            this.field.classList.remove(this.settings.successClass);
+	        }
+	    }, {
+	        key: 'removeError',
+	        value: function removeError() {
+	            this.field.classList.remove(this.settings.errorClass);
+	            this.field.classList.add(this.settings.successClass);
+	        }
+	    }, {
+	        key: 'needValidate',
+	        value: function needValidate() {
+	            var noEmpty = this.field.value != 0;
+	
+	            if (this.isRequired) {
+	                return true;
+	            }
+	
+	            if (noEmpty && this.type == 'email') {
+	                return true;
+	            }
+	
+	            if (noEmpty && this.regularExp != null) {
+	                return true;
+	            }
+	
+	            return false;
+	        }
+	    }, {
+	        key: 'resetSelf',
+	        value: function resetSelf() {
+	            this.field.value = '';
+	            this.field.checked = false;
+	        }
+	
+	        //Is on no empty value testing
+	
+	    }, {
+	        key: 'isEmpty',
+	        value: function isEmpty(val) {
+	            if (val == '') {
+	                return false;
+	            } else {
+	                return true;
+	            }
+	        }
+	
+	        //Is email testing
+	
+	    }, {
+	        key: 'isEmail',
+	        value: function isEmail(val) {
+	            var email = /^[-\w.]+@([A-z0-9]+\.)+[A-z]{2,4}$/;
+	            return email.test(val);
+	        }
+	
+	        //Is url testing
+	
+	    }, {
+	        key: 'isUrl',
+	        value: function isUrl(element) {
+	            var url = /[^\s\.]+\.[^\s]{2,}|www\.[^\s]+\.[^\s]{2,}/;
+	            return url.test($(element).val());
+	        }
+	
+	        //Is min 5 charachter
+	
+	    }, {
+	        key: 'minLength',
+	        value: function minLength(val) {
+	            if (val.length > 5) return true;
+	        }
+	    }, {
+	        key: 'isChecked',
+	        value: function isChecked() {
+	            if (this.field.checked) {
+	                return true;
+	            }
+	            return false;
+	        }
+	
+	        //Is cyrillic testing
+	
+	    }, {
+	        key: 'isCyr',
+	        value: function isCyr(val) {
+	            var cyr = /[\u0400-\u04FF]/gi;
+	            return cyr.test(val);
+	        }
+	    }, {
+	        key: 'isCheckedRadio',
+	        value: function isCheckedRadio() {
+	            var collection = document.querySelectorAll('input[name=' + this.field.name + ']');
+	            var isSomeChecked = false;
+	            collection.forEach(function (el) {
+	                if (el.checked) isSomeChecked = true;
+	            });
+	            return isSomeChecked;
+	        }
+	    }, {
+	        key: 'regExp',
+	        value: function regExp(val) {
+	            var reqular = new RegExp(this.regularExp);
+	            return reqular.test(val);
+	        }
+	    }]);
+	    return Field;
+	}();
+	
+	exports.default = Field;
+
+/***/ },
+/* 126 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+	
+	exports.__esModule = true;
+	
+	var _from = __webpack_require__(116);
+	
+	var _from2 = _interopRequireDefault(_from);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	exports.default = function (arr) {
+	  if (Array.isArray(arr)) {
+	    for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) {
+	      arr2[i] = arr[i];
+	    }
+	
+	    return arr2;
+	  } else {
+	    return (0, _from2.default)(arr);
+	  }
+	};
+
+/***/ },
+/* 127 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -2680,8 +3730,7 @@
 	}
 
 /***/ },
-/* 109 */,
-/* 110 */
+/* 128 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -2691,15 +3740,15 @@
 	});
 	exports.ChangeProductRequest = undefined;
 	
-	var _classCallCheck2 = __webpack_require__(79);
+	var _classCallCheck2 = __webpack_require__(99);
 	
 	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
 	
-	var _createClass2 = __webpack_require__(80);
+	var _createClass2 = __webpack_require__(100);
 	
 	var _createClass3 = _interopRequireDefault(_createClass2);
 	
-	var _getToken = __webpack_require__(108);
+	var _getToken = __webpack_require__(127);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -2726,13 +3775,10 @@
 	
 	            $('.js_product-colour').on('change', function () {
 	
-	                var colorId = $(this).data('color');
 	                var productId = $(this).closest('.product-row').data('id');
 	                var url = '/product/test';
-	                console.log(this);
-	                console.log(productId);
-	                console.log(colorId);
-	                _this.request(url, colorId, productId);
+	
+	                _this.request(url, productId);
 	            });
 	        }
 	
@@ -2742,12 +3788,11 @@
 	
 	    }, {
 	        key: 'request',
-	        value: function request(url, colorId, productId) {
+	        value: function request(url, productId) {
 	            $.ajax({
 	                url: url,
 	                method: this.method,
 	                data: {
-	                    colorId: colorId,
 	                    productId: productId,
 	                    _token: this.token
 	                },
@@ -2770,7 +3815,7 @@
 	}();
 
 /***/ },
-/* 111 */
+/* 129 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -2780,19 +3825,19 @@
 	});
 	exports.ShowMoreRequest = undefined;
 	
-	var _assign = __webpack_require__(85);
+	var _assign = __webpack_require__(102);
 	
 	var _assign2 = _interopRequireDefault(_assign);
 	
-	var _classCallCheck2 = __webpack_require__(79);
+	var _classCallCheck2 = __webpack_require__(99);
 	
 	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
 	
-	var _createClass2 = __webpack_require__(80);
+	var _createClass2 = __webpack_require__(100);
 	
 	var _createClass3 = _interopRequireDefault(_createClass2);
 	
-	var _getToken = __webpack_require__(108);
+	var _getToken = __webpack_require__(127);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -2894,6 +3939,555 @@
 	    }]);
 	    return ShowMoreRequest;
 	}();
+
+/***/ },
+/* 130 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	exports.CartRequest = undefined;
+	
+	var _classCallCheck2 = __webpack_require__(99);
+	
+	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+	
+	var _createClass2 = __webpack_require__(100);
+	
+	var _createClass3 = _interopRequireDefault(_createClass2);
+	
+	var _getToken = __webpack_require__(127);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var CartRequest = exports.CartRequest = function () {
+	    function CartRequest() {
+	        var method = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 'POST';
+	        (0, _classCallCheck3.default)(this, CartRequest);
+	
+	
+	        this.method = method;
+	        this.token = (0, _getToken.getToken)();
+	    }
+	
+	    /**
+	     * Init btn
+	     */
+	
+	
+	    (0, _createClass3.default)(CartRequest, [{
+	        key: 'init',
+	        value: function init() {
+	
+	            var _this = this;
+	
+	            $('.js_cart-btn').on('click', function (event) {
+	                event.preventDefault();
+	                var productID = $(this).closest('.product-row').data('id');
+	                var url = '/cart/add';
+	                _this.requestAdd(url, productID);
+	            });
+	
+	            $('.js_header-cart-delete-btn').on('click', function (event) {
+	                event.preventDefault();
+	                console.log(this);
+	                var item_id = $(this).closest('.header-basket-inner-t').data('item-id');
+	                var url = '/cart/remove';
+	                _this.requestRemove(url, item_id);
+	            });
+	        }
+	
+	        /**
+	         * Change product by colour ajax request
+	         */
+	
+	    }, {
+	        key: 'requestAdd',
+	        value: function requestAdd(url, productId) {
+	            $.ajax({
+	                url: url,
+	                method: this.method,
+	                data: {
+	                    product_id: productId,
+	                    _token: this.token
+	                },
+	                success: function success(data) {
+	                    $('.js_header-cart-blk').append(data);
+	                    var cartCount = +$('.js_cart-count').html();
+	                    cartCount++;
+	                    $('.js_cart-count').empty();
+	                    $('.js_cart-count').append(cartCount++);
+	                }
+	            });
+	        }
+	    }, {
+	        key: 'requestRemove',
+	        value: function requestRemove(url, itemId) {
+	            $.ajax({
+	                url: url,
+	                method: this.method,
+	                data: {
+	                    item_id: itemId,
+	                    _token: this.token
+	                },
+	                success: function success(data) {
+	                    console.log('yeahh');
+	                    var cartCount = +$('.js_cart-count').html();
+	                    cartCount--;
+	                    $('.js_cart-count').empty();
+	                    $('.js_cart-count').append(cartCount--);
+	                },
+	                error: function error() {
+	                    var cartCount = +$('.js_cart-count').html();
+	                    console.log(cartCount--);
+	                    $('.js_cart-count').empty();
+	                    $('.js_cart-count').append(cartCount--);
+	                }
+	            });
+	        }
+	
+	        /**
+	         * On success request
+	         */
+	
+	    }, {
+	        key: 'success',
+	        value: function success(data) {
+	            console.log(data);
+	        }
+	    }]);
+	    return CartRequest;
+	}();
+
+/***/ },
+/* 131 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	exports.LikeRequest = undefined;
+	
+	var _classCallCheck2 = __webpack_require__(99);
+	
+	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+	
+	var _createClass2 = __webpack_require__(100);
+	
+	var _createClass3 = _interopRequireDefault(_createClass2);
+	
+	var _getToken = __webpack_require__(127);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var LikeRequest = exports.LikeRequest = function () {
+	    function LikeRequest() {
+	        var method = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 'POST';
+	        (0, _classCallCheck3.default)(this, LikeRequest);
+	
+	
+	        this.method = method;
+	        this.token = (0, _getToken.getToken)();
+	    }
+	
+	    /**
+	     * Init btn
+	     */
+	
+	
+	    (0, _createClass3.default)(LikeRequest, [{
+	        key: 'init',
+	        value: function init() {
+	
+	            var _this = this;
+	
+	            $('body').on('click', '.js_like-btn', function (event) {
+	                event.preventDefault();
+	                var productID = $(this).closest('.product-card').data('id');
+	                var url = '/like/add';
+	                _this.requestAdd(url, productID);
+	            });
+	
+	            $('body').on('click', '.js_like-btn-remove', function (event) {
+	                event.preventDefault();
+	                console.log('yeaahh');
+	                var item_id = $(this).closest('.like-product-card').data('item-id');
+	                var url = '/like/remove';
+	                _this.requestRemove(url, item_id);
+	            });
+	        }
+	
+	        /**
+	         * Change product by colour ajax request
+	         */
+	
+	    }, {
+	        key: 'requestAdd',
+	        value: function requestAdd(url, productId) {
+	            $.ajax({
+	                url: url,
+	                method: this.method,
+	                data: {
+	                    product_id: productId,
+	                    _token: this.token
+	                },
+	                success: function success(data) {
+	                    console.log('success');
+	                    var likeCount = +$('.js_like-count').html();
+	                    $('.js_like-count').empty();
+	                    $('.js_like-count').append(likeCount++);
+	                },
+	                error: function error() {
+	                    console.log('error');
+	                    var likeCount = +$('.js_like-count').html();
+	                    console.log(likeCount++);
+	                    $('.js_like-count').empty();
+	                    $('.js_like-count').append(likeCount++);
+	                }
+	            });
+	        }
+	    }, {
+	        key: 'requestRemove',
+	        value: function requestRemove(url, itemId) {
+	            $.ajax({
+	                url: url,
+	                method: this.method,
+	                data: {
+	                    item_id: itemId,
+	                    _token: this.token
+	                },
+	                success: function success(data) {
+	                    console.log('success');
+	                },
+	                error: function error() {
+	                    console.log('error');
+	                }
+	            });
+	        }
+	
+	        /**
+	         * On success request
+	         */
+	        // success(data) {
+	        //    console.log(data);
+	        // }
+	
+	    }]);
+	    return LikeRequest;
+	}();
+
+/***/ },
+/* 132 */
+/***/ function(module, exports) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+	var amount = exports.amount = {
+		init: function init(el, btnDec, btnInc) {
+			var min = $(el).data('min') || false,
+			    max = $(el).data('max') || false;
+			if (!$(el).attr('disabled')) {
+				$('body').on('click', btnDec, function (event) {
+					event.preventDefault();
+					var inp = $(this).parent().find(el);
+					amount.decrement(inp, min);
+					amount.checkedDisabled(inp, $(this), min, btnInc, max);
+				});
+				$('body').on('click', btnInc, function (event) {
+					event.preventDefault();
+					var inp = $(this).parent().find(el);
+					amount.increment(inp, max);
+					amount.checkedDisabled(inp, btnDec, min, $(this), max);
+				});
+			}
+		},
+	
+		// count reduction
+		decrement: function decrement(el, min) {
+			var value = parseInt(el.val());
+			value--;
+			if (value >= min) {
+				el.val(value--);
+			}
+		},
+		//count increase
+		increment: function increment(el, max) {
+			var value = parseInt(el.val());
+			value++;
+			if (value <= max) {
+				el.val(value++);
+			}
+		},
+		//check the button on the activity
+		checkedDisabled: function checkedDisabled(el, btnDec, min, btnInc, max) {
+			$(el).each(function (index, el) {
+				var value = parseInt($(el).val());
+				$(el).parent().find(btnDec).removeClass('__disabled');
+				$(el).parent().find(btnInc).removeClass('__disabled');
+				if (value <= min) {
+					$(el).parent().find(btnDec).addClass('__disabled');
+				}
+				if (value >= max) {
+					$(el).parent().find(btnInc).addClass('__disabled');
+				}
+			});
+		}
+	
+	};
+
+/***/ },
+/* 133 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	exports.MfPopup = undefined;
+	
+	var _getPrototypeOf = __webpack_require__(77);
+	
+	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
+	
+	var _classCallCheck2 = __webpack_require__(99);
+	
+	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+	
+	var _createClass2 = __webpack_require__(100);
+	
+	var _createClass3 = _interopRequireDefault(_createClass2);
+	
+	var _possibleConstructorReturn2 = __webpack_require__(106);
+	
+	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
+	
+	var _inherits2 = __webpack_require__(107);
+	
+	var _inherits3 = _interopRequireDefault(_inherits2);
+	
+	var _popup = __webpack_require__(134);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var MfPopup = exports.MfPopup = function (_Popup) {
+	    (0, _inherits3.default)(MfPopup, _Popup);
+	
+	    function MfPopup() {
+	        (0, _classCallCheck3.default)(this, MfPopup);
+	        return (0, _possibleConstructorReturn3.default)(this, (MfPopup.__proto__ || (0, _getPrototypeOf2.default)(MfPopup)).apply(this, arguments));
+	    }
+	
+	    (0, _createClass3.default)(MfPopup, [{
+	        key: 'openPopup',
+	        value: function openPopup() {
+	            $.magnificPopup.open({
+	                showCloseBtn: false,
+	                type: 'inline',
+	                tLoading: 'Загрузка...',
+	                items: {
+	                    src: this.popupId
+	                }
+	            });
+	        }
+	    }, {
+	        key: 'closePopup',
+	        value: function closePopup() {
+	            $.magnificPopup.close();
+	        }
+	    }]);
+	    return MfPopup;
+	}(_popup.Popup);
+
+/***/ },
+/* 134 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	exports.Popup = undefined;
+	
+	var _getPrototypeOf = __webpack_require__(77);
+	
+	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
+	
+	var _classCallCheck2 = __webpack_require__(99);
+	
+	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+	
+	var _createClass2 = __webpack_require__(100);
+	
+	var _createClass3 = _interopRequireDefault(_createClass2);
+	
+	var _possibleConstructorReturn2 = __webpack_require__(106);
+	
+	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
+	
+	var _inherits2 = __webpack_require__(107);
+	
+	var _inherits3 = _interopRequireDefault(_inherits2);
+	
+	var _component = __webpack_require__(112);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var Popup = exports.Popup = function (_Component) {
+	    (0, _inherits3.default)(Popup, _Component);
+	
+	    /**
+	     *
+	     * @param callClass{string} - class on open popup
+	     * @param closeClass{string} - class on close
+	     */
+	    function Popup(callClass, closeClass) {
+	        (0, _classCallCheck3.default)(this, Popup);
+	
+	        // check on parent errors
+	        var _this2 = (0, _possibleConstructorReturn3.default)(this, (Popup.__proto__ || (0, _getPrototypeOf2.default)(Popup)).call(this, callClass));
+	
+	        if (_this2.errors) return (0, _possibleConstructorReturn3.default)(_this2);
+	        // get url of popup if exist
+	        _this2.popupAjaxUrl = _this2.element.data('url');
+	        // get id of popup if exist
+	        _this2.popupId = _this2.element.data('popup');
+	        _this2.closeClass = closeClass ? closeClass : '.js_popup-close';
+	        // if url for ajax does not exist check
+	        // for existing id of modal
+	        if (!_this2.popupAjaxUrl) {
+	            _this2.checkOnExistPopupElements();
+	        }
+	        if (_this2.errors) return (0, _possibleConstructorReturn3.default)(_this2);
+	        _this2.dataPush = null;
+	        _this2.identificator = callClass;
+	        _this2.initPopup();
+	        return _this2;
+	    }
+	
+	    /**
+	     * Init all settings for popup
+	     */
+	
+	
+	    (0, _createClass3.default)(Popup, [{
+	        key: 'initPopup',
+	        value: function initPopup() {
+	            var _this = this;
+	            // On click open popup
+	            $('body').on('click', this.identificator, function (event) {
+	                event.preventDefault();
+	                // get data for hidden inputs
+	                _this.dataPush = $(this).data('info');
+	
+	                if (_this.dataPush) _this.pushData();
+	                this.dataPush = null;
+	                _this.openPopup();
+	            })
+	            // On close popup
+	            .on('click', this.closeClass, function (event) {
+	                event.preventDefault();
+	                _this.closePopup();
+	            });
+	        }
+	
+	        /**
+	         * Preparing and add data for hidden inputs into forms
+	         */
+	
+	    }, {
+	        key: 'pushData',
+	        value: function pushData() {
+	            if (!this.validateData(this.dataPush)) return;
+	            var arr = this.breakStr();
+	            var form = $(this.popupId).find('form');
+	
+	            if (typeof arr[0] === 'string') {
+	                form.append('<input type="hidden" name="' + arr[0] + '" value="' + arr[1] + '">');
+	                return;
+	            }
+	            arr.forEach(function (el) {
+	                console.log(el);
+	                form.append('<input type="hidden" name="' + el[0] + '" value="' + el[1] + '">');
+	            });
+	        }
+	
+	        /**
+	         * Validating data for hidden inputs
+	         *
+	         * @param str
+	         * @returns {boolean}
+	         */
+	
+	    }, {
+	        key: 'validateData',
+	        value: function validateData(str) {
+	            if (typeof str !== 'string') {
+	                console.warn(' Warning in Popup ' + this.identificator + ':the value ' + str + ' should be string ');
+	                return false;
+	            }
+	            if (str.indexOf(':') < 0) {
+	                console.warn(' Warning in Popup ' + this.identificator + ':the value ' + str + ' should contain ":"');
+	                return false;
+	            }
+	
+	            return true;
+	        }
+	
+	        /**
+	         * Break string for array
+	         *
+	         * @returns {Array}
+	         */
+	
+	    }, {
+	        key: 'breakStr',
+	        value: function breakStr() {
+	            var _this3 = this;
+	
+	            if (this.dataPush.indexOf(',') < 0) {
+	                return this.dataPush.split(':');
+	            }
+	
+	            return this.dataPush.split(',').map(function (el) {
+	                if (_this3.validateData(el)) {
+	                    return el.split(':');
+	                }
+	                return [];
+	            });
+	        }
+	    }, {
+	        key: 'openPopup',
+	        value: function openPopup() {
+	            console.warn('Warn in Popup: you use default function of open popup, you should redeclare it');
+	        }
+	    }, {
+	        key: 'closePopup',
+	        value: function closePopup() {
+	            console.warn('Warn in Popup: you use default function of close popup, you should redeclare it');
+	        }
+	    }, {
+	        key: 'checkOnExistPopupElements',
+	        value: function checkOnExistPopupElements() {
+	            if (this.checkOnExistElement(this.closeClass)) {
+	                console.warn('on ' + this.identificator + ' wrong close class element ' + this.closeClass);
+	            }
+	            if (!this.checkOnExistElement(this.popupId)) {
+	                console.warn('on ' + this.identificator + ' do not set or wrong set data-popup or data-url');
+	            }
+	        }
+	    }]);
+	    return Popup;
+	}(_component.Component); /*POPUP*/
 
 /***/ }
 /******/ ]);

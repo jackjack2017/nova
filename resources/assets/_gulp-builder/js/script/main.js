@@ -1,8 +1,13 @@
 import { Slider } from '../libs/slider';
 import {ui} from './ui';
+import {Sendform} from '../libs/sendform/sendform2';
 import {getToken} from "../libs/getToken";
 import {ChangeProductRequest} from "./changeProductRequest";
 import {ShowMoreRequest} from "./showMoreRequest";
+import {CartRequest} from "./cartRequest";
+import {LikeRequest} from "./likeRequest";
+import { amount } from './amount';
+import {MfPopup} from '../libs/popup/mfpopup';
 
 $( document ).ready(function() {
     if(NODE_ENV === 'dev'){
@@ -21,9 +26,89 @@ class App{
         //used in Product slider block (Product page)
         ui.galleryPopupInit('.js_gallery-product');
         ui.tabsInit('.js_ui-tab-nav', '.js_ui-tabs-cnt', '.js_ui-tabs');
+        ui.initPhoneMask();
+        ui.accordion('.js_deal-detail-btn', '.js_deal-detail-blk');
+        amount.init('.js_ui-amount-inp', '.js_ui-amount-btn-dec', '.js_ui-amount-btn-inc');
+        $('.my-container').sortablePhotos({
+            selector: '> .my-item',
+            sortable: true,
+            padding: 2
+        });
+        $('.js_select').select2({
+            placeholder: 'Выбор перевозчика',
+            minimumResultsForSearch: Infinity
+        });
+        $('.js_select-payment').select2({
+            placeholder: 'Выбор способа оплаты',
+            minimumResultsForSearch: Infinity
+        });
+
+        new MfPopup('.js_mfpopup-popup-success');
+
+        //for delivery on the deal page
+
+        $('body').on('change', '.js_delivery', function () {
+            let deliveryForm = $('.js_delivery').val() + '';
+            let allrequiredFields = $('.js_required-field');
+            let currentRequiredFields = $(deliveryForm).find('.js_required-field');
+
+            $(allrequiredFields).each(function (i, el) {
+                el.required = false;
+            });
+
+            $('.js_delivery-form').hide();
+            $(deliveryForm).slideDown().css('display', 'flex');
+
+
+            $(currentRequiredFields).each(function (i, el) {
+                el.required = true;
+            });
+
+        });
+
+        //for an amount of products in a cart and on the product page
+
+        $('body').on('click', '.js_ui-amount-btn', function () {
+            let productQty = $(this).siblings('.js_product-amount').val();
+            let priceBlk = $(this).closest('.js_product-price-blk');
+            let totalPriceStr = $(priceBlk).find('.js_product-price-total');
+            let totalPriceStrAll = $('.js_product-price-total-cart');
+            let price = $(priceBlk).find('.js_product-price').html();
+            let totalPrice = price*productQty;
+
+            $(totalPriceStr).html(totalPrice);
+
+            if(totalPriceStrAll.length !== 0){
+                let allTotalPrices = ($('.cart .js_product-price-total'));
+
+                let array = [];
+                let totalPriceAll = 0;
+
+                $(allTotalPrices).each(function (i, el) {
+                    array[i] = [];
+                    array[i].push(+$(el).html());
+                });
+
+                $(array).each(function (i, el) {
+                    totalPriceAll += +el;
+                });
+
+                $(totalPriceStrAll).html(totalPriceAll);
+
+            }
+
+        });
+
+        this.sendFormInit();
 
         let changeProductRequest = new ChangeProductRequest;
         changeProductRequest.init();
+
+        let cartRequest = new CartRequest;
+        cartRequest.init();
+
+        let likeRequest = new LikeRequest;
+        likeRequest.init();
 
         let requestProducts = new ShowMoreRequest({
             url: '/product/test',
@@ -41,6 +126,13 @@ class App{
             margin: 10
         });
 
+        new Slider('.js_slider-main-big', {
+            nav: true,
+            dots: true,
+            items: 6,
+            margin: 10
+        });
+
         new Slider('.js_slider-product', {
             nav: false,
             dots: true,
@@ -49,5 +141,17 @@ class App{
             mouseDrag: false,
             dotsContainer: '.js_product-slider-dots-container'
         });
+    }
+
+    sendFormInit(){
+
+        //used in the order form of the site
+        let formDeal = new Sendform('.js_sendform-form-deal', {
+            success: successSend
+        });
+
+        function successSend() {
+            ui.openPopup('#modal-success');
+        }
     }
 }; 

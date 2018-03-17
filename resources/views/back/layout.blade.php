@@ -17,6 +17,8 @@
   <link rel="stylesheet" href="{{ asset('adminlte/css/AdminLTE.min.css') }}">
   <!-- AdminLTE Skins. -->
   <link rel="stylesheet" href="{{ asset('adminlte/css/skins/skin-blue.min.css') }}">
+  {{--dropzone--}}
+  <link rel="stylesheet" href="{{ asset('adminlte/css/dropzone.min.css') }}">
 
   @yield('css')
 
@@ -27,26 +29,7 @@
   <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
   <![endif]-->
 </head>
-<!--
-BODY TAG OPTIONS:
-=================
-Apply one or more of the following classes to get the
-desired effect
-|---------------------------------------------------------|
-| SKINS         | skin-blue                               |
-|               | skin-black                              |
-|               | skin-purple                             |
-|               | skin-yellow                             |
-|               | skin-red                                |
-|               | skin-green                              |
-|---------------------------------------------------------|
-|LAYOUT OPTIONS | fixed                                   |
-|               | layout-boxed                            |
-|               | layout-top-nav                          |
-|               | sidebar-collapse                        |
-|               | sidebar-mini                            |
-|---------------------------------------------------------|
--->
+
 <body class="hold-transition skin-blue sidebar-mini">
 <div class="wrapper">
 
@@ -78,39 +61,11 @@ desired effect
         <li {{ currentRouteBootstrap('admin') }}>
           <a href="{{ route('admin') }}"><i class="fa fa-fw fa-dashboard"></i> <span>@lang('Dashboard')</span></a>
         </li>
-        {{--@admin--}}
-        {{----}}
+
         <li><a href="{{ route('categories.index') }}"><i class="fa fa-list"></i> <span>@lang('Categories')</span></a></li>
-
-        {{--@endadmin--}}
-
-        {{--@include('back.partials.treeview', [--}}
-          {{--'icon' => 'file-text',--}}
-          {{--'type' => 'categories',--}}
-          {{--'items' => [--}}
-            {{--[--}}
-              {{--'route' => route('categories.index'),--}}
-              {{--'command' => 'list',--}}
-              {{--'color' => 'blue',--}}
-            {{--],--}}
-            {{--[--}}
-              {{--'route' => route('categories.index', ['new' => 'on']),--}}
-              {{--'command' => 'new',--}}
-              {{--'color' => 'yellow',--}}
-            {{--],--}}
-            {{--[--}}
-              {{--'route' => route('categories.create'),--}}
-              {{--'command' => 'create',--}}
-              {{--'color' => 'green',--}}
-            {{--],--}}
-          {{--],--}}
-        {{--])--}}
+        <li><a href="{{ route('products.index') }}"><i class="fa fa-list"></i> <span>@lang('Products')</span></a></li>
 
         <li><a href="{{ route('medias.index') }}"><i class="fa fa-image"></i> <span>@lang('Medias')</span></a></li>
-
-
-        <li><a href="{{ route('settings.edit') }}"><i class="fa fa-cog"></i> <span>@lang('Settings')</span></a></li>
-
 
       </ul>
       <!-- /.sidebar-menu -->
@@ -122,10 +77,11 @@ desired effect
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
-      <h1>
-        {{ $title }}
-        @yield('button')
-      </h1>
+      <h1>@yield('title', '')</h1>
+      {{--<h1>--}}
+        {{--{{ $title }}--}}
+        {{--@yield('button')--}}
+      {{--</h1>--}}
       <ol class="breadcrumb">
         @foreach ($breadcrumbs as $item)
           <li @if ($loop->last && $item['url'] === '#') class="active" @endif>
@@ -172,7 +128,8 @@ desired effect
 @yield('js')
 
 <!-- AdminLTE App -->
-<script src="{{ asset('adminlte/js/app.min.js') }}"></script>
+
+<script src="{{ asset('js/admin.js') }}"></script>
 
 <!-- Commom -->
 {{--<script src="/adminlte/js/common.js"></script>--}}
@@ -190,5 +147,6 @@ desired effect
         })
     })
 </script>
+<script src="{{ asset('adminlte/js/app.min.js') }}"></script>
 </body>
 </html>

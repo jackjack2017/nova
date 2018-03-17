@@ -4,7 +4,7 @@
             <div class="col-twelve">
                 <div class="primary-content">
                     @if (session('confirmation-success'))
-                        @component('front.components.alert')
+                        @component('components.alert')
                             @slot('type')
                                 success
                             @endslot
@@ -12,7 +12,7 @@
                         @endcomponent
                     @endif
                     @if (session('confirmation-danger'))
-                        @component('front.components.alert')
+                        @component('components.alert')
                             @slot('type')
                                 error
                             @endslot
@@ -23,7 +23,7 @@
                     <form role="form" method="POST" action="{{ route('login') }}">
                         {{ csrf_field() }}
                         @if ($errors->has('log'))
-                            @component('front.components.error')
+                            @component('components.error')
                                 {{ $errors->first('log') }}
                             @endcomponent
                         @endif   

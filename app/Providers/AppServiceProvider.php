@@ -8,6 +8,7 @@ use App\Http\ViewComposers\MenuComposer;
 use App\Http\ViewComposers\HeaderComposer;
 use Laravel\Dusk\DuskServiceProvider;
 use Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider;
+use App\Generators\FormGenerator;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -16,7 +17,7 @@ class AppServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    public function boot()
+    public function boot(FormGenerator $formGenerator)
     {
         setLocale(LC_TIME, config('app.locale'));
 
@@ -28,6 +29,8 @@ class AppServiceProvider extends ServiceProvider
 
         $this->bodyClassShare();
 
+
+        view()->share('form', $formGenerator);
 
 //               Blade::if('request', function ($url) {
 //            return request()->is($url);

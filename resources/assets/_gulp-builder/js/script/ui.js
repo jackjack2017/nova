@@ -1,4 +1,61 @@
 export let ui = {
+    //PHONE MASK
+
+    initPhoneMask: function() {
+        $('input[type="tel"]').mask('+38 (999) 999-99-99');
+    },
+    //POPUPS
+
+    /**
+     * function opens popup by id
+     *
+     * @param modalEL - id of the element
+     */
+
+    openPopup(modalEL){
+        $.magnificPopup.open({
+            showCloseBtn: false,
+            type: 'inline',
+            tLoading: 'Загрузка...',
+            items: {
+                src: modalEL
+            }
+        });
+    },
+
+    /**
+     * function opens popup by id
+     *
+     * @param el - the element which closes popup when you click on it
+     */
+
+    closePopup(el) {
+        $('body').on('click', el, function(event) {
+            event.preventDefault();
+            $.magnificPopup.close();
+        });
+    },
+
+    //ACCORDEON
+
+    /**Accordeon functionality
+     *
+     * @param accordionTtl - an element which you click on
+     * @param accordionCnt - the content of the define element
+     * @param activeClassTtl - active class witch change styles
+     */
+    accordion: function(accordionTtl, accordionCnt, activeClassTtl = '__active' ){
+        $('body').on('click', accordionTtl, function (event) {
+            event.preventDefault();
+            if($(accordionTtl).hasClass(activeClassTtl) && !$(this).hasClass(activeClassTtl)){
+                $(accordionTtl).removeClass(activeClassTtl);
+                $(accordionCnt).slideUp(400);
+            }
+            $(this).toggleClass(activeClassTtl);
+            $(this).next(accordionCnt).slideToggle(400);
+
+        });
+    },
 //POPUP GALLERY
 
     /**

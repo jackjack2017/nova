@@ -2,32 +2,30 @@
 
 namespace App\Http\Controllers\Back;
 
-use Illuminate\Http\Request;
+
 use App\ {
     Http\Controllers\Controller,
-    Http\Requests\CategoryRequest,
     Models\Category
 };
+use Illuminate\Http\Request;
 
 class CategoryController extends Controller
 {
+
     /**
-     * Display a listing of the categories.
-     *
-     * @param  \Illuminate\Http\Request $request
-     * @return \Illuminate\Http\Response
+     * Display list of models
      */
-    public function index(Request $request)
+    public function index()
     {
-        $categories = Category::oldest('title')->get();
+        $categories = Category::all();
 
         return view('back.categories.index', compact('categories'));
     }
 
+
+
     /**
-     * Show the form for creating a new categorie.
-     *
-     * @return \Illuminate\Http\Response
+     * Show the form for creating a new model.
      */
     public function create()
     {
@@ -35,20 +33,25 @@ class CategoryController extends Controller
     }
 
     /**
-     * Store a newly created categorie in storage.
-     *
-     * @param  \App\Http\Requests\CategoryRequest $request
-     * @return \Illuminate\Http\Response
+     * Create a new model
+     * @param Request $request
+     * @return
      */
-    public function store(CategoryRequest $request)
+    public function store(Request $request)
     {
-        Category::create($request->all());
+        Category::create([
+            'active' => isset($request['active']) ? true : false,
+            'name' => $request->get('name'),
+            'description' => $request->get('description'),
+            'slug'=> str_slug($request->get('name'), "-")
+        ]);
 
-        return redirect(route('categories.index'))->with('category-ok', __('The category has been successfully created'));
+        return view('back.categories.index')->with('category-ok', __('The category has been successfully created'));
     }
 
+
     /**
-     * Show the form for editing the specified categorie.
+     * Show the form for editing the specified model.
      *
      * @param  \App\Models\Category $category
      * @return \Illuminate\Http\Response
@@ -59,15 +62,20 @@ class CategoryController extends Controller
     }
 
     /**
-     * Update the specified categorie in storage.
+     * Update the specified model in storage.
      *
-     * @param  \App\Http\Requests\CategoryRequest $request
+     * @param Request $request
      * @param  \App\Models\Category $category
      * @return \Illuminate\Http\Response
      */
-    public function update(CategoryRequest $request, Category $category)
+    public function update(Request $request, Category $category)
     {
-        $category->update($request->all());
+        $category->update([
+            'active' => isset($request['active']) ? true : false,
+            'name' => $request->get('name'),
+            'description' => $request->get('description'),
+            'slug'=> str_slug($request->get('name'), "-")
+        ]);
 
         return redirect(route('categories.index'))->with('category-ok', __('The category has been successfully updated'));
     }
@@ -82,6 +90,6 @@ class CategoryController extends Controller
     {
         $category->delete();
 
-        return response()->json();
+        return  redirect(route('categories.index'));
     }
 }
