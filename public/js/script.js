@@ -1563,6 +1563,8 @@
 	
 	            new _mfpopup.MfPopup('.js_mfpopup-popup-success');
 	
+	            //for delivery on the deal page
+	
 	            $('body').on('change', '.js_delivery', function () {
 	                var deliveryForm = $('.js_delivery').val() + '';
 	                var allrequiredFields = $('.js_required-field');
@@ -1578,6 +1580,39 @@
 	                $(currentRequiredFields).each(function (i, el) {
 	                    el.required = true;
 	                });
+	            });
+	
+	            //for an amount of products in a cart and on the product page
+	
+	            $('body').on('click', '.js_ui-amount-btn', function () {
+	                var productQty = $(this).siblings('.js_product-amount').val();
+	                var priceBlk = $(this).closest('.js_product-price-blk');
+	                var totalPriceStr = $(priceBlk).find('.js_product-price-total');
+	                var totalPriceStrAll = $('.js_product-price-total-cart');
+	                var price = $(priceBlk).find('.js_product-price').html();
+	                var totalPrice = price * productQty;
+	
+	                $(totalPriceStr).html(totalPrice);
+	
+	                if (totalPriceStrAll.length !== 0) {
+	                    (function () {
+	                        var allTotalPrices = $('.cart .js_product-price-total');
+	
+	                        var array = [];
+	                        var totalPriceAll = 0;
+	
+	                        $(allTotalPrices).each(function (i, el) {
+	                            array[i] = [];
+	                            array[i].push(+$(el).html());
+	                        });
+	
+	                        $(array).each(function (i, el) {
+	                            totalPriceAll += +el;
+	                        });
+	
+	                        $(totalPriceStrAll).html(totalPriceAll);
+	                    })();
+	                }
 	            });
 	
 	            this.sendFormInit();

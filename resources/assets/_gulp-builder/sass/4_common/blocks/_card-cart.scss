@@ -9,13 +9,9 @@
     @include make-col(6);
     padding: 0 15px;
     margin-bottom: 30px;
-    &-l{
+    &-col{
       @include make-col-ready($grid-columns);
       @include make-col(4);
-    }
-    &-r{
-      @include make-col-ready($grid-columns);
-      @include make-col(8);
     }
   }
   &-t{
@@ -70,5 +66,9 @@
         padding-bottom: 3px;
       }
     }
+  }
+  .count-num{
+    justify-content: flex-end;
+    padding-top: 10px;
   }
 }

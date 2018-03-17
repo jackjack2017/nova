@@ -45,6 +45,8 @@ class App{
 
         new MfPopup('.js_mfpopup-popup-success');
 
+        //for delivery on the deal page
+
         $('body').on('change', '.js_delivery', function () {
             let deliveryForm = $('.js_delivery').val() + '';
             let allrequiredFields = $('.js_required-field');
@@ -61,6 +63,39 @@ class App{
             $(currentRequiredFields).each(function (i, el) {
                 el.required = true;
             });
+
+        });
+
+        //for an amount of products in a cart and on the product page
+
+        $('body').on('click', '.js_ui-amount-btn', function () {
+            let productQty = $(this).siblings('.js_product-amount').val();
+            let priceBlk = $(this).closest('.js_product-price-blk');
+            let totalPriceStr = $(priceBlk).find('.js_product-price-total');
+            let totalPriceStrAll = $('.js_product-price-total-cart');
+            let price = $(priceBlk).find('.js_product-price').html();
+            let totalPrice = price*productQty;
+
+            $(totalPriceStr).html(totalPrice);
+
+            if(totalPriceStrAll.length !== 0){
+                let allTotalPrices = ($('.cart .js_product-price-total'));
+
+                let array = [];
+                let totalPriceAll = 0;
+
+                $(allTotalPrices).each(function (i, el) {
+                    array[i] = [];
+                    array[i].push(+$(el).html());
+                });
+
+                $(array).each(function (i, el) {
+                    totalPriceAll += +el;
+                });
+
+                $(totalPriceStrAll).html(totalPriceAll);
+
+            }
 
         });
 

@@ -65,6 +65,7 @@
 	}
 	&-c{
 		@extend .product-txt;
+		padding-top: 20px;
 		&-inp{
 			@extend .inp-c;
 			&:checked+&-lbl {

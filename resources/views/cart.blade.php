@@ -13,7 +13,7 @@
     </div>
 
     <div class="container __withPad">
-        <p class="cart-total">Итого: <span class="cart-total-num">999</span> грн.</p>
+        <p class="cart-total">Итого: <span class="cart-total-num js_product-price-total-cart">999</span> грн.</p>
     </div>
 
     <div class="container __withPad">
