@@ -41,7 +41,15 @@ class CartController extends Controller
     public function remove(Request $request)
     {
         Cart::remove($request->get('item_id'));
-        return $this->getAll();
+        return true;
+
+//        $remove = Cart::remove($request->get('item_id'));
+//
+//        if($remove){
+//            return true;
+//        }
+//
+//        return false;
     }
 
     public function destroy()

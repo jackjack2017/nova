@@ -1546,6 +1546,9 @@
 	            _ui.ui.tabsInit('.js_ui-tab-nav', '.js_ui-tabs-cnt', '.js_ui-tabs');
 	            _ui.ui.initPhoneMask();
 	            _ui.ui.accordion('.js_deal-detail-btn', '.js_deal-detail-blk');
+	            _ui.ui.accordion('.js_submenu-btn', '.js_submenu-cnt');
+	            _ui.ui.accordion('.js_mob-menu-btn', '.js_mob-menu-blk');
+	
 	            _amount.amount.init('.js_ui-amount-inp', '.js_ui-amount-btn-dec', '.js_ui-amount-btn-inc');
 	            $('.my-container').sortablePhotos({
 	                selector: '> .my-item',
@@ -3993,7 +3996,6 @@
 	
 	            $('.js_header-cart-delete-btn').on('click', function (event) {
 	                event.preventDefault();
-	                console.log(this);
 	                var item_id = $(this).closest('.header-basket-inner-t').data('item-id');
 	                var url = '/cart/remove';
 	                _this.requestRemove(url, item_id);
@@ -4034,7 +4036,7 @@
 	                    _token: this.token
 	                },
 	                success: function success(data) {
-	                    console.log('yeahh');
+	                    console.log(data);
 	                    var cartCount = +$('.js_cart-count').html();
 	                    cartCount--;
 	                    $('.js_cart-count').empty();
@@ -4042,7 +4044,6 @@
 	                },
 	                error: function error() {
 	                    var cartCount = +$('.js_cart-count').html();
-	                    console.log(cartCount--);
 	                    $('.js_cart-count').empty();
 	                    $('.js_cart-count').append(cartCount--);
 	                }
