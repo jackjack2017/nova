@@ -36,24 +36,34 @@ body{
  	@include make-container(); /* align center, add default padding*/
  	padding-left: 40px;
  	padding-right: 40px;
- 	&-category{
+ 	&-with-sidebar{
  		@include make-row();
  		margin: 0;
  	}
 }
 
-.main-sidebar{
+.withPad{
+	padding-top: 50px;
+	&-S{
+		padding-top: 30px;
+	}
+}
+
+.sidebar{
 	@include make-col-ready($grid-columns);
 	@include make-col(3);
 	width: 100%;
 	padding: 0;
 }
 
-.main-cnt{
+.cnt{
 	@include make-col-ready($grid-columns);
 	@include make-col(9);
 	width: 100%;
 	padding: 0;
+}
+.tel{
+	pointer-events: none;
 }
 
 
@@ -73,6 +83,14 @@ body{
 /* end footer to bottom of page */
 
 
-@media screen and (max-width: 1200px){
-
+@media screen and (max-width: 680px){
+	.container{
+		max-width: $width-container + ($padding-container * 2);
+		@include make-container(); /* align center, add default padding*/
+		padding-left: 15px;
+		padding-right: 15px;
+	}
+	.tel{
+		pointer-events: auto;
+	}
 }

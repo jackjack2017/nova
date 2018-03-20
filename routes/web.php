@@ -16,33 +16,39 @@
 | Frontend
 |--------------------------------------------------------------------------|
 */
-Route::get('/', function () {
-    return view('main');
-});
 
-Route::get('/model', function () {
-    return view('model');
-});
+//Route::view('/', 'main');
+//Route::view('/page', 'page');
+//Route::view('/product', 'product');
+//Route::view('/category', 'category');
+Route::view('/cart', 'cart');
+Route::view('/deal', 'deal');
+//Route::view('/favourite', 'favourite');
 
-Route::get('/page', function () {
-    return view('page');
-});
-
-//Route::get('/product', function () {
-//    return view('product');
+//Route::get('/page', function () {
+//    return view('page');
 //});
-Route::name('product')->get('/product/{product_id}', 'FrontController@product');
+//
+////Route::get('/product', function () {
+////    return view('product');
+////});
+Route::name('product')->get('/product/{product_slug}/{product_id}', 'FrontController@product');
+Route::name('home')->get('/', 'FrontController@index');
+Route::name('page')->get('page/{id?}', 'FrontController@page');
+
+Route::name('favourite')->get('favourite', 'FrontController@favourite');
 
 
-//Route::get('/category', function () {
-//    return view('category');
+//
+//
+////Route::get('/category', function () {
+////    return view('category');
+////});
+Route::name('category')->get('category/{id}', 'FrontController@category');
+//
+//Route::post('/product/test', function () {
+//    return view('test');
 //});
-Route::name('category')->get('/category', 'FrontController@category');
-
-Route::post('/product/test', function () {
-    return view('test');
-});
-
 
 // Authentification
 Auth::routes();
@@ -96,4 +102,9 @@ Route::prefix('cart')->namespace('Back')->group(function () {
     Route::name('cart::remove')->post('remove', 'CartController@remove');
     Route::name('cart::all')->get('all', 'CartController@getAll');
     Route::name('cart::destroy')->post('destroy', 'CartController@destroy');
+//    Route::name('cart::like')->post('like/add', 'CartController@like');
 });
+Route::namespace('Back')->group(function () {
+    Route::name('cart::like')->post('like/add', 'CartController@like');
+});
+

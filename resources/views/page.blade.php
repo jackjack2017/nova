@@ -4,18 +4,18 @@
 @include('parts/_breadcrumbs')
 
 <section class="page">
-	<div class="page-container-main">
-		<div class="page-container">
+	<div class="container">
+		<div class="container-with-sidebar">
 
-			@include('blocks/_sidebar-menu')
+			@include('blocks/_sidebar-menu', ['active_category' => $category->id])
 
-			<div class="page-cnt">
+			<div class="cnt">
 
 				@include('/blocks/_banner-main-right')
 				@include('/blocks/_banner-main-left')
 
-				<h2 class="page-ttl">Новые поступления</h2>
-				@include('/blocks/_slider-main')
+				<h2 class="ttl-L">Новые поступления</h2>
+				@include('/blocks/_slider-main', ['products' => $new])
 			</div>
 		</div>
 	</div>

@@ -17,7 +17,7 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $categories = Category::all();
+        $categories = Category::where('parent_id', '!=', 0)->with('parentCategories')->get();
 
         return view('back.categories.index', compact('categories'));
     }
@@ -29,7 +29,8 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        return view('back.categories.create');
+        $parent_categories = Category::where('parent_id', 0)->pluck('name', 'id');
+        return view('back.categories.create', compact('parent_categories'));
     }
 
     /**
@@ -43,7 +44,8 @@ class CategoryController extends Controller
             'active' => isset($request['active']) ? true : false,
             'name' => $request->get('name'),
             'description' => $request->get('description'),
-            'slug'=> str_slug($request->get('name'), "-")
+            'slug'=> str_slug($request->get('name'). ' ' .$request->get('parent_id'), "-"),
+            'parent_id' => $request->get('parent_id'),
         ]);
 
         return view('back.categories.index')->with('category-ok', __('The category has been successfully created'));

@@ -2,7 +2,7 @@
     <tr>
         <td>{{ $category->id }}</td>
         <td>{{ $category->name }}</td>
-        <td>{{ $category->slug }}</td>
+        <td>{{ $category->parentCategories->name }}</td>
         <td  class="text-center"><i class="fa {{$category->active ? "fa-check" : "fa-remove"}}"></i></td>
         <td  class="text-center"><a class="btn btn-warning btn-xs" href="{{ route('categories.edit', $category->id) }}" role="button" title="@lang('Edit')"><span class="fa fa-edit"></span></a></td>
         <td  class="text-center">

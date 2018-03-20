@@ -30,7 +30,19 @@ class ProductController extends Controller
      */
     public function create(Product $product)
     {
-        $categories = Category::where('active', 1)->get()->pluck('name', 'id');
+        $categories = Category::where('active', 1)
+            ->where('parent_id', '!=',0)
+            ->get()->sortBy('parent_id');
+
+        foreach ($categories as $category){
+            if($category->parent_id == 1)
+                $category->name = $category->name. ' (Женщины)';
+            if($category->parent_id == 2)
+                $category->name = $category->name. ' (Мужчины)';
+            if($category->parent_id == 3)
+                $category->name = $category->name. ' (Дети)';
+        }
+        $categories = $categories->pluck('name', 'id');
 
         return view('back.products.create', compact('product','categories'));
     }

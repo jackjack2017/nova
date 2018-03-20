@@ -1,4 +1,4 @@
-<div class="product-row js-product" data-id="1">  
+<div class="product-row js-product" data-id="{{$product->id}}">
     			<div class="product-img">
                     <div class="product-slider owl-carousel owl-theme js_slider-product js_gallery-product">
                         <a href="{{asset('img/product-img1.jpg')}}" class="product-slider-i">
@@ -36,9 +36,20 @@
                     </div>
 	    		</div>
 	    		<div class="product-info">
-	    			<p class="product-name">Плaтье с рисунком</p>
-                    <p class="product-price">2 999 грн</p>
+	    			<p class="product-name">{{$product->name}}</p>
                     <p class="product-article">Артикул: 23456789</p>
+                    <div class="js_product-price-blk">
+                        <p class="product-price"><span class="product-price-num js_product-price">{{$product->price}}</span> грн.</p>
+                        <p class="product-price-total">Итого: <span class="product-price-num js_product-price-total">{{$product->price}}</span> грн.</p>
+                        <p class="product-q">Количество:</p>
+                        <div class="count-wrap">
+                            <div class="count-num">
+                                <a href="#" class="count-min js_ui-amount-btn js_ui-amount-btn-dec __disabled"></a>
+                                <input type="number" class="amount js_ui-amount-inp js_product-amount" value="1" data-min="1" min="1" data-max="999" max="999" readonly>
+                                <a href="#" class="count-plus js_ui-amount-btn js_ui-amount-btn-inc"></a>
+                            </div>
+                        </div>
+                    </div>
                     <p class="product-c">Цвет:</p>
                     <div class="product-c-wrap">
                         <div class="product-c-i">
@@ -100,13 +111,13 @@
                             <a href="#" class="product-description-lnk js_ui-tab-nav">Отзывы</a>
                         </div>
                         <div class="product-description-b default-cnt js_ui-tabs-cnt __show-cnt">
-                            <p>Платье из плотного трикотажа с рельефным рисунком. На платье длинные рукава и отрезная талия. Боковые карманы.</p>
+                            <p>{{$product->description}}</p>
                         </div>
                         <div class="product-description-b default-cnt js_ui-tabs-cnt">
                             <ul>
-                                <li>Бренд: <span></span></li>
+                                <li>Бренд: {{$product->brand}}<span></span></li>
                                 <li>Размеры: <span></span></li>
-                                <li>Сезонность: <span></span></li>
+                                <li>Сезонность: {{$product->season}}<span></span></li>
                                 <li>Ткань: <span></span></li>
                                 <li>Длина изделия: <span></span></li>
                                 <li>Длина рукава: <span></span></li>

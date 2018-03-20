@@ -1,19 +1,33 @@
+<a href="{{route('product', [$product->slug, $product->id])}}" class="product-card" data-id="{{$product->id}}">
+    <div class="product-card-t">
+        <div class="product-card-lbl-blk">
+            @if($product->new)
+                <span class="product-card-lbl"> <i class="fa fa-bell"></i>New</span>
+            @endif
+            @if($product->top)
+                <span class="product-card-lbl"><i class="fa fa-diamond"></i>Top</span>
+            @endif
+            @if($product->discount)
+                <span class="product-card-lbl"><i class="fa fa-percent"></i>Discount</span>
+            @endif
+        </div>
+        <img src="{{asset('img/product-img2.jpg')}}" alt="banner">
+    </div>
+    <div class="product-card-b">
+        <div class="product-card-btn-wrap">
+            <button class="product-card-btn-inverse">Подробнее</button>
+        </div>
+        <div class="product-card-btn-wrap">
 
-    <a href="#" class="product-card" data-id="1">
-        <div class="product-card-t">
-            <img src="{{asset('img/product-img2.jpg')}}" alt="banner">
-            <span class="product-card-t-ic __new" aria-hidden="true">NEW</span>
-            <span class="product-card-t-ic __top" aria-hidden="true">TOP</span>
-            <span class="product-card-t-ic __discount fa fa-percent fa-2x" aria-hidden="true"></span>
+            <button class="product-card-btn js_like-btn">
+                @if(Session::has('likes.' . $product->id))
+                    В избранном
+                @else
+                    В избранное
+                @endif
+            </button>
         </div>
-        <div class="product-card-b">
-            <div class="product-card-btn-wrap">
-                <button class="product-card-btn-inverse">Подробнее</button>
-            </div>
-            <div class="product-card-btn-wrap">
-                <button class="product-card-btn js_like-btn">В избранное</button>
-            </div>
-            <p class="product-card-b-txt">Жилет из искусственного меха</p>
-            <p class="product-card-b-txt">999 грн</p>
-        </div>
-    </a>
+        <p class="product-card-b-txt">{{$product->name}}</p>
+        <p class="product-card-b-txt">{{$product->price}} грн</p>
+    </div>
+</a>

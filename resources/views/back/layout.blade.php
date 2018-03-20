@@ -17,6 +17,8 @@
   <link rel="stylesheet" href="{{ asset('adminlte/css/AdminLTE.min.css') }}">
   <!-- AdminLTE Skins. -->
   <link rel="stylesheet" href="{{ asset('adminlte/css/skins/skin-blue.min.css') }}">
+  {{--dropzone--}}
+  <link rel="stylesheet" href="{{ asset('adminlte/css/dropzone.min.css') }}">
 
   @yield('css')
 
@@ -126,7 +128,7 @@
 @yield('js')
 
 <!-- AdminLTE App -->
-<script src="{{ asset('adminlte/js/app.min.js') }}"></script>
+
 <script src="{{ asset('js/admin.js') }}"></script>
 
 <!-- Commom -->
@@ -145,5 +147,6 @@
         })
     })
 </script>
+<script src="{{ asset('adminlte/js/app.min.js') }}"></script>
 </body>
 </html>

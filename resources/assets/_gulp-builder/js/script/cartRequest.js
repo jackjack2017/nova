@@ -26,7 +26,6 @@ export class CartRequest{
 
         $('.js_header-cart-delete-btn').on('click', function(event) {
             event.preventDefault();
-            console.log(this);
             let item_id = $(this).closest('.header-basket-inner-t').data('item-id');
             let url = '/cart/remove';
             _this.requestRemove(url, item_id);
@@ -64,7 +63,7 @@ export class CartRequest{
                 _token: this.token
             },
             success: function(data){
-                console.log('yeahh');
+                console.log(data);
                 let cartCount = +$('.js_cart-count').html();
                 cartCount--;
                 $('.js_cart-count').empty();
@@ -72,7 +71,6 @@ export class CartRequest{
             },
             error(){
                 let cartCount = +$('.js_cart-count').html();
-                console.log(cartCount--);
                 $('.js_cart-count').empty();
                 $('.js_cart-count').append(cartCount--);
             }

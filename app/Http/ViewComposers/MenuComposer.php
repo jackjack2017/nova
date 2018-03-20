@@ -16,14 +16,8 @@ class MenuComposer
      */
     public function compose(View $view)
     {
-        $products = Product::all();
-        $categories = Category::pluck('name', 'id');
-        dd($categories);
-        foreach ($products as $product){
-            if($product->gender == 0){
+        $categories = Category::where('parent_id', 0)->with('subCategories')->get();
 
-            }
-        }
-        $view->with('categories', Category::select('title', 'slug')->get());
+        $view->with('categories', $categories);
     }
 }
