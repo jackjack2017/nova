@@ -38,6 +38,15 @@
 	&-btn{
 		@extend .product-btn;
 		margin-bottom: 0;
+		&.__active{
+			background: gold;
+			border: 1px solid transparent;
+			&:hover{
+				background: gold;
+				color: #000;
+				border: 1px solid transparent;
+			}
+		}
 		&:before{
 			font-family: FontAwesome;
 			content: "\f005";

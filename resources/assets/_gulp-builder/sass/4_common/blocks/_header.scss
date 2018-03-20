@@ -31,7 +31,8 @@
 		line-height: 66px;
 		&.__mob{
 			display: none;
-			text-align: center;
+			max-width: 120px;
+			margin: 0 auto;
 		}
 	}
 	&-soc{
@@ -311,6 +312,7 @@
 				position: relative;
 			}
 			&-btn{
+				display: none!important;
 				position: absolute;
 				top: 20px;
 				right: 18px;
@@ -394,6 +396,9 @@
 
 @media screen and (max-width: 680px){
 	.header{
+		&-container{
+			padding-bottom: 20px;
+		}
 		&-col{
 			@include make-col(12);
 		}
@@ -404,6 +409,16 @@
 		&-basket{
 			&-inner{
 				width: 270px;
+			}
+		}
+		&-menu{
+			display: none;
+		}
+		&-mob{
+			&-menu{
+				&-btn{
+					display: block!important;
+				}
 			}
 		}
 	}

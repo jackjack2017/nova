@@ -18,8 +18,19 @@ export class LikeRequest{
 
         $('body').on('click', '.js_like-btn', function(event) {
             event.preventDefault();
+
             let productID = $(this).closest('.product-card').data('id');
             let url = '/like/add';
+
+            if($(this).hasClass('__active')){
+                $(this).removeClass('__active');
+                $(this).html('В избранное');
+                _this.requestRemove(url, productID);
+                return
+            }
+
+            $(this).addClass('__active');
+            $(this).html('Убрать из избранного');
             _this.requestAdd(url, productID);
         });
 
@@ -44,18 +55,11 @@ export class LikeRequest{
                 product_id: productId,
                 _token: this.token
             },
-            success(data){
+            success(){
                 console.log('success');
-                let likeCount = +$('.js_like-count').html();
-                $('.js_like-count').empty();
-                $('.js_like-count').append(likeCount++);
-            },
-            error(){
-                console.log('error');
-                let likeCount = +$('.js_like-count').html();
-                console.log(likeCount++);
-                $('.js_like-count').empty();
-                $('.js_like-count').append(likeCount++);
+
+                let likeCount = $('.js_like-count').html();
+                $('.js_like-count').html(+likeCount++);
             }
         });
     }
@@ -68,21 +72,13 @@ export class LikeRequest{
                 item_id: itemId,
                 _token: this.token
             },
-            success(data){
+            success(){
                 console.log('success');
-            },
-            error(){
-                console.log('error');
+
+                let likeCount = $('.js_like-count').html();
+                $('.js_like-count').html(+likeCount--);
             }
         });
 
     }
-
-    /**
-     * On success request
-     */
-    // success(data) {
-    //    console.log(data);
-    // }
-
 }

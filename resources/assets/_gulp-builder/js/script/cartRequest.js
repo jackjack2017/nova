@@ -17,7 +17,7 @@ export class CartRequest{
 
         let _this = this;
 
-        $('.js_cart-btn').on('click', function(event) {  
+        $('.js_cart-btn').on('click', function(event) {
             event.preventDefault();
             let productID = $(this).closest('.product-row').data('id');
             let url = '/cart/add';
@@ -45,11 +45,10 @@ export class CartRequest{
                 _token: this.token
             },
             success: function(data){
-                $('.js_header-cart-blk').append(data);
-                let cartCount = +$('.js_cart-count').html();
-                cartCount++;
-                $('.js_cart-count').empty();
-                $('.js_cart-count').append(cartCount++);
+                $('.js_header-cart-blk').html(data);
+                let cartCount = $('.js_cart-count').html();
+                +cartCount++;
+                $('.js_cart-count').html(+cartCount++);
             }
         });
     }
@@ -64,25 +63,10 @@ export class CartRequest{
             },
             success: function(data){
                 console.log(data);
-                let cartCount = +$('.js_cart-count').html();
-                cartCount--;
-                $('.js_cart-count').empty();
-                $('.js_cart-count').append(cartCount--);
-            },
-            error(){
-                let cartCount = +$('.js_cart-count').html();
-                $('.js_cart-count').empty();
-                $('.js_cart-count').append(cartCount--);
+                let cartCount = $('.js_cart-count').html();
+                +cartCount--;
+                $('.js_cart-count').html(+cartCount--);
             }
         });
-
     }
-
-    /**
-     * On success request
-     */
-    success(data) {
-       console.log(data);
-    }
-
 }

@@ -2,7 +2,7 @@
     <div class="header-container">
         <div class="header-mob-blk">
             <a href="/" class="header-logo __mob">Nova</a>
-            <div class="header-mob-menu-btn fa fa-bars fa-3x js_mob-menu-btn"></div>
+            <a href="#" class="header-mob-menu-btn fa fa-bars fa-3x js_mob-menu-btn"></a>
             <div class="header-mob-menu js_mob-menu-blk">
                 <ul class="header-mob-menu-lst">
                     @foreach($categories as $category)

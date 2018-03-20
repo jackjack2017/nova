@@ -4017,11 +4017,10 @@
 	                    _token: this.token
 	                },
 	                success: function success(data) {
-	                    $('.js_header-cart-blk').append(data);
-	                    var cartCount = +$('.js_cart-count').html();
-	                    cartCount++;
-	                    $('.js_cart-count').empty();
-	                    $('.js_cart-count').append(cartCount++);
+	                    $('.js_header-cart-blk').html(data);
+	                    var cartCount = $('.js_cart-count').html();
+	                    +cartCount++;
+	                    $('.js_cart-count').html(+cartCount++);
 	                }
 	            });
 	        }
@@ -4037,27 +4036,11 @@
 	                },
 	                success: function success(data) {
 	                    console.log(data);
-	                    var cartCount = +$('.js_cart-count').html();
-	                    cartCount--;
-	                    $('.js_cart-count').empty();
-	                    $('.js_cart-count').append(cartCount--);
-	                },
-	                error: function error() {
-	                    var cartCount = +$('.js_cart-count').html();
-	                    $('.js_cart-count').empty();
-	                    $('.js_cart-count').append(cartCount--);
+	                    var cartCount = $('.js_cart-count').html();
+	                    +cartCount--;
+	                    $('.js_cart-count').html(+cartCount--);
 	                }
 	            });
-	        }
-	
-	        /**
-	         * On success request
-	         */
-	
-	    }, {
-	        key: 'success',
-	        value: function success(data) {
-	            console.log(data);
 	        }
 	    }]);
 	    return CartRequest;
@@ -4109,8 +4092,19 @@
 	
 	            $('body').on('click', '.js_like-btn', function (event) {
 	                event.preventDefault();
+	
 	                var productID = $(this).closest('.product-card').data('id');
 	                var url = '/like/add';
+	
+	                if ($(this).hasClass('__active')) {
+	                    $(this).removeClass('__active');
+	                    $(this).html('В избранное');
+	                    _this.requestRemove(url, productID);
+	                    return;
+	                }
+	
+	                $(this).addClass('__active');
+	                $(this).html('Убрать из избранного');
 	                _this.requestAdd(url, productID);
 	            });
 	
@@ -4137,18 +4131,11 @@
 	                    product_id: productId,
 	                    _token: this.token
 	                },
-	                success: function success(data) {
+	                success: function success() {
 	                    console.log('success');
-	                    var likeCount = +$('.js_like-count').html();
-	                    $('.js_like-count').empty();
-	                    $('.js_like-count').append(likeCount++);
-	                },
-	                error: function error() {
-	                    console.log('error');
-	                    var likeCount = +$('.js_like-count').html();
-	                    console.log(likeCount++);
-	                    $('.js_like-count').empty();
-	                    $('.js_like-count').append(likeCount++);
+	
+	                    var likeCount = $('.js_like-count').html();
+	                    $('.js_like-count').html(+likeCount++);
 	                }
 	            });
 	        }
@@ -4162,22 +4149,14 @@
 	                    item_id: itemId,
 	                    _token: this.token
 	                },
-	                success: function success(data) {
+	                success: function success() {
 	                    console.log('success');
-	                },
-	                error: function error() {
-	                    console.log('error');
+	
+	                    var likeCount = $('.js_like-count').html();
+	                    $('.js_like-count').html(+likeCount--);
 	                }
 	            });
 	        }
-	
-	        /**
-	         * On success request
-	         */
-	        // success(data) {
-	        //    console.log(data);
-	        // }
-	
 	    }]);
 	    return LikeRequest;
 	}();
