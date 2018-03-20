@@ -5,7 +5,7 @@
                 <li class="active"><a href="#tab_1" data-toggle="tab" aria-expanded="true">Основное</a></li>
                 <li><a href="#tab_2" data-toggle="tab" aria-expanded="false">Описание</a></li>
                 <li><a href="#tab_3" data-toggle="tab" aria-expanded="false">Опции</a></li>
-                <li><a href="#tab_4" data-toggle="tab" aria-expanded="false">Галерея</a></li>
+                <li><a href="#tab_4" data-toggle="tab" aria-expanded="false" class="tab_4">Галерея</a></li>
             </ul>
 
 

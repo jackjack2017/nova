@@ -33,10 +33,10 @@ class FormGenerator
         return $this->textarea($name, $value, $label, $options);
     }
 
-//    public function file($name, $label = '', $options = [])
-//    {
-//        return view('dashboard::components._file', compact('name', 'label', 'options'))->render();
-//    }
+    public function file($name, $label = '', $options = [])
+    {
+        return view('back.components.file', compact('name', 'label', 'options'))->render();
+    }
 
 
 

@@ -14,7 +14,8 @@
       */
      entry: {
          script : path.join(__dirname,'./js/script.js'),
-         libs : path.join(__dirname,'./js/libs.js')
+         libs : path.join(__dirname,'./js/libs.js'),
+         admin : path.join(__dirname,'./js/admin.js')
      },
      /**
       * Output point.

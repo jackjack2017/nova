@@ -1,5 +1,6 @@
-<div class="header-basket-inner-t">
-    @foreach($cart as $item)
+@foreach($cart as $item)
+<div class="header-basket-inner-t" data-item-id="1">
+        <a href="#" class="header-basket-inner-t-btn js_header-cart-delete-btn"></a>
         <div class="header-basket-inner-t-col-l">
             <a href="{{asset('img/product-img1.jpg')}}" class="header-basket-img">
                 <img src="{{asset('img/product-img1.jpg')}}" alt="product-img">
@@ -13,8 +14,9 @@
             <span class="header-basket-inner-txt">Размер: {{ $item->size }}</span>
             <span class="header-basket-inner-total">Итого: {{ $item->price * $item->price }} Грн</span>
         </div>
-    @endforeach
+    
 </div>
+@endforeach
 <div class="header-basket-inner-b">
     <div class="header-basket-inner-b-price-line">
         <span class="header-basket-inner-b-price-line-txt">Стоимость заказа</span><span class="header-basket-inner-b-price-line-txt">4 999 грн</span>

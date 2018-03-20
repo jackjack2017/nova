@@ -13,13 +13,6 @@ class Product extends Model
    ];
 
 
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     */
-    public function pictures()
-    {
-        return $this->hasMany(Picture::class,'product_id','id')->orderBy('position');
-    }
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
@@ -30,10 +23,11 @@ class Product extends Model
     }
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\hasMany
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function products()
+    public function options()
     {
-        return $this->hasMany(Product::class);
+        return $this->hasMany(Option::class);
     }
+
 }

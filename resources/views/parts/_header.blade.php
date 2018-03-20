@@ -13,15 +13,17 @@
 				
 			</div>
 			<div class="header-t-r">
-				<form action="#" class="header-search-form">
+				<form action="{{url('search')}}" class="header-search-form">
 					<input type="text" placeholder="Найти товары" class="header-search-form-inp">
-					<button class="header-search-form-ic fa fa-search"></button>
+					<input type="hidden" name="form_type" value="Поиск">
+					<input type="hidden" name="_token" value="{{csrf_token()}}">
+					<button type="submit" class="header-search-form-ic fa fa-search"></button>
 				</form>
-				<a href="#" class="header-like"><span class="header-like-txt">Избранное</span><span class="header-like-num">(0)</span></a>
+				<a href="#" class="header-like"><span class="header-like-txt">Избранное</span>(<span class="header-like-num js_like-count">0</span>)</a>
 				<div class="header-basket-blk">
-					<a href="#" class="header-basket-lnk"><span class="header-basket-txt">Корзина</span> <span class="header-basket-num">(0)</span></a>
-					<div class="header-basket-inner">
-						@include('/parts/_header-cart')
+					<a href="#" class="header-basket-lnk"><span class="header-basket-txt">Корзина</span>(<span class="header-basket-num js_cart-count">0</span>)</a>
+					<div class="header-basket-inner js_header-cart-blk">
+							@include('/parts/_header-cart')
 					</div>
 				</div>
 			</div>

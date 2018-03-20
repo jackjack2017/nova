@@ -66,7 +66,10 @@ Route::prefix('admin')->namespace('Back')->group(function () {
                     'destroy' => 'products.destroy'
                 ]]
         );
-
+        Route::put('import', [
+            'as' => 'products.import',
+            'uses' => 'ExcellController@import'
+        ]);
 
         // Categories
         Route::resource('categories', 'CategoryController', [
