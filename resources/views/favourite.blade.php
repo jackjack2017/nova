@@ -7,7 +7,9 @@
             <h1 class="ttl-L">Мои будущие покупки</h1>
             <div class="card-cart-row">
                 @foreach($wishlist as $product)
-                    @include('blocks/_card-like')
+                    <div class="category-col">
+                        @include('parts/_product-card', ['favourite'=>true])
+                    </div>
                 @endforeach
 
             </div>

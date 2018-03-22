@@ -1,4 +1,4 @@
-<div class="card-cart-col">
+<div class="card-cart-col like-product-card" data-id="1">
     <div class="card-cart">
         <div class="card-cart-t">
             <p class="card-cart-price">Цена: <span class="card-cart-price-num">{{$product->price}}</span> грн.</p>
@@ -23,7 +23,7 @@
                 </div>
                 <div class="card-cart-btn-blk">
                     <div class="card-cart-btn-wrap">
-                        <a href="#" class="btn" title="Удалить из избранного"><i class="fa fa-trash fa-2x"></i></a>
+                        <a href="#" class="btn js_like-btn-remove" title="Удалить из избранного"><i class="fa fa-trash fa-2x"></i></a>
                     </div>
                     <div class="card-cart-btn-wrap">
                         <a href="#" class="btn" title="Добавить в корзину"><i class="fa fa-shopping-cart fa-2x"></i></a>

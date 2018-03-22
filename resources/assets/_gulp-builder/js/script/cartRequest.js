@@ -24,7 +24,7 @@ export class CartRequest{
             _this.requestAdd(url, productID);
         });
 
-        $('.js_header-cart-delete-btn').on('click', function(event) {
+        $('body').on('click', '.js_header-cart-delete-btn', function(event) {
             event.preventDefault();
             let item_id = $(this).closest('.header-basket-inner-t').data('item-id');
             let url = '/cart/remove';

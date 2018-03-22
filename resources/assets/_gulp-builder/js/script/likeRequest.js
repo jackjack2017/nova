@@ -26,6 +26,13 @@ export class LikeRequest{
                 $(this).removeClass('__active');
                 $(this).html('В избранное');
                 _this.requestRemove(url, productID);
+
+                if($('body').hasClass('page-favourite')){
+
+                    let favouriteCard = $(this).closest('.like-product-card'); 
+                    $(favouriteCard).remove();
+                }
+
                 return
             }
 
@@ -33,14 +40,6 @@ export class LikeRequest{
             $(this).html('Убрать из избранного');
             _this.requestAdd(url, productID);
         });
-
-        $('body').on('click','.js_like-btn-remove', function(event) {
-            event.preventDefault();
-            console.log('yeaahh');
-            let item_id = $(this).closest('.like-product-card').data('item-id');
-            let url = '/like/remove';
-            _this.requestRemove(url, item_id);
-        })
 
     }
 
@@ -64,12 +63,12 @@ export class LikeRequest{
         });
     }
 
-    requestRemove(url, itemId){
+    requestRemove(url, productId){
         $.ajax({
             url: url,
             method: this.method,
             data: {
-                item_id: itemId,
+                product_id: productId,
                 _token: this.token
             },
             success(){

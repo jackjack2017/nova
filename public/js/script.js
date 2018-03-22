@@ -3994,7 +3994,7 @@
 	                _this.requestAdd(url, productID);
 	            });
 	
-	            $('.js_header-cart-delete-btn').on('click', function (event) {
+	            $('body').on('click', '.js_header-cart-delete-btn', function (event) {
 	                event.preventDefault();
 	                var item_id = $(this).closest('.header-basket-inner-t').data('item-id');
 	                var url = '/cart/remove';
@@ -4100,20 +4100,19 @@
 	                    $(this).removeClass('__active');
 	                    $(this).html('В избранное');
 	                    _this.requestRemove(url, productID);
+	
+	                    if ($('body').hasClass('page-favourite')) {
+	
+	                        var favouriteCard = $(this).closest('.like-product-card');
+	                        $(favouriteCard).remove();
+	                    }
+	
 	                    return;
 	                }
 	
 	                $(this).addClass('__active');
 	                $(this).html('Убрать из избранного');
 	                _this.requestAdd(url, productID);
-	            });
-	
-	            $('body').on('click', '.js_like-btn-remove', function (event) {
-	                event.preventDefault();
-	                console.log('yeaahh');
-	                var item_id = $(this).closest('.like-product-card').data('item-id');
-	                var url = '/like/remove';
-	                _this.requestRemove(url, item_id);
 	            });
 	        }
 	
@@ -4141,12 +4140,12 @@
 	        }
 	    }, {
 	        key: 'requestRemove',
-	        value: function requestRemove(url, itemId) {
+	        value: function requestRemove(url, productId) {
 	            $.ajax({
 	                url: url,
 	                method: this.method,
 	                data: {
-	                    item_id: itemId,
+	                    product_id: productId,
 	                    _token: this.token
 	                },
 	                success: function success() {
