@@ -1,4 +1,4 @@
-<div class="card-cart-col js_cart-blk" data-item-id="1">
+<div class="card-cart-col js_cart-blk" data-item-id="12de6e2164e99e7e46c75c872d8221a6">
     <div class="card-cart">
         <div class="card-cart-b">
             <div class="card-cart-col-col">

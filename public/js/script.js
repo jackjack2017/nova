@@ -3994,7 +3994,8 @@
 	                var item_id = $(this).closest('.header-basket-inner-t').data('item-id');
 	                var url = '/cart/remove';
 	
-	                if ('.page-cart') {
+	                if ($('.page-cart').length !== 0) {
+	                    console.log('true');
 	                    var productCard = $(this).closest('.js_cart-blk');
 	                    var deletedPriceTotal = $(this).closest('.js_cart-blk').find('.js_product-price-total').html();
 	                    var totalPriceStrAll = $('.js_product-price-total-cart');
