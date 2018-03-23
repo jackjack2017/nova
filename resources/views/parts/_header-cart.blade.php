@@ -1,6 +1,6 @@
 @foreach($cart as $item)
 <div class="header-basket-inner-t" data-item-id="{{$item->rowId}}">
-        <a href="#" class="header-basket-inner-t-btn js_header-cart-delete-btn"></a>
+        <a href="#" class="header-basket-inner-t-btn js_cart-delete-btn"></a>
         <div class="header-basket-inner-t-col-l">
             <a href="{{asset('img/product-img1.jpg')}}" class="header-basket-img">
                 <img src="{{asset('img/product-img1.jpg')}}" alt="product-img">

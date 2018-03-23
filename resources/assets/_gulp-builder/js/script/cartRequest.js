@@ -10,9 +10,6 @@ export class CartRequest{
     }
 
 
-    /**
-     * Init btn
-     */
     init(){
 
         let _this = this;
@@ -24,18 +21,33 @@ export class CartRequest{
             _this.requestAdd(url, productID);
         });
 
-        $('body').on('click', '.js_header-cart-delete-btn', function(event) {
+        $('body').on('click', '.js_cart-delete-btn', function(event) {
             event.preventDefault();
             let item_id = $(this).closest('.header-basket-inner-t').data('item-id');
             let url = '/cart/remove';
+
+            if('.page-cart'){
+                let productCard = $(this).closest('.js_cart-blk');
+                let deletedPriceTotal = $(this).closest('.js_cart-blk').find('.js_product-price-total').html();
+                let totalPriceStrAll = $('.js_product-price-total-cart');
+                let totalPriceAll = $(totalPriceStrAll).html();
+                let item_id = $(productCard).data('item-id');
+
+                _this.requestRemove(url, item_id);
+                $(totalPriceStrAll).html(totalPriceAll - deletedPriceTotal);
+                $(productCard).remove();
+                let cartCount = +$('.js_cart-count').html();
+                cartCount--;
+                $('.js_cart-count').html(cartCount);
+                return
+            }
+
             _this.requestRemove(url, item_id);
         })
 
     }
 
-    /**
-     * Change product by colour ajax request
-     */
+
     requestAdd(url, productId){
         $.ajax({
             url: url,
@@ -46,9 +58,9 @@ export class CartRequest{
             },
             success: function(data){
                 $('.js_header-cart-blk').html(data);
-                let cartCount = $('.js_cart-count').html();
-                +cartCount++;
-                $('.js_cart-count').html(+cartCount++);
+                let cartCount = +$('.js_cart-count').html();
+                cartCount++;
+                $('.js_cart-count').html(cartCount);
             }
         });
     }
@@ -62,10 +74,10 @@ export class CartRequest{
                 _token: this.token
             },
             success: function(data){
-                console.log(data);
-                let cartCount = $('.js_cart-count').html();
-                +cartCount--;
-                $('.js_cart-count').html(+cartCount--);
+                $('.js_header-cart-blk').html(data);
+                let cartCount = +$('.js_cart-count').html();
+                cartCount--;
+                $('.js_cart-count').html(cartCount);
             }
         });
     }

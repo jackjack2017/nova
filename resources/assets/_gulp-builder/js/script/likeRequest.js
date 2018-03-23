@@ -9,9 +9,7 @@ export class LikeRequest{
         this.token = getToken();
     }
 
-    /**
-     * Init btn
-     */
+
     init(){
 
         let _this = this;
@@ -43,9 +41,7 @@ export class LikeRequest{
 
     }
 
-    /**
-     * Change product by colour ajax request
-     */
+
     requestAdd(url, productId){
         $.ajax({
             url: url,
@@ -55,10 +51,9 @@ export class LikeRequest{
                 _token: this.token
             },
             success(){
-                console.log('success');
-
-                let likeCount = $('.js_like-count').html();
-                $('.js_like-count').html(+likeCount++);
+                let likeCount = +$('.js_like-count').html();
+                likeCount++;
+                $('.js_like-count').html(likeCount);
             }
         });
     }
@@ -72,10 +67,9 @@ export class LikeRequest{
                 _token: this.token
             },
             success(){
-                console.log('success');
-
-                let likeCount = $('.js_like-count').html();
-                $('.js_like-count').html(+likeCount--);
+                let likeCount = +$('.js_like-count').html();
+                likeCount--;
+                $('.js_like-count').html(likeCount);
             }
         });
 

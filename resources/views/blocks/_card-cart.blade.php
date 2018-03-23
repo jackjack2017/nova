@@ -1,6 +1,5 @@
-<div class="card-cart-col">
+<div class="card-cart-col js_cart-blk" data-item-id="1">
     <div class="card-cart">
-
         <div class="card-cart-b">
             <div class="card-cart-col-col">
                 <img src="{{asset('img/product-img1.jpg')}}" alt="product-img">
@@ -21,7 +20,7 @@
                 </div>
                 <div class="card-cart-btn-blk">
                     <div class="card-cart-btn-wrap">
-                        <a href="#" class="btn" title="Удалить из корзины"><i class="fa fa-trash fa-2x"></i></a>
+                        <a href="#" class="btn js_cart-delete-btn" title="Удалить из корзины"><i class="fa fa-trash fa-2x"></i></a>
                     </div>
                     <div class="card-cart-btn-wrap">
                         <a href="#" class="btn" title="Добавить в избранное"><i class="fa fa-star-o fa-2x"></i></a>

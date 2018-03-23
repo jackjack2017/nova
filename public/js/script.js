@@ -3976,11 +3976,6 @@
 	        this.token = (0, _getToken.getToken)();
 	    }
 	
-	    /**
-	     * Init btn
-	     */
-	
-	
 	    (0, _createClass3.default)(CartRequest, [{
 	        key: 'init',
 	        value: function init() {
@@ -3994,18 +3989,30 @@
 	                _this.requestAdd(url, productID);
 	            });
 	
-	            $('body').on('click', '.js_header-cart-delete-btn', function (event) {
+	            $('body').on('click', '.js_cart-delete-btn', function (event) {
 	                event.preventDefault();
 	                var item_id = $(this).closest('.header-basket-inner-t').data('item-id');
 	                var url = '/cart/remove';
+	
+	                if ('.page-cart') {
+	                    var productCard = $(this).closest('.js_cart-blk');
+	                    var deletedPriceTotal = $(this).closest('.js_cart-blk').find('.js_product-price-total').html();
+	                    var totalPriceStrAll = $('.js_product-price-total-cart');
+	                    var totalPriceAll = $(totalPriceStrAll).html();
+	                    var _item_id = $(productCard).data('item-id');
+	
+	                    _this.requestRemove(url, _item_id);
+	                    $(totalPriceStrAll).html(totalPriceAll - deletedPriceTotal);
+	                    $(productCard).remove();
+	                    var cartCount = +$('.js_cart-count').html();
+	                    cartCount--;
+	                    $('.js_cart-count').html(cartCount);
+	                    return;
+	                }
+	
 	                _this.requestRemove(url, item_id);
 	            });
 	        }
-	
-	        /**
-	         * Change product by colour ajax request
-	         */
-	
 	    }, {
 	        key: 'requestAdd',
 	        value: function requestAdd(url, productId) {
@@ -4018,9 +4025,9 @@
 	                },
 	                success: function success(data) {
 	                    $('.js_header-cart-blk').html(data);
-	                    var cartCount = $('.js_cart-count').html();
-	                    +cartCount++;
-	                    $('.js_cart-count').html(+cartCount++);
+	                    var cartCount = +$('.js_cart-count').html();
+	                    cartCount++;
+	                    $('.js_cart-count').html(cartCount);
 	                }
 	            });
 	        }
@@ -4035,10 +4042,10 @@
 	                    _token: this.token
 	                },
 	                success: function success(data) {
-	                    console.log(data);
-	                    var cartCount = $('.js_cart-count').html();
-	                    +cartCount--;
-	                    $('.js_cart-count').html(+cartCount--);
+	                    $('.js_header-cart-blk').html(data);
+	                    var cartCount = +$('.js_cart-count').html();
+	                    cartCount--;
+	                    $('.js_cart-count').html(cartCount);
 	                }
 	            });
 	        }
@@ -4079,11 +4086,6 @@
 	        this.token = (0, _getToken.getToken)();
 	    }
 	
-	    /**
-	     * Init btn
-	     */
-	
-	
 	    (0, _createClass3.default)(LikeRequest, [{
 	        key: 'init',
 	        value: function init() {
@@ -4115,11 +4117,6 @@
 	                _this.requestAdd(url, productID);
 	            });
 	        }
-	
-	        /**
-	         * Change product by colour ajax request
-	         */
-	
 	    }, {
 	        key: 'requestAdd',
 	        value: function requestAdd(url, productId) {
@@ -4131,10 +4128,9 @@
 	                    _token: this.token
 	                },
 	                success: function success() {
-	                    console.log('success');
-	
-	                    var likeCount = $('.js_like-count').html();
-	                    $('.js_like-count').html(+likeCount++);
+	                    var likeCount = +$('.js_like-count').html();
+	                    likeCount++;
+	                    $('.js_like-count').html(likeCount);
 	                }
 	            });
 	        }
@@ -4149,10 +4145,9 @@
 	                    _token: this.token
 	                },
 	                success: function success() {
-	                    console.log('success');
-	
-	                    var likeCount = $('.js_like-count').html();
-	                    $('.js_like-count').html(+likeCount--);
+	                    var likeCount = +$('.js_like-count').html();
+	                    likeCount--;
+	                    $('.js_like-count').html(likeCount);
 	                }
 	            });
 	        }
