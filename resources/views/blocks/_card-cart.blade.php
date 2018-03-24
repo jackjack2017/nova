@@ -27,7 +27,7 @@
                     </div>
                 </div>
             </div>
-            <div class="card-cart-col-col">
+            <div class="card-cart-col-col __last">
                 <div class="card-cart-t js_product-price-blk">
                     <p class="card-cart-price">Цена: <span class="card-cart-price-num js_product-price">999</span> грн.</p>
                     <p class="card-cart-price-total">Итого: <span class="card-cart-price-num js_product-price-total">999</span> грн.</p>

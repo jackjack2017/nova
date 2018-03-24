@@ -25,20 +25,7 @@
 			position: absolute;
 			top: 30%;
 			right: 10%;
-		}
-		&-ttl{
-			font-size: 13px;
-			text-transform: uppercase;
-			color: #fff;
-			text-align: center;
-			padding-bottom: 10px;
-			&-L{
-				@extend .page-banner-ttl;
-				font-size: 32px;
-				max-width: 300px;
-    			line-height: 38px;
-    			padding-bottom: 25px;
-			}
+			max-width: 300px;
 		}
 		&-btn{
 			@extend .btn;
@@ -52,6 +39,9 @@
 		}
 	}
 	&-slider{
+		&-i{
+			display: flex;
+		}
 		&.owl-carousel .owl-nav .owl-prev{
 			border: 1px solid grey;
 			padding: 20px;
@@ -68,6 +58,18 @@
 			@extend .arrow-right;
 			&:hover{
 				background-color: rgba(0,0,0, .5);
+			}
+		}
+	}
+}
+
+@media screen and (max-width: 680px){
+	.page{
+		&-banner{
+			&-txt{
+				right: 0;
+				top: auto;
+				bottom: 20%;
 			}
 		}
 	}

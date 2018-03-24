@@ -1,4 +1,4 @@
-<a href="{{route('product', [$product->slug, $product->id])}}" class="product-card @if (isset($favourite))like-product-card @endif" data-id="{{$product->id}}">
+<a href="{{route('product', [$product->slug, $product->id])}}" class="product-card js_product-card @if (isset($favourite))like-product-card @endif" data-id="{{$product->id}}">
     <div class="product-card-t">
         <div class="product-card-lbl-blk">
             @if($product->new)

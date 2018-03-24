@@ -1,7 +1,13 @@
 .filter{
   display: flex;
   align-items: center;
+  flex-wrap: wrap;
   padding-bottom: 10px;
+  &-ttl{
+    font-size: 16px;
+    padding: 10px 15px;
+    border-bottom: 1px solid #ccc;
+  }
   &-txt{
     @extend .product-txt;
     padding-bottom: 0!important;
@@ -18,6 +24,23 @@
     &.__active{
       color: black;
       border-bottom: 1px dotted black;
+    }
+  }
+}
+
+@media screen and (max-width: 680px){
+  .filter{
+    &-blk{
+      display: flex;
+      flex-direction: column;
+      &-wrap{
+        display: none;
+      }
+      border-bottom: 1px solid #ccc;
+      &-check{
+        display: flex;
+        flex-wrap: wrap;
+      }
     }
   }
 }

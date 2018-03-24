@@ -318,7 +318,7 @@
 				right: 18px;
 			}
 			&-lnk{
-				display: block;
+				display: none;
 				position: relative;
 				&:after{
 					content: "";
@@ -418,6 +418,9 @@
 			&-menu{
 				&-btn{
 					display: block!important;
+				}
+				&-lnk{
+					display: block;
 				}
 			}
 		}

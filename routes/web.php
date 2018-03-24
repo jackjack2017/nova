@@ -23,6 +23,9 @@
 //Route::view('/category', 'category');
 Route::view('/cart', 'cart');
 Route::view('/deal', 'deal');
+Route::post('/test', function () {
+   return view('test');
+});
 //Route::view('/favourite', 'favourite');
 
 //Route::get('/page', function () {
@@ -46,9 +49,6 @@ Route::name('favourite')->get('favourite', 'FrontController@favourite');
 ////});
 Route::name('category')->get('category/{id}', 'FrontController@category');
 //
-//Route::post('/product/test', function () {
-//    return view('test');
-//});
 
 // Authentification
 Auth::routes();

@@ -89,8 +89,31 @@ body{
 		@include make-container(); /* align center, add default padding*/
 		padding-left: 15px;
 		padding-right: 15px;
+		&-with-sidebar{
+	 		display: block;
+	 	}
 	}
 	.tel{
 		pointer-events: auto;
+	}
+	.withPad{
+		padding-top: 10px;
+		&-S{
+			padding-top: 10px;
+		}
+	}
+	.sidebar{
+		display: none;
+		&.__filter{
+			display: block;
+			@include make-col(12);
+			padding-bottom: 20px;
+		}
+		&.__deal{
+			display: block;
+		}
+	}
+	.cnt{
+		@include make-col(12);
 	}
 }

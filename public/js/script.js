@@ -1548,6 +1548,7 @@
 	            _ui.ui.accordion('.js_deal-detail-btn', '.js_deal-detail-blk');
 	            _ui.ui.accordion('.js_submenu-btn', '.js_submenu-cnt');
 	            _ui.ui.accordion('.js_mob-menu-btn', '.js_mob-menu-blk');
+	            _ui.ui.accordion('.js_filter-open-btn', '.js_filter-open-blk');
 	
 	            _amount.amount.init('.js_ui-amount-inp', '.js_ui-amount-btn-dec', '.js_ui-amount-btn-inc');
 	            $('.my-container').sortablePhotos({
@@ -1630,7 +1631,7 @@
 	            likeRequest.init();
 	
 	            var requestProducts = new _showMoreRequest.ShowMoreRequest({
-	                url: '/product/test',
+	                url: '/test',
 	                method: 'POST',
 	                btnClass: '.js_showMore-btn',
 	                blockClass: '.js_showMore-blk'
@@ -1641,24 +1642,53 @@
 	            new _slider.Slider('.js_slider-main', {
 	                nav: true,
 	                dots: true,
-	                items: 4,
-	                margin: 10
+	                margin: 10,
+	                responsive: {
+	                    0: {
+	                        items: 2
+	                    },
+	                    480: {
+	                        items: 3
+	                    },
+	                    900: {
+	                        items: 4
+	                    }
+	
+	                }
 	            });
 	
 	            new _slider.Slider('.js_slider-main-big', {
 	                nav: true,
 	                dots: true,
-	                items: 6,
-	                margin: 10
+	                margin: 10,
+	                responsive: {
+	                    0: {
+	                        items: 2
+	                    },
+	                    480: {
+	                        items: 3
+	                    },
+	                    680: {
+	                        items: 4
+	                    },
+	                    900: {
+	                        items: 5
+	                    }
+	
+	                }
 	            });
 	
 	            new _slider.Slider('.js_slider-product', {
 	                nav: false,
 	                dots: true,
-	                items: 1,
 	                touchDrag: false,
 	                mouseDrag: false,
-	                dotsContainer: '.js_product-slider-dots-container'
+	                dotsContainer: '.js_product-slider-dots-container',
+	                responsive: {
+	                    0: {
+	                        items: 1
+	                    }
+	                }
 	            });
 	        }
 	    }, {
@@ -3909,35 +3939,16 @@
 	    }, {
 	        key: 'request',
 	        value: function request() {
+	            var _this = this;
 	            $.ajax({
 	                url: this.url,
 	                data: this.params,
 	                method: this.method,
-	                // success: (data)=>{
-	                //     // call callback user function if define
-	                //     this.successFn.call(this, data);
-	                // }
-	                success: this.success()
+	                success: function success(data) {
+	                    $(this.blockClass).append(data);
+	                    _this.params.page++;
+	                }
 	            });
-	        }
-	
-	        /**
-	         * On success request
-	         * @param data
-	         */
-	
-	    }, {
-	        key: 'success',
-	        value: function success(data) {
-	            // $(this.blockClass).append(data);
-	            console.log('success');
-	            this.params.page++;
-	
-	            // check is it last page
-	            // let isLastPage = $('.js_request-last-page').length;
-	            // if(isLastPage){
-	            //     $(this.btnClass).hide();
-	            // }
 	        }
 	    }]);
 	    return ShowMoreRequest;
@@ -4096,7 +4107,7 @@
 	            $('body').on('click', '.js_like-btn', function (event) {
 	                event.preventDefault();
 	
-	                var productID = $(this).closest('.product-card').data('id');
+	                var productID = $(this).closest('.js_product-card').data('id');
 	                var url = '/like/add';
 	
 	                if ($(this).hasClass('__active')) {

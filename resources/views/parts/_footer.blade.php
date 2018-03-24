@@ -17,7 +17,7 @@
 					<li class="footer-lst-i"><a href="#" class="footer-lnk">Контакты</a></li>
 				</ul>
 			</div>
-			<div class="footer-col">
+			<div class="footer-col __last">
 				<h2 class="footer-ttl">Помощь</h2>
 				<ul class="footer-lst">
 					<li class="footer-lst-i"><a href="#" class="footer-lnk">Доставка и оплата</a></li>

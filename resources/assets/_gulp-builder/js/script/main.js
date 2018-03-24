@@ -30,6 +30,7 @@ class App{
         ui.accordion('.js_deal-detail-btn', '.js_deal-detail-blk');
         ui.accordion('.js_submenu-btn', '.js_submenu-cnt');
         ui.accordion('.js_mob-menu-btn', '.js_mob-menu-blk');
+        ui.accordion('.js_filter-open-btn', '.js_filter-open-blk');
 
         amount.init('.js_ui-amount-inp', '.js_ui-amount-btn-dec', '.js_ui-amount-btn-inc');
         $('.my-container').sortablePhotos({
@@ -114,7 +115,7 @@ class App{
         likeRequest.init();
 
         let requestProducts = new ShowMoreRequest({
-            url: '/product/test',
+            url: '/test',
             method: 'POST',
             btnClass: '.js_showMore-btn',
             blockClass: '.js_showMore-blk'
@@ -125,24 +126,53 @@ class App{
         new Slider('.js_slider-main', {
             nav: true,
             dots: true,
-            items: 4,
-            margin: 10
+            margin: 10,
+            responsive : {
+                0 : {
+                   items: 2
+                },
+                480 : {
+                   items: 3
+                },
+                900 : {
+                     items: 4
+                }
+                
+            }
         });
 
         new Slider('.js_slider-main-big', {
             nav: true,
             dots: true,
-            items: 6,
-            margin: 10
+            margin: 10,
+            responsive : {
+                0 : {
+                   items: 2
+                },
+                480 : {
+                   items: 3
+                },
+                680 : {
+                   items: 4
+                },
+                900 : {
+                     items: 5
+                }
+                
+            }
         });
 
         new Slider('.js_slider-product', {
             nav: false,
             dots: true,
-            items: 1,
             touchDrag: false,
             mouseDrag: false,
-            dotsContainer: '.js_product-slider-dots-container'
+            dotsContainer: '.js_product-slider-dots-container',
+            responsive : {
+                0 : {
+                   items: 1
+                }
+            }
         });
     }
 

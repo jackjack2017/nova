@@ -17,7 +17,7 @@ export class LikeRequest{
         $('body').on('click', '.js_like-btn', function(event) {
             event.preventDefault();
 
-            let productID = $(this).closest('.product-card').data('id');
+            let productID = $(this).closest('.js_product-card').data('id');
             let url = '/like/add';
 
             if($(this).hasClass('__active')){
