@@ -8,7 +8,7 @@
             <div class="card-cart-row">
                 @foreach($wishlist as $product)
                     <div class="category-col">
-                        @include('parts/_product-card', ['favourite'=>true])
+                        @include('parts/_product-card')
                     </div>
                 @endforeach
 
@@ -20,10 +20,10 @@
             @include('/blocks/_slider-main-big', ['products' => $viewed])
         </div>
 
-        <div class="container withPad">
-            <h2 class="ttl-L">Хиты продаж</h2>
-            @include('/blocks/_slider-main-big', ['products' => $top])
-        </div>
+        {{--<div class="container withPad">--}}
+            {{--<h2 class="ttl-L">Хиты продаж</h2>--}}
+            {{--@include('/blocks/_slider-main-big', ['products' => $top])--}}
+        {{--</div>--}}
     </section>
 
 @endsection

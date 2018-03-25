@@ -37,7 +37,7 @@
 	</div>
 	<div class="product-info">
 		<p class="product-name">{{$product->name}}</p>
-        <p class="product-article">Артикул: 23456789</p>
+        <p class="product-article">Артикул: {{$product->article}}</p>
         <div class="js_product-price-blk">
             <p class="product-price"><span class="product-price-num js_product-price">{{$product->price}}</span> грн.</p>
             <p class="product-price-total">Итого: <span class="product-price-num js_product-price-total">{{$product->price}}</span> грн.</p>
@@ -101,9 +101,9 @@
             <a href="#" class="product-btn-inverse js_cart-btn">Добавить в корзину</a>
         </div>
          <div class="product-btn-wrap">
-            <a href="#" class="product-btn js_like-btn">
-                @if(Session::has('likes.' . $product->id))
-                    В избранном
+            <a href="#" class="product-btn js_like-btn @if(in_array($product->id, $wishlist_ids)) __active @endif">
+                @if(in_array($product->id, $wishlist_ids))
+                    Убрать из избранного
                 @else
                     В избранное
                 @endif

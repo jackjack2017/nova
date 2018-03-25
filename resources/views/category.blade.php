@@ -18,9 +18,13 @@
                     <div class="js_showMore-blk">
                         @include('blocks/_products')
                     </div>
-                    <div class="category-btn-show-wrap">
-                        <a href="#" class="category-btn-show js_showMore-btn">Показать еще</a>
-                    </div>
+
+                    @if ($products->hasMorePages())
+                        <div class="category-btn-show-wrap">
+                            <a href="#" class="category-btn-show js_showMore-btn">Показать еще</a>
+                        </div>
+
+                    @endif
 
                     <h2 class="ttl-L">Недавно просмотренные</h2>
 

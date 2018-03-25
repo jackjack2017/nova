@@ -48,7 +48,7 @@
                                 class="header-like-txt">Избранное</span>(<span
                                 class="header-like-num js_like-count">{{$wishlist_count}}</span>)</a>
                     <div class="header-basket-blk">
-                        <a href="#" class="header-basket-lnk"><span class="header-basket-txt">Корзина</span>(<span
+                        <a href="{{route('cart')}}" class="header-basket-lnk"><span class="header-basket-txt">Корзина</span>(<span
                                     class="header-basket-num js_cart-count">{{$cart_count}}</span>)</a>
                         <div class="header-basket-inner js_header-cart-blk">
                             @include('/parts/_header-cart')

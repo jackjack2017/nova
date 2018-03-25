@@ -20,12 +20,12 @@ class CartComposer
         $cart_count = Cart::instance('shopping')->count();
 
         $wishlist = Cart::instance('wishlist')->content();
+        $wishlist_ids = $wishlist->groupBy('id')->keys()->toArray();
+
         $wishlist_count = Cart::instance('wishlist')->count();
 
         $viewed = Cart::instance('viewed')->content();
-//dump(Cart::instance('shopping')->content());
-//dump(Cart::instance('wishlist')->content());
-//dump(Cart::instance('viewed')->content());
-        $view->with(compact('cart', 'total', 'cart_count', 'wishlist', 'wishlist_count', 'viewed'));
+
+        $view->with(compact('cart', 'total', 'cart_count', 'wishlist', 'wishlist_count', 'wishlist_ids', 'viewed'));
     }
 }

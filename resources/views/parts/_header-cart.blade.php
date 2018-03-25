@@ -31,6 +31,6 @@
         <a href="#" class="header-basket-inner-b-btn-inverse">Оформить заказ</a>
     </div>
     <div class="header-basket-inner-b-btn-wrap">
-        <a href="#" class="header-basket-inner-b-btn">В корзину</a>
+        <a href="{{route('cart')}}" class="header-basket-inner-b-btn">В корзину</a>
     </div>
 </div>

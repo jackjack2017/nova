@@ -27,22 +27,36 @@ class FrontController extends Controller
         }
     }
 
-    public function favourite(Request $request)
+    public function favourite()
     {
-        $ids = $request->session()->get('likes');
-
-        $ids ? $likes = Product::whereIn('id', $ids)->get() : $likes = [];
         $top = Product::where('top',1)->get();
 
-        return view('favourite', compact('likes', 'top'));
+        return view('favourite', compact( 'top'));
     }
 
-    public function category($category_id)
+
+    public function cart()
+    {
+        $top = Product::where('top',1)->get();
+
+        return view('cart', compact( 'top'));
+    }
+
+
+    public function category($category_id, Request $request)
     {
         $category = Category::find($category_id);
         $products = Product::where('category_id', $category_id)->where('active', 1)->paginate(12);
 
         return view('category', compact('category','products'));
+    }
+
+    public function showMore(Request $request)
+    {
+        $products = Product::where('category_id', $request->get('category_id') ? $request->get('category_id') : 1)
+            ->where('active', 1)->paginate(12, ['*'], 'page', $request->get('page'));
+
+        return view('blocks._products', compact('products'));
     }
 
 

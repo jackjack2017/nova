@@ -21,25 +21,19 @@
 //Route::view('/page', 'page');
 //Route::view('/product', 'product');
 //Route::view('/category', 'category');
-Route::view('/cart', 'cart');
+//Route::view('/cart', 'cart');
 Route::view('/deal', 'deal');
-Route::post('/test', function () {
-   return view('test');
-});
-//Route::view('/favourite', 'favourite');
-
-//Route::get('/page', function () {
-//    return view('page');
+//Route::post('/test', function () {
+//   return view('test');
 //});
-//
-////Route::get('/product', function () {
-////    return view('product');
-////});
+Route::name('showMoreProducts')->post('/showMore', 'FrontController@showMore');
+
 Route::name('product')->get('/product/{product_slug}/{product_id}', 'FrontController@product');
 Route::name('home')->get('/', 'FrontController@index');
 Route::name('page')->get('page/{id?}', 'FrontController@page');
 
 Route::name('favourite')->get('favourite', 'FrontController@favourite');
+Route::name('cart')->get('cart', 'FrontController@cart');
 
 
 //

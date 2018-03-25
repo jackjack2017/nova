@@ -11,19 +11,32 @@ class CartController extends Controller
 {
     public function add(Request $request)
     {
-        $product = Product::find($request->get('product_id'));
-        $cart_item = [
-            'id' => $product->id,
-            'name' => $product->name,
-            'qty' => 1,
-            'price' => $product->price,
-            'options' => [
-                'size' => $product->size,
-                'color' => $product->color,
-                'artcile' => $product->article,
-            ]
-        ];
-        Cart::instance('shopping')->add($cart_item);
+        $id = $request->get('product_id');
+
+        $item = Cart::instance('shopping')->search(function ($cartItem) use ($id) {
+            return $cartItem->id == $id;
+        })->first();
+
+
+        if ($item) {
+            Cart::instance('shopping')->update($item->rowId, $item->qty+1);
+        } else {
+
+            $product = Product::find($id);
+
+            $cart_item = [
+                'id' => $product->id,
+                'name' => $product->name,
+                'qty' => 1,
+                'price' => $product->price,
+                'options' => [
+                    'size' => $product->size,
+                    'color' => $product->color,
+                    'artcile' => $product->article,
+                ]
+            ];
+            Cart::instance('shopping')->add($cart_item);
+        }
 
         return $this->getAll();
     }
