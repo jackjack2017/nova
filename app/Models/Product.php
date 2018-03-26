@@ -30,4 +30,12 @@ class Product extends Model
         return $this->hasMany(Option::class);
     }
 
+
+    /**
+     * Get all of the owning loggable models.
+     */
+    public function imageable()
+    {
+        return $this->morphMany(Image::class, 'imageable');
+    }
 }

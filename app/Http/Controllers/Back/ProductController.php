@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Back;
 
 use Illuminate\Http\Request;
 use App\{
-    Http\Controllers\Controller, Models\Category, Models\Option, Models\Product
+    Http\Controllers\Controller, Models\Category, Models\Option, Models\Product, ProductsImages
 };
 
 class ProductController extends Controller
@@ -81,6 +81,14 @@ class ProductController extends Controller
             $option->product_id = $product->id;
             $option->fill($option_data);
             $option->save();
+        }
+
+        foreach ($request->photos as $photo) {
+            $filename = $photo->store('photos');
+            ProductsImages::create([
+                'product_id' => $product->id,
+                'img_src' => $filename
+            ]);
         }
 
         return redirect(route('products.index'))->with('product-ok', __('The product has been successfully created'));

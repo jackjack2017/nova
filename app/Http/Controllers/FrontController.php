@@ -12,8 +12,8 @@ class FrontController extends Controller
 
     public function index()
     {
-        $new = Product::where('new',1)->get();
-        $top = Product::where('top',1)->get();
+        $new = Product::where('new',1)->get()->shuffle()->take(20);
+        $top = Product::where('top',1)->get()->shuffle()->take(20);
         return view('main', compact('new', 'top'));
     }
 

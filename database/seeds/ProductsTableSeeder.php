@@ -50,11 +50,14 @@ class ProductsTableSeeder extends Seeder
         $nth_products_in_category = 60;
         foreach(Category::all() as $category)
         {
-            for($i=0; $i < $nth_products_in_category; $i++)
-            {
-                factory(Product::class)->create([
-                    'category_id' => $category['id']
-                ]);
+            if($category->id != 1 && $category->id != 2 && $category->id != 3) {
+
+
+                for ($i = 0; $i < $nth_products_in_category; $i++) {
+                    factory(Product::class)->create([
+                        'category_id' => $category['id']
+                    ]);
+                }
             }
         }
     }
