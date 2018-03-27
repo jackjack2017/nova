@@ -22,7 +22,9 @@ export class LikeRequest{
 
             if($(this).hasClass('__active')){
                 $(this).removeClass('__active');
-                $(this).html('В избранное');
+                if($('.page-cart').length < 1){
+                    $(this).html('В избранное');
+                }
                 _this.requestRemove(url, productID);
 
                 if($('body').hasClass('page-favourite')){
@@ -35,7 +37,9 @@ export class LikeRequest{
             }
 
             $(this).addClass('__active');
-            $(this).html('Убрать из избранного');
+            if($('.page-cart').length < 1){
+                $(this).html('Убрать из избранного');
+            }
             _this.requestAdd(url, productID);
         });
 

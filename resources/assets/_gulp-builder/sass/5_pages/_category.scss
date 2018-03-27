@@ -14,7 +14,7 @@
 	&-col{
 		@include make-col-ready($grid-columns);
 		@include make-col(3);
-		
+		display: flex;
 	}
 	&-ttl{
 		@extend .ttl;

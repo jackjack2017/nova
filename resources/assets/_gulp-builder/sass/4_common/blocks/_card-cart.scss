@@ -66,6 +66,11 @@
         vertical-align: middle;
         padding-bottom: 3px;
       }
+      a{
+        &.__active{
+          background-color: gold;
+        }
+      }
     }
   }
   .count-num{

@@ -115,7 +115,7 @@ class App{
         likeRequest.init();
 
         let requestProducts = new ShowMoreRequest({
-            url: '/test',
+            url: '/showMore',
             method: 'POST',
             btnClass: '.js_showMore-btn',
             blockClass: '.js_showMore-blk'
@@ -126,6 +126,7 @@ class App{
         new Slider('.js_slider-main', {
             nav: true,
             dots: true,
+            loop: false,
             margin: 10,
             responsive : {
                 0 : {
@@ -144,6 +145,7 @@ class App{
         new Slider('.js_slider-main-big', {
             nav: true,
             dots: true,
+            loop: false,
             margin: 10,
             responsive : {
                 0 : {

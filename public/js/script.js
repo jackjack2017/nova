@@ -1631,7 +1631,7 @@
 	            likeRequest.init();
 	
 	            var requestProducts = new _showMoreRequest.ShowMoreRequest({
-	                url: '/test',
+	                url: '/showMore',
 	                method: 'POST',
 	                btnClass: '.js_showMore-btn',
 	                blockClass: '.js_showMore-blk'
@@ -1642,6 +1642,7 @@
 	            new _slider.Slider('.js_slider-main', {
 	                nav: true,
 	                dots: true,
+	                loop: false,
 	                margin: 10,
 	                responsive: {
 	                    0: {
@@ -1660,6 +1661,7 @@
 	            new _slider.Slider('.js_slider-main-big', {
 	                nav: true,
 	                dots: true,
+	                loop: false,
 	                margin: 10,
 	                responsive: {
 	                    0: {
@@ -3888,6 +3890,9 @@
 	        //make a token for secure data sending
 	        var token = (0, _getToken.getToken)();
 	
+	        var category = $('.js_category');
+	        var categoryID = $(category).data('id');
+	
 	        // default settings
 	        var defaultSettings = {
 	            url: '',
@@ -3895,7 +3900,7 @@
 	            btnClass: '',
 	            blockClass: '',
 	            params: {
-	                qty: 12,
+	                category_id: categoryID,
 	                page: 2,
 	                _token: token
 	            },
@@ -3940,12 +3945,13 @@
 	        key: 'request',
 	        value: function request() {
 	            var _this = this;
+	
 	            $.ajax({
 	                url: this.url,
 	                data: this.params,
 	                method: this.method,
 	                success: function success(data) {
-	                    $(this.blockClass).append(data);
+	                    $(_this.blockClass).append(data);
 	                    _this.params.page++;
 	                }
 	            });
@@ -4006,7 +4012,6 @@
 	                var url = '/cart/remove';
 	
 	                if ($('.page-cart').length !== 0) {
-	                    console.log('true');
 	                    var productCard = $(this).closest('.js_cart-blk');
 	                    var deletedPriceTotal = $(this).closest('.js_cart-blk').find('.js_product-price-total').html();
 	                    var totalPriceStrAll = $('.js_product-price-total-cart');
@@ -4016,9 +4021,6 @@
 	                    _this.requestRemove(url, _item_id);
 	                    $(totalPriceStrAll).html(totalPriceAll - deletedPriceTotal);
 	                    $(productCard).remove();
-	                    var cartCount = +$('.js_cart-count').html();
-	                    cartCount--;
-	                    $('.js_cart-count').html(cartCount);
 	                    return;
 	                }
 	
@@ -4112,7 +4114,9 @@
 	
 	                if ($(this).hasClass('__active')) {
 	                    $(this).removeClass('__active');
-	                    $(this).html('В избранное');
+	                    if ($('.page-cart').length < 1) {
+	                        $(this).html('В избранное');
+	                    }
 	                    _this.requestRemove(url, productID);
 	
 	                    if ($('body').hasClass('page-favourite')) {
@@ -4125,7 +4129,9 @@
 	                }
 	
 	                $(this).addClass('__active');
-	                $(this).html('Убрать из избранного');
+	                if ($('.page-cart').length < 1) {
+	                    $(this).html('Убрать из избранного');
+	                }
 	                _this.requestAdd(url, productID);
 	            });
 	        }

@@ -13,6 +13,9 @@ export class ShowMoreRequest{
         //make a token for secure data sending
         let token = getToken();
 
+        let category = $('.js_category');
+        let categoryID = $(category).data('id');
+
         // default settings
         let defaultSettings = {
             url: '',
@@ -20,7 +23,7 @@ export class ShowMoreRequest{
             btnClass: '',
             blockClass: '',
             params:{
-                qty: 12,
+                category_id: categoryID,
                 page:2,
                 _token: token
             },
@@ -59,12 +62,13 @@ export class ShowMoreRequest{
      */
     request(){
         let _this = this;
+
         $.ajax({
             url: this.url,
             data: this.params,
             method: this.method,
             success: function(data){
-                $(this.blockClass).append(data);  
+                $(_this.blockClass).append(data);
                 _this.params.page ++;
             }
         })

@@ -27,7 +27,6 @@ export class CartRequest{
             let url = '/cart/remove';
 
             if($('.page-cart').length !== 0){
-                console.log('true');
                 let productCard = $(this).closest('.js_cart-blk');
                 let deletedPriceTotal = $(this).closest('.js_cart-blk').find('.js_product-price-total').html();
                 let totalPriceStrAll = $('.js_product-price-total-cart');
@@ -37,9 +36,6 @@ export class CartRequest{
                 _this.requestRemove(url, item_id);
                 $(totalPriceStrAll).html(totalPriceAll - deletedPriceTotal);
                 $(productCard).remove();
-                let cartCount = +$('.js_cart-count').html();
-                cartCount--;
-                $('.js_cart-count').html(cartCount);
                 return
             }
 

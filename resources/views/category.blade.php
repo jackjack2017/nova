@@ -4,7 +4,7 @@
     @include('parts/_breadcrumbs')
 
 
-    <section class="category">
+    <section class="category js_category" data-id="{{$category->id}}">
         <div class="container">
             <div class="container-with-sidebar">
 

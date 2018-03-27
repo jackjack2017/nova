@@ -1,11 +1,15 @@
-<div class="card-cart-col js_cart-blk" data-item-id="{{$product->rowId}}">
+<div class="card-cart-col js_cart-blk js_product-card" data-id="{{$product->id}}" data-item-id="{{$product->rowId}}">
     <div class="card-cart">
         <div class="card-cart-b">
             <div class="card-cart-col-col">
-                <img src="{{asset('img/product-img1.jpg')}}" alt="product-img">
+                <a href="{{route('product', [isset($product->slug) ? $product->slug : $product->options->slug, $product->id])}}" class="">
+                    <img src="{{asset('img/product-img1.jpg')}}" alt="product-img">
+                </a>
             </div>
             <div class="card-cart-col-col">
-                <p class="card-cart-name">{{$product->name}}</p>
+                <a href="{{route('product', [isset($product->slug) ? $product->slug : $product->options->slug, $product->id])}}" class="">
+                    <p class="card-cart-name">{{$product->name}}</p>
+                </a>
                 <div class="card-cart-line">
                     <p class="card-cart-option">Артикул:</p>
                     <p class="card-cart-value">{{$product->options->article}}</p>
@@ -23,7 +27,7 @@
                         <a href="#" class="btn js_cart-delete-btn" title="Удалить из корзины"><i class="fa fa-trash fa-2x"></i></a>
                     </div>
                     <div class="card-cart-btn-wrap">
-                        <a href="#" class="btn" title="Добавить в избранное"><i class="fa fa-star-o fa-2x"></i></a>
+                        <a href="#" class="btn js_like-btn  @if(in_array($product->id, $wishlist_ids)) __active @endif" title="Добавить в избранное"><i class="fa fa-star-o fa-2x"></i></a>
                     </div>
                 </div>
             </div>

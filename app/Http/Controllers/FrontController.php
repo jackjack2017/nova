@@ -29,7 +29,7 @@ class FrontController extends Controller
 
     public function favourite()
     {
-        $top = Product::where('top',1)->get();
+        $top = Product::where('top',1)->get()->shuffle()->take(20);
 
         return view('favourite', compact( 'top'));
     }
@@ -37,7 +37,7 @@ class FrontController extends Controller
 
     public function cart()
     {
-        $top = Product::where('top',1)->get();
+        $top = Product::where('top',1)->get()->shuffle()->take(20);
 
         return view('cart', compact( 'top'));
     }
