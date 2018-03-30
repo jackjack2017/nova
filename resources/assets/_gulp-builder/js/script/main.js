@@ -31,6 +31,7 @@ class App{
         ui.accordion('.js_submenu-btn', '.js_submenu-cnt');
         ui.accordion('.js_mob-menu-btn', '.js_mob-menu-blk');
         ui.accordion('.js_filter-open-btn', '.js_filter-open-blk');
+        ui.accordion('.js_size-btn', '.js_size-blk');
 
         amount.init('.js_ui-amount-inp', '.js_ui-amount-btn-dec', '.js_ui-amount-btn-inc');
         $('.my-container').sortablePhotos({
@@ -48,6 +49,9 @@ class App{
         });
 
         new MfPopup('.js_mfpopup-popup-success');
+
+        new MfPopup('.js_popup-sizesW');
+        new MfPopup('.js_popup-sizesM');
 
         //for delivery on the deal page
 

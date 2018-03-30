@@ -96,14 +96,11 @@
 	//     }
 	// });
 	
+	// let el = $('#uploader');
+	// $(el).closest('form').attr('id', 'qq-form');
+	
 	//dropzone
 	//jquery-ui
-	var el = $('#uploader');
-	
-	//sortable photos
-	
-	$(el).closest('form').attr('id', 'qq-form');
-	
 	var uploader = new _fineUploader2.default.FineUploader({
 	    element: document.getElementById("uploader"),
 	    request: {
@@ -111,6 +108,14 @@
 	    }
 	});
 	
+	// $('.qq-upload-list').sortablePhotos({
+	//     selector: '> li',
+	//     sortable: true,
+	//     padding: 2
+	// });
+	
+	
+	//sortable photos
 	$('body').on('click', '.js_options-btn', function (e) {
 	    e.preventDefault();
 	

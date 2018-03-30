@@ -1618,6 +1618,7 @@
 	            _ui.ui.accordion('.js_submenu-btn', '.js_submenu-cnt');
 	            _ui.ui.accordion('.js_mob-menu-btn', '.js_mob-menu-blk');
 	            _ui.ui.accordion('.js_filter-open-btn', '.js_filter-open-blk');
+	            _ui.ui.accordion('.js_size-btn', '.js_size-blk');
 	
 	            _amount.amount.init('.js_ui-amount-inp', '.js_ui-amount-btn-dec', '.js_ui-amount-btn-inc');
 	            $('.my-container').sortablePhotos({
@@ -1635,6 +1636,9 @@
 	            });
 	
 	            new _mfpopup.MfPopup('.js_mfpopup-popup-success');
+	
+	            new _mfpopup.MfPopup('.js_popup-sizesW');
+	            new _mfpopup.MfPopup('.js_popup-sizesM');
 	
 	            //for delivery on the deal page
 	

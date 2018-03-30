@@ -40,8 +40,8 @@ import qq from 'fine-uploader'
 //     }
 // });
 
-let el = $('#uploader');
-$(el).closest('form').attr('id', 'qq-form');
+// let el = $('#uploader');
+// $(el).closest('form').attr('id', 'qq-form');
 
 let uploader = new qq.FineUploader({
     element: document.getElementById("uploader"),
@@ -50,6 +50,12 @@ let uploader = new qq.FineUploader({
     }
 });
 
+
+// $('.qq-upload-list').sortablePhotos({
+//     selector: '> li',
+//     sortable: true,
+//     padding: 2
+// });
 
 
 $('body').on('click', '.js_options-btn', function (e) {

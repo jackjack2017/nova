@@ -96,7 +96,7 @@
                 <label for="size5" class="product-s-inp-lbl">112</label>
             </div>
         </div>
-        <a href="#" class="product-s-lnk" target="blank">Размерная сетка</a>
+        <a href="#" class="product-s-lnk js_popup-sizesW" data-popup="#popup-sizesW">Размерная сетка</a>
         <div class="product-btn-wrap">
             <a href="#" class="product-btn-inverse js_cart-btn">Добавить в корзину</a>
         </div>
