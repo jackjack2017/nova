@@ -180,6 +180,11 @@ class App{
                 }
             }
         });
+
+        $('body').on('click', '.owl-dot', function () {
+            console.log('ckick');
+
+        })
     }
 
     sendFormInit(){

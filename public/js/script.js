@@ -1763,6 +1763,10 @@
 	                    }
 	                }
 	            });
+	
+	            $('body').on('click', '.owl-dot', function () {
+	                console.log('ckick');
+	            });
 	        }
 	    }, {
 	        key: 'sendFormInit',

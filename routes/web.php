@@ -23,6 +23,10 @@
 //Route::view('/category', 'category');
 //Route::view('/cart', 'cart');
 Route::view('/deal', 'deal');
+Route::view('/new', 'new');
+Route::view('/top', 'top');
+Route::view('/actions', 'actions');
+
 //Route::post('/test', function () {
 //   return view('test');
 //});
