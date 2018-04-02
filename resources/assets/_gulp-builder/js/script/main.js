@@ -1,11 +1,11 @@
 import { Slider } from '../libs/slider';
 import {ui} from './ui';
 import {Sendform} from '../libs/sendform/sendform2';
-import {getToken} from "../libs/getToken";
 import {ChangeProductRequest} from "./changeProductRequest";
 import {ShowMoreRequest} from "./showMoreRequest";
 import {CartRequest} from "./cartRequest";
 import {LikeRequest} from "./likeRequest";
+import {SortingRequest} from "./sortingRequest";
 import { amount } from './amount';
 import {MfPopup} from '../libs/popup/mfpopup';
 
@@ -117,6 +117,9 @@ class App{
 
         let likeRequest = new LikeRequest;
         likeRequest.init();
+
+        let sortingRequest = new SortingRequest;
+        sortingRequest.init();
 
         let requestProducts = new ShowMoreRequest({
             url: '/showMore',

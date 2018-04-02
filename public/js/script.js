@@ -1586,6 +1586,8 @@
 	
 	var _likeRequest = __webpack_require__(132);
 	
+	var _sortingRequest = __webpack_require__(136);
+	
 	var _amount = __webpack_require__(133);
 	
 	var _mfpopup = __webpack_require__(134);
@@ -1700,6 +1702,9 @@
 	
 	            var likeRequest = new _likeRequest.LikeRequest();
 	            likeRequest.init();
+	
+	            var sortingRequest = new _sortingRequest.SortingRequest();
+	            sortingRequest.init();
 	
 	            var requestProducts = new _showMoreRequest.ShowMoreRequest({
 	                url: '/showMore',
@@ -3916,9 +3921,10 @@
 	            $('.js_product-colour').on('change', function () {
 	
 	                var productId = $(this).closest('.product-row').data('id');
-	                var url = '/product/test';
+	                var colorID = $(this).data('color');
+	                var url = '/test';
 	
-	                _this.request(url, productId);
+	                _this.request(url, colorID, productId);
 	            });
 	        }
 	
@@ -3928,15 +3934,16 @@
 	
 	    }, {
 	        key: 'request',
-	        value: function request(url, productId) {
+	        value: function request(url, colorID, productId) {
 	            $.ajax({
 	                url: url,
 	                method: this.method,
 	                data: {
 	                    productId: productId,
+	                    color_id: colorID,
 	                    _token: this.token
 	                },
-	                success: this.success()
+	                success: this.success
 	            });
 	        }
 	
@@ -3946,9 +3953,13 @@
 	
 	    }, {
 	        key: 'success',
-	        value: function success() {
-	            // let info = JSON.parse(data);
-	            console.log('success');
+	        value: function success(data) {
+	            var info = JSON.parse(data);
+	            console.log(info[1]);
+	            $('.js_size-blk').html('');
+	            $(info[1]).each(function (i, el) {
+	                $('.js_size-blk').append(' <div class="product-s-i">\n                    <input type="radio" name="size" id="size_' + i + '" class="product-s-inp">\n                     <label for="size_' + i + '" class="product-s-inp-lbl js_size">' + el + '</label>\n                </div>');
+	            });
 	        }
 	    }]);
 	    return ChangeProductRequest;
@@ -4585,6 +4596,83 @@
 	    }]);
 	    return Popup;
 	}(_component.Component); /*POPUP*/
+
+/***/ }),
+/* 136 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	exports.SortingRequest = undefined;
+	
+	var _classCallCheck2 = __webpack_require__(100);
+	
+	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+	
+	var _createClass2 = __webpack_require__(101);
+	
+	var _createClass3 = _interopRequireDefault(_createClass2);
+	
+	var _getToken = __webpack_require__(128);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var SortingRequest = exports.SortingRequest = function () {
+	    function SortingRequest() {
+	        var method = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 'POST';
+	        (0, _classCallCheck3.default)(this, SortingRequest);
+	
+	
+	        this.method = method;
+	        this.token = (0, _getToken.getToken)();
+	        this.blkClass = '.js_sorting-blk';
+	    }
+	
+	    (0, _createClass3.default)(SortingRequest, [{
+	        key: 'init',
+	        value: function init() {
+	
+	            var _this = this;
+	
+	            $('body').on('click', '.js_sorting-btn', function (event) {
+	                event.preventDefault();
+	
+	                var sortingID = $(this).data('sort');
+	                var categoryID = $(this).closest('.js_category').data('id');
+	                var sortingBtn = $('.js_sorting-btn');
+	                var url = '/test';
+	
+	                $(sortingBtn).removeClass('__active');
+	                if ($(this).hasClass('__active')) {
+	                    return;
+	                }
+	
+	                _this.requestSorting(url, categoryID, sortingID);
+	                $(this).addClass('__active');
+	            });
+	        }
+	    }, {
+	        key: 'requestSorting',
+	        value: function requestSorting(url, categoryID, sortingID) {
+	            $.ajax({
+	                url: url,
+	                method: this.method,
+	                data: {
+	                    category_id: categoryID,
+	                    sorting_id: sortingID,
+	                    _token: this.token
+	                },
+	                success: function success(data) {
+	                    $(_this.blkClass).append(data);
+	                }
+	            });
+	        }
+	    }]);
+	    return SortingRequest;
+	}();
 
 /***/ })
 /******/ ]);

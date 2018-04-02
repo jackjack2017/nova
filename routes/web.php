@@ -27,9 +27,9 @@ Route::view('/new', 'new');
 Route::view('/top', 'top');
 Route::view('/actions', 'actions');
 
-//Route::post('/test', function () {
-//   return view('test');
-//});
+Route::post('/test', function () {
+   return view('test');
+});
 Route::name('showMoreProducts')->post('/showMore', 'FrontController@showMore');
 
 Route::name('product')->get('/product/{product_slug}/{product_id}', 'FrontController@product');
