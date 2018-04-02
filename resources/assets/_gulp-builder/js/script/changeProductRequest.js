@@ -50,12 +50,12 @@ export class ChangeProductRequest{
     success(data) {
         let info = JSON.parse(data);
         console.log(info[1]);
-        $('.js_size-blk').html('');
+        $('.js_sizes-blk').html('');
         $(info[1]).each(function (i, el) {
-            $('.js_size-blk').append(
+            $('.js_sizes-blk').append(
               ` <div class="product-s-i">
                     <input type="radio" name="size" id="size_${i}" class="product-s-inp">
-                     <label for="size_${i}" class="product-s-inp-lbl js_size">${el}</label>
+                     <label for="size_${i}" class="product-s-inp-lbl js_sizes">${el}</label>
                 </div>`
             );
         })

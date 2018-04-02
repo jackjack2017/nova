@@ -74,26 +74,26 @@
             </div>
         </div>
         <p class="product-s">Размер:</p>
-        <div class="product-s-wrap js_size-blk">
+        <div class="product-s-wrap js_sizes-blk">
             <div class="product-s-i">
                 <input type="radio" name="size" id="size" class="product-s-inp" checked>
-                <label for="size" class="product-s-inp-lbl js_size">23</label>
+                <label for="size" class="product-s-inp-lbl js_sizes">23</label>
             </div>
             <div class="product-s-i">
                 <input type="radio" name="size" id="size2" class="product-s-inp" disabled>
-                <label for="size2" class="product-s-inp-lbl js_size">98</label>
+                <label for="size2" class="product-s-inp-lbl js_sizes">98</label>
             </div>
             <div class="product-s-i">
                 <input type="radio" name="size" id="size3" class="product-s-inp">
-                <label for="size3" class="product-s-inp-lbl js_size">XXL</label>
+                <label for="size3" class="product-s-inp-lbl js_sizes">XXL</label>
             </div>
             <div class="product-s-i">
                 <input type="radio" name="size" id="size4" class="product-s-inp">
-                <label for="size4" class="product-s-inp-lbl js_size">K-150_2x</label>
+                <label for="size4" class="product-s-inp-lbl js_sizes">K-150_2x</label>
             </div>
             <div class="product-s-i">
                 <input type="radio" name="size" id="size5" class="product-s-inp">
-                <label for="size5" class="product-s-inp-lbl js_size">112</label>
+                <label for="size5" class="product-s-inp-lbl js_sizes">112</label>
             </div>
         </div>
         <a href="#" class="product-s-lnk js_popup-sizesW" data-popup="#popup-sizesW">Размерная сетка</a>
