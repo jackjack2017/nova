@@ -6,6 +6,12 @@
 //     let optionsForCopy = $(optionsBlk).find('.js_copy').first();
 //     $( optionsForCopy).clone().appendTo( optionsBlk);
 // });
+//JQuery
+require('expose?$!expose?jQuery!jquery');
+
+//jquery-ui
+import '../../bower_components/jquery-ui/jquery-ui.min';
+
 import {Uploader} from "../libs/uploader";
 
 //Fine Uploader

@@ -23,16 +23,16 @@ export  class Uploader{
         let options = {
             element: el,
             callbacks:{
-                // onSubmitted: function () {
-                //     $('.qq-upload-list').addClass('js-sortable-without-handler');
-                //     $('.qq-upload-list li').each(function (i, el) {
-                //         $(el).addClass('js-sortable-i');
-                //         $(el).attr('id', `js-sortable_${i}`);
-                //         sortable.init('.js-sortable');
-                //     });
-                // }
+                onSubmitted: function () {
+                    $('.qq-upload-list').addClass('js-sortable-without-handler');
+                    $('.qq-upload-list li').each(function (i, el) {
+                        $(el).addClass('js-sortable-i');
+                        $(el).attr('id', `js-sortable_${i}`);
+                        sortable.init('.js-sortable');
+                    });
+                }
             },
-        };  
+        };
 
         new qq.FineUploader(options);
 
