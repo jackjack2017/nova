@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Back;
 
 use Illuminate\Http\Request;
 use App\{
-    Http\Controllers\Controller, Models\Category, Models\Product
+    Http\Controllers\Controller, Models\Category, Models\Option, Models\Product, ProductsImages
 };
 
 class ProductController extends Controller
@@ -28,11 +28,23 @@ class ProductController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Product $product)
     {
-        $categories = Category::where('active', 1)->get()->pluck('name', 'id');
+        $categories = Category::where('active', 1)
+            ->where('parent_id', '!=',0)
+            ->get()->sortBy('parent_id');
 
-        return view('back.products.create', compact('categories'));
+        foreach ($categories as $category){
+            if($category->parent_id == 1)
+                $category->name = $category->name. ' (Женщины)';
+            if($category->parent_id == 2)
+                $category->name = $category->name. ' (Мужчины)';
+            if($category->parent_id == 3)
+                $category->name = $category->name. ' (Дети)';
+        }
+        $categories = $categories->pluck('name', 'id');
+
+        return view('back.products.create', compact('product','categories'));
     }
 
     /**
@@ -58,6 +70,26 @@ class ProductController extends Controller
         $product->slug = str_slug($request->get('name'), "-");
 
         $product->save();
+
+        $request['options'] = [
+            ['article' => '123456', 'color_id' => 2, 'size_id' => 1],
+            ['article' => '765432', 'color_id' => 2, 'size_id' => 2],
+            ['article' => '765435', 'color_id' => 2, 'size_id' => 3],
+        ];
+        foreach($request['options'] as $option_data) {
+            $option = new Option();
+            $option->product_id = $product->id;
+            $option->fill($option_data);
+            $option->save();
+        }
+
+        foreach ($request->photos as $photo) {
+            $filename = $photo->store('photos');
+            ProductsImages::create([
+                'product_id' => $product->id,
+                'img_src' => $filename
+            ]);
+        }
 
         return redirect(route('products.index'))->with('product-ok', __('The product has been successfully created'));
     }

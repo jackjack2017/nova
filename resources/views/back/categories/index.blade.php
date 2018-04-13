@@ -17,7 +17,7 @@
                         <tr role="row">
                             <th>ID</th>
                             <th>Название</th>
-                            <th>Slug</th>
+                            <th>Родительская категория</th>
                             <th></th>
                             <th></th>
                             <th></th>

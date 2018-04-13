@@ -2,6 +2,7 @@
 
 namespace App\Http\ViewComposers;
 
+use App\Models\Product;
 use Illuminate\View\View;
 use App\Models\Category;
 
@@ -15,6 +16,8 @@ class MenuComposer
      */
     public function compose(View $view)
     {
-        $view->with('categories', Category::select('title', 'slug')->get());
+        $categories = Category::where('parent_id', 0)->with('subCategories')->get();
+
+        $view->with('categories', $categories);
     }
 }

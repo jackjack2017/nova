@@ -9,33 +9,43 @@ export class LikeRequest{
         this.token = getToken();
     }
 
-    /**
-     * Init btn
-     */
+
     init(){
 
         let _this = this;
 
         $('body').on('click', '.js_like-btn', function(event) {
             event.preventDefault();
-            let productID = $(this).closest('.product-card').data('id');
+
+            let productID = $(this).closest('.js_product-card').data('id');
             let url = '/like/add';
+
+            if($(this).hasClass('__active')){
+                $(this).removeClass('__active');
+                if($('.page-cart').length < 1){
+                    $(this).html('В избранное');
+                }
+                _this.requestRemove(url, productID);
+
+                if($('body').hasClass('page-favourite')){
+
+                    let favouriteCard = $(this).closest('.like-product-card'); 
+                    $(favouriteCard).remove();
+                }
+
+                return
+            }
+
+            $(this).addClass('__active');
+            if($('.page-cart').length < 1){
+                $(this).html('Убрать из избранного');
+            }
             _this.requestAdd(url, productID);
         });
 
-        $('body').on('click','.js_like-btn-remove', function(event) {
-            event.preventDefault();
-            console.log('yeaahh');
-            let item_id = $(this).closest('.like-product-card').data('item-id');
-            let url = '/like/remove';
-            _this.requestRemove(url, item_id);
-        })
-
     }
 
-    /**
-     * Change product by colour ajax request
-     */
+
     requestAdd(url, productId){
         $.ajax({
             url: url,
@@ -44,45 +54,28 @@ export class LikeRequest{
                 product_id: productId,
                 _token: this.token
             },
-            success(data){
-                console.log('success');
+            success(){
                 let likeCount = +$('.js_like-count').html();
-                $('.js_like-count').empty();
-                $('.js_like-count').append(likeCount++);
-            },
-            error(){
-                console.log('error');
-                let likeCount = +$('.js_like-count').html();
-                console.log(likeCount++);
-                $('.js_like-count').empty();
-                $('.js_like-count').append(likeCount++);
+                likeCount++;
+                $('.js_like-count').html(likeCount);
             }
         });
     }
 
-    requestRemove(url, itemId){
+    requestRemove(url, productId){
         $.ajax({
             url: url,
             method: this.method,
             data: {
-                item_id: itemId,
+                product_id: productId,
                 _token: this.token
             },
-            success(data){
-                console.log('success');
-            },
-            error(){
-                console.log('error');
+            success(){
+                let likeCount = +$('.js_like-count').html();
+                likeCount--;
+                $('.js_like-count').html(likeCount);
             }
         });
 
     }
-
-    /**
-     * On success request
-     */
-    // success(data) {
-    //    console.log(data);
-    // }
-
 }

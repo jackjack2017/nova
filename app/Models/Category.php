@@ -12,7 +12,7 @@ class Category extends Model {
     * @var array
     */
     protected $fillable = [
-        'name', 'description', 'slug', 'active'
+        'name', 'description', 'slug', 'active', 'parent_id'
     ];
 
 
@@ -25,4 +25,21 @@ class Category extends Model {
 	{
 		return $this->hasMany(Product::class);
 	}
+
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function parentCategories()
+    {
+        return $this->belongsTo(Category::class, 'parent_id');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function subCategories()
+    {
+        return $this->hasMany(Category::class, 'parent_id');
+    }
 }

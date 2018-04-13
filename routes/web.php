@@ -17,15 +17,36 @@
 |--------------------------------------------------------------------------|
 */
 
-Route::view('/', 'main');
-Route::view('/page', 'page');
-Route::view('/product', 'product');
-Route::view('/category', 'category');
-Route::view('/cart', 'cart');
+//Route::view('/', 'main');
+//Route::view('/page', 'page');
+//Route::view('/product', 'product');
+//Route::view('/category', 'category');
+//Route::view('/cart', 'cart');
 Route::view('/deal', 'deal');
-Route::view('/favourite', 'favourite');
+Route::view('/new', 'new');
+Route::view('/top', 'top');
+Route::view('/actions', 'actions');
+
+Route::post('/test', function () {
+   return view('test');
+});
+Route::name('showMoreProducts')->post('/showMore', 'FrontController@showMore');
+
+Route::name('product')->get('/product/{product_slug}/{product_id}', 'FrontController@product');
+Route::name('home')->get('/', 'FrontController@index');
+Route::name('page')->get('page/{id?}', 'FrontController@page');
+
+Route::name('favourite')->get('favourite', 'FrontController@favourite');
+Route::name('cart')->get('cart', 'FrontController@cart');
 
 
+//
+//
+////Route::get('/category', function () {
+////    return view('category');
+////});
+Route::name('category')->get('category/{id}', 'FrontController@category');
+//
 
 // Authentification
 Auth::routes();
@@ -49,7 +70,10 @@ Route::prefix('admin')->namespace('Back')->group(function () {
                     'destroy' => 'products.destroy'
                 ]]
         );
-
+        Route::put('import', [
+            'as' => 'products.import',
+            'uses' => 'ExcellController@import'
+        ]);
 
         // Categories
         Route::resource('categories', 'CategoryController', [
@@ -76,4 +100,9 @@ Route::prefix('cart')->namespace('Back')->group(function () {
     Route::name('cart::remove')->post('remove', 'CartController@remove');
     Route::name('cart::all')->get('all', 'CartController@getAll');
     Route::name('cart::destroy')->post('destroy', 'CartController@destroy');
+//    Route::name('cart::like')->post('like/add', 'CartController@like');
 });
+Route::namespace('Back')->group(function () {
+    Route::name('cart::like')->post('like/add', 'CartController@like');
+});
+

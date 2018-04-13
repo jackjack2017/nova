@@ -17,8 +17,9 @@
   <link rel="stylesheet" href="{{ asset('adminlte/css/AdminLTE.min.css') }}">
   <!-- AdminLTE Skins. -->
   <link rel="stylesheet" href="{{ asset('adminlte/css/skins/skin-blue.min.css') }}">
-  {{--dropzone--}}
-  <link rel="stylesheet" href="{{ asset('adminlte/css/dropzone.min.css') }}">
+  <!-- Fine uploader -->
+  {{--<link rel="stylesheet" href="{{ asset('adminlte/css/uploader/fine-uploader-gallery.min.css') }}">--}}
+  <link rel="stylesheet" href="{{ asset('adminlte/css/uploader/fine-uploader-new.min.css') }}">
 
   @yield('css')
 
@@ -119,7 +120,8 @@
 <!-- REQUIRED JS SCRIPTS -->
 
 <!-- jQuery 3.2.0 -->
-<script src="https://code.jquery.com/jquery-3.2.0.min.js"></script>
+<script src="{{ asset('js/admin.js') }}"></script>
+{{--<script src="https://code.jquery.com/jquery-3.2.0.min.js"></script>--}}
 <!-- Bootstrap 3.3.7 -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <!-- Sweet Alert -->
@@ -129,7 +131,8 @@
 
 <!-- AdminLTE App -->
 
-<script src="{{ asset('js/admin.js') }}"></script>
+
+
 
 <!-- Commom -->
 {{--<script src="/adminlte/js/common.js"></script>--}}

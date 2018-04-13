@@ -14,7 +14,7 @@
 	&-col{
 		@include make-col-ready($grid-columns);
 		@include make-col(3);
-		
+		display: flex;
 	}
 	&-ttl{
 		@extend .ttl;
@@ -52,6 +52,34 @@
 		}
 		&-wrap{
 			@extend .inp-c-wrap;
+		}
+	}
+}
+
+@media screen and (max-width: 900px){
+	.category{
+		&-col{
+			@include make-col(4);
+		}
+	}
+}
+
+@media screen and (max-width: 680px){
+	.category{
+		&-col{
+			@include make-col(6);
+		}
+		&-sidebar{
+			&-txt{
+				padding: 0;
+			}
+		}
+		&-btn{
+			&-inverse{
+				&-wrap{
+					max-width: 100%;
+				}
+			}
 		}
 	}
 }

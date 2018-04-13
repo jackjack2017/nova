@@ -1,11 +1,11 @@
 import { Slider } from '../libs/slider';
 import {ui} from './ui';
 import {Sendform} from '../libs/sendform/sendform2';
-import {getToken} from "../libs/getToken";
 import {ChangeProductRequest} from "./changeProductRequest";
 import {ShowMoreRequest} from "./showMoreRequest";
 import {CartRequest} from "./cartRequest";
 import {LikeRequest} from "./likeRequest";
+import {SortingRequest} from "./sortingRequest";
 import { amount } from './amount';
 import {MfPopup} from '../libs/popup/mfpopup';
 
@@ -28,12 +28,13 @@ class App{
         ui.tabsInit('.js_ui-tab-nav', '.js_ui-tabs-cnt', '.js_ui-tabs');
         ui.initPhoneMask();
         ui.accordion('.js_deal-detail-btn', '.js_deal-detail-blk');
+        ui.accordion('.js_submenu-btn', '.js_submenu-cnt');
+        ui.accordion('.js_mob-menu-btn', '.js_mob-menu-blk');
+        ui.accordion('.js_filter-open-btn', '.js_filter-open-blk');
+        ui.accordion('.js_size-btn', '.js_size-blk');
+
         amount.init('.js_ui-amount-inp', '.js_ui-amount-btn-dec', '.js_ui-amount-btn-inc');
-        $('.my-container').sortablePhotos({
-            selector: '> .my-item',
-            sortable: true,
-            padding: 2
-        });
+
         $('.js_select').select2({
             placeholder: 'Выбор перевозчика',
             minimumResultsForSearch: Infinity
@@ -44,6 +45,9 @@ class App{
         });
 
         new MfPopup('.js_mfpopup-popup-success');
+
+        new MfPopup('.js_popup-sizesW');
+        new MfPopup('.js_popup-sizesM');
 
         //for delivery on the deal page
 
@@ -110,8 +114,11 @@ class App{
         let likeRequest = new LikeRequest;
         likeRequest.init();
 
+        let sortingRequest = new SortingRequest;
+        sortingRequest.init();
+
         let requestProducts = new ShowMoreRequest({
-            url: '/product/test',
+            url: '/showMore',
             method: 'POST',
             btnClass: '.js_showMore-btn',
             blockClass: '.js_showMore-blk'
@@ -122,24 +129,55 @@ class App{
         new Slider('.js_slider-main', {
             nav: true,
             dots: true,
-            items: 4,
-            margin: 10
+            loop: false,
+            margin: 10,
+            responsive : {
+                0 : {
+                   items: 2
+                },
+                480 : {
+                   items: 3
+                },
+                900 : {
+                     items: 4
+                }
+                
+            }
         });
 
         new Slider('.js_slider-main-big', {
             nav: true,
             dots: true,
-            items: 6,
-            margin: 10
+            loop: false,
+            margin: 10,
+            responsive : {
+                0 : {
+                   items: 2
+                },
+                480 : {
+                   items: 3
+                },
+                680 : {
+                   items: 4
+                },
+                900 : {
+                     items: 5
+                }
+                
+            }
         });
 
         new Slider('.js_slider-product', {
             nav: false,
             dots: true,
-            items: 1,
             touchDrag: false,
             mouseDrag: false,
-            dotsContainer: '.js_product-slider-dots-container'
+            dotsContainer: '.js_product-slider-dots-container',
+            responsive : {
+                0 : {
+                   items: 1
+                }
+            }
         });
     }
 

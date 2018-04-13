@@ -11,6 +11,7 @@
     <link rel="stylesheet" type="text/css" href="{{asset('css/style.css')}}">
     {{--<link rel="stylesheet" type="text/css" href="{{asset('css/custom.css')}}">--}}
     <link rel="stylesheet" href="{{asset('css/font-awesome.min.css')}}">
+
 </head>
 <body class="{{$body_class}}">
 

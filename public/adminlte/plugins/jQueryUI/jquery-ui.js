@@ -13496,7 +13496,7 @@ var slider = $.widget( "ui.slider", $.ui.mouse, {
  */
 
 
-var sortable = $.widget("ui.sortable", $.ui.mouse, {
+export let sortable = $.widget("ui.sortable", $.ui.mouse, {
 	version: "1.11.4",
 	widgetEventPrefix: "sort",
 	ready: false,

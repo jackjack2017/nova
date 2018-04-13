@@ -1,16 +1,44 @@
+
+// $('body').on('click', '.js_options-btn', function (e) {
+//     e.preventDefault();
+//
+//     let optionsBlk = $(this).closest('.js_options-blk');
+//     let optionsForCopy = $(optionsBlk).find('.js_copy').first();
+//     $( optionsForCopy).clone().appendTo( optionsBlk);
+// });
+//JQuery
+require('expose?$!expose?jQuery!jquery');
+
 //jquery-ui
-import '../libs/jquery-ui';
+import '../../bower_components/jquery-ui/jquery-ui.min';
 
-//sortable photos
-import '../../bower_components/jquery-sortable-photos/jquery-sortable-photos';
+import {Uploader} from "../libs/uploader";
 
-//dropzone
-import '../libs/dropzone/dropzone.min';
+//Fine Uploader
+function uploaderInit(){
+    let $uploader  = $('.js_uploader');
+    if(!$uploader.length) {
+        return;
+    }
 
+    // each element init
+    $uploader.each((i, el)=>{
 
-$('.tab_4').on('click', function () {
-    console.log('click on btn');
-});
+        let uploader = new Uploader({
+            element: el,
+            availableOptionsFromDataAttr : [
+                'itemLimit',
+                'request-endpoint',
+                'deleteFile-endpoint',
+                'deleteFile-enabled',
+                'sizeLimit'
+            ]
+        });
 
+        uploader.init();
+    });
+}
+
+uploaderInit();
 
 

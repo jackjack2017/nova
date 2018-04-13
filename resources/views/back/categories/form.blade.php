@@ -4,8 +4,14 @@
             <div class="col-md-4">
                 {!! $form->text('name', null, 'Название') !!}
             </div>
+
             <div class="col-md-4">
                 {!! $form->checkbox('active',  'Активный', null, isset($category) ? $category->active : false) !!}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                {!! $form->select('parent_id', $parent_categories, null, 'Родительская категория') !!}
             </div>
         </div>
         <div class="row">

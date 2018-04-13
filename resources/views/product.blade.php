@@ -10,12 +10,12 @@
 
     <div class="container withPad">
         <h2 class="ttl-L">Недавно просмотренные</h2>
-        @include('/blocks/_slider-main-big')
+        @include('/blocks/_slider-main-big', ['products' => $viewed])
     </div>
 
     <div class="container withPad">
         <h2 class="ttl-L">Сочетается с</h2>
-        @include('/blocks/_slider-main-big')
+        @include('/blocks/_slider-main-big', ['products' => []])
     </div>
 </section>
 

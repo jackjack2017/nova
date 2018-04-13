@@ -10,33 +10,41 @@ export class CartRequest{
     }
 
 
-    /**
-     * Init btn
-     */
     init(){
 
         let _this = this;
 
-        $('.js_cart-btn').on('click', function(event) {  
+        $('.js_cart-btn').on('click', function(event) {
             event.preventDefault();
             let productID = $(this).closest('.product-row').data('id');
             let url = '/cart/add';
             _this.requestAdd(url, productID);
         });
 
-        $('.js_header-cart-delete-btn').on('click', function(event) {
+        $('body').on('click', '.js_cart-delete-btn', function(event) {
             event.preventDefault();
-            console.log(this);
             let item_id = $(this).closest('.header-basket-inner-t').data('item-id');
             let url = '/cart/remove';
+
+            if($('.page-cart').length !== 0){
+                let productCard = $(this).closest('.js_cart-blk');
+                let deletedPriceTotal = $(this).closest('.js_cart-blk').find('.js_product-price-total').html();
+                let totalPriceStrAll = $('.js_product-price-total-cart');
+                let totalPriceAll = $(totalPriceStrAll).html();
+                let item_id = $(productCard).data('item-id');
+
+                _this.requestRemove(url, item_id);
+                $(totalPriceStrAll).html(totalPriceAll - deletedPriceTotal);
+                $(productCard).remove();
+                return
+            }
+
             _this.requestRemove(url, item_id);
         })
 
     }
 
-    /**
-     * Change product by colour ajax request
-     */
+
     requestAdd(url, productId){
         $.ajax({
             url: url,
@@ -46,11 +54,10 @@ export class CartRequest{
                 _token: this.token
             },
             success: function(data){
-                $('.js_header-cart-blk').append(data);
+                $('.js_header-cart-blk').html(data);
                 let cartCount = +$('.js_cart-count').html();
                 cartCount++;
-                $('.js_cart-count').empty();
-                $('.js_cart-count').append(cartCount++);
+                $('.js_cart-count').html(cartCount);
             }
         });
     }
@@ -64,27 +71,11 @@ export class CartRequest{
                 _token: this.token
             },
             success: function(data){
-                console.log('yeahh');
+                $('.js_header-cart-blk').html(data);
                 let cartCount = +$('.js_cart-count').html();
                 cartCount--;
-                $('.js_cart-count').empty();
-                $('.js_cart-count').append(cartCount--);
-            },
-            error(){
-                let cartCount = +$('.js_cart-count').html();
-                console.log(cartCount--);
-                $('.js_cart-count').empty();
-                $('.js_cart-count').append(cartCount--);
+                $('.js_cart-count').html(cartCount);
             }
         });
-
     }
-
-    /**
-     * On success request
-     */
-    success(data) {
-       console.log(data);
-    }
-
 }

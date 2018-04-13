@@ -16,7 +16,15 @@ class ComposerServiceProvider extends ServiceProvider
     {
         // Using class based composers...
         View::composer(
-            'parts._header', 'App\Http\ViewComposers\CartComposer'
+            ['parts._header', 'favourite', 'product', 'category', 'main', 'cart', 'parts._product-card'],
+            'App\Http\ViewComposers\CartComposer'
+        );
+        View::composer(
+            ['parts._header', 'blocks._sidebar-menu'], 'App\Http\ViewComposers\MenuComposer'
+        );
+
+        View::composer(
+            'back/layout', 'App\Http\ViewComposers\HeaderComposer'
         );
 
     }

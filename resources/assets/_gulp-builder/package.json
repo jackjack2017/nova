@@ -19,7 +19,8 @@
     "gulp.spritesmith": "^3.5.4",
     "imagemin-pngquant": "^4.0.0",
     "rimraf": "^2.3.1",
-    "webpack": "^1.13.2"
+    "webpack": "^1.13.2",
+    "fine-uploader": "5.11.5"
   },
   "devDependencies": {
     "babel-core": "^6.17.0",

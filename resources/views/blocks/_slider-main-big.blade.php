@@ -1,17 +1,7 @@
 <div class="page-slider  js_slider-main-big owl-carousel owl-theme">
+    @foreach($products as $product)
     <div class="page-slider-i">
-        @include('parts/_product-card')
+        @include('parts/_product-card', $product)
     </div>
-    <div class="page-slider-i">
-        @include('parts/_product-card')
-    </div>
-    <div class="page-slider-i">
-        @include('parts/_product-card')
-    </div>
-    <div class="page-slider-i">
-        @include('parts/_product-card')
-    </div>
-    <div class="page-slider-i">
-        @include('parts/_product-card')
-    </div>
+    @endforeach
 </div>

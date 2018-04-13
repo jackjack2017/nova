@@ -182,7 +182,8 @@ return [
         App\Providers\ComposerServiceProvider::class,
 
         Collective\Html\HtmlServiceProvider::class,
-        Intervention\Image\ImageServiceProvider::class
+        Intervention\Image\ImageServiceProvider::class,
+        \Maatwebsite\Excel\ExcelServiceProvider::class
     ],
 
     /*

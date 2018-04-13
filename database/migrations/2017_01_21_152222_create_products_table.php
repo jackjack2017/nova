@@ -26,16 +26,12 @@ class CreateProductsTable extends Migration
             $table->string('style')->nullable();
             $table->string('textile')->nullable();
             $table->text('comment')->nullable();
-            $table->string('gender');
+            $table->string('gender')->nullable();;
 
             $table->string('slug');
-
             $table->string('article');
-            $table->string('size');
-            $table->string('color');
 
             $table->boolean('new')->default(true);
-            $table->boolean('main')->default(false);
             $table->boolean('top')->default(false);
             $table->boolean('active')->default(false);
 

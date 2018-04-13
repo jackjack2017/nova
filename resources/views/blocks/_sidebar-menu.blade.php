@@ -1,3 +1,5 @@
+@foreach($categories as $category)
+    @if($category->id === $active_category)
 <div class="sidebar">
     <ul class="page-lst default-cnt">
         <li><a href="#">
@@ -9,6 +11,9 @@
         <li ><a href="#">
                 <span>Хиты продаж</span>
             </a></li>
+        @foreach($category->subCategories as $sub)
+            <li><a href="#">{{$sub->name}}</a></li>
+        @endforeach
         <li ><a href="#" >Куртки и пальто</a></li>
         <li ><a href="#" >Трикотаж</a></li>
         <li ><a href="#" >Кардиганы и джемперы</a></li>
@@ -33,3 +38,5 @@
         <li ><a href="#">Большие размеры</a></li>
     </ul>
 </div>
+@endif
+@endforeach

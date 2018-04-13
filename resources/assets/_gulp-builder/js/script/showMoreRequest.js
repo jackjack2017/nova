@@ -13,6 +13,9 @@ export class ShowMoreRequest{
         //make a token for secure data sending
         let token = getToken();
 
+        let category = $('.js_category');
+        let categoryID = $(category).data('id');
+
         // default settings
         let defaultSettings = {
             url: '',
@@ -20,7 +23,7 @@ export class ShowMoreRequest{
             btnClass: '',
             blockClass: '',
             params:{
-                qty: 12,
+                category_id: categoryID,
                 page:2,
                 _token: token
             },
@@ -58,32 +61,16 @@ export class ShowMoreRequest{
      * Sending ajax request
      */
     request(){
+        let _this = this;
+
         $.ajax({
             url: this.url,
             data: this.params,
             method: this.method,
-            // success: (data)=>{
-            //     // call callback user function if define
-            //     this.successFn.call(this, data);
-            // }
-            success: this.success()
+            success: function(data){
+                $(_this.blockClass).append(data);
+                _this.params.page ++;
+            }
         })
     }
-
-    /**
-     * On success request
-     * @param data
-     */
-    success(data){
-        // $(this.blockClass).append(data);
-        console.log('success');
-        this.params.page ++;
-
-        // check is it last page
-        // let isLastPage = $('.js_request-last-page').length;
-        // if(isLastPage){
-        //     $(this.btnClass).hide();
-        // }
-    }
-
 }

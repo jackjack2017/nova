@@ -4,32 +4,35 @@
     @include('parts/_breadcrumbs')
 
 
-    <section class="category">
+    <section class="category js_category" data-id="{{$category->id}}">
         <div class="container">
             <div class="container-with-sidebar">
 
                 @include('blocks/_sidebar-filter')
 
                 <div class="cnt">
-                    <h2 class="ttl-L">Платья</h2>
+                    <h2 class="ttl-L">{{$category->name}}</h2>
 
                     @include('blocks/_filter')
 
-                    @include('blocks/_products')
-
-                    <div class="category-btn-show-wrap">
-                        <a href="#" class="category-btn-show js_showMore-btn">Показать еще</a>
+                    <div class="js_showMore-blk">
+                        @include('blocks/_products')
                     </div>
+
+                    @if ($products->hasMorePages())
+                        <div class="category-btn-show-wrap">
+                            <a href="#" class="category-btn-show js_showMore-btn">Показать еще</a>
+                        </div>
+
+                    @endif
 
                     <h2 class="ttl-L">Недавно просмотренные</h2>
 
-                    @include('/blocks/_slider-main')
+                    @include('/blocks/_slider-main', ['products' => $viewed])
 
-                    <h2 class="ttl-L">Платья</h2>
+                    <h2 class="ttl-L">{{$category->name}}</h2>
                     <div class="default-cnt">
-                        <p>Составляйте стильные ансамбли с белоснежными рубашками, прозрачными блузками и легкими
-                            туниками. Чтобы создать всегда актуальный и безупречный образ, который легко преобразить,
-                            сочетайте любимые изделия с подходящими аксессуарами.</p>
+                        <p>{{$category->description}}</p>
                     </div>
                 </div>
             </div>

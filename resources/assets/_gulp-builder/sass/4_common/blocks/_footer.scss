@@ -41,3 +41,15 @@
 		text-transform: uppercase;
 	}
 }
+
+@media screen and (max-width: 480px){
+	.footer{
+		&-col{
+				@include make-col(6);
+				&.__last{
+					@include make-col(12);
+					padding-bottom: 10px;
+				}
+		}
+	}
+}
