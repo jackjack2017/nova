@@ -6,8 +6,33 @@
 //     let optionsForCopy = $(optionsBlk).find('.js_copy').first();
 //     $( optionsForCopy).clone().appendTo( optionsBlk);
 // });
+import {Uploader} from "../libs/uploader";
 
+//Fine Uploader
+function uploaderInit(){
+    let $uploader  = $('.js_uploader');
+    if(!$uploader.length) {
+        return;
+    }
 
+    // each element init
+    $uploader.each((i, el)=>{
 
+        let uploader = new Uploader({
+            element: el,
+            availableOptionsFromDataAttr : [
+                'itemLimit',
+                'request-endpoint',
+                'deleteFile-endpoint',
+                'deleteFile-enabled',
+                'sizeLimit'
+            ]
+        });
+
+        uploader.init();
+    });
+}
+
+uploaderInit();
 
 

@@ -17,6 +17,9 @@
   <link rel="stylesheet" href="{{ asset('adminlte/css/AdminLTE.min.css') }}">
   <!-- AdminLTE Skins. -->
   <link rel="stylesheet" href="{{ asset('adminlte/css/skins/skin-blue.min.css') }}">
+  <!-- Fine uploader -->
+  {{--<link rel="stylesheet" href="{{ asset('adminlte/css/uploader/fine-uploader-gallery.min.css') }}">--}}
+  <link rel="stylesheet" href="{{ asset('adminlte/css/uploader/fine-uploader-new.min.css') }}">
 
   @yield('css')
 
@@ -128,6 +131,7 @@
 <!-- AdminLTE App -->
 
 <script src="{{ asset('js/admin.js') }}"></script>
+
 
 <!-- Commom -->
 {{--<script src="/adminlte/js/common.js"></script>--}}
