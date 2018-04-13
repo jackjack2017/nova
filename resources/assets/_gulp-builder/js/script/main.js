@@ -34,11 +34,7 @@ class App{
         ui.accordion('.js_size-btn', '.js_size-blk');
 
         amount.init('.js_ui-amount-inp', '.js_ui-amount-btn-dec', '.js_ui-amount-btn-inc');
-        $('.my-container').sortablePhotos({
-            selector: '> .my-item',
-            sortable: true,
-            padding: 2
-        });
+
         $('.js_select').select2({
             placeholder: 'Выбор перевозчика',
             minimumResultsForSearch: Infinity
@@ -183,11 +179,6 @@ class App{
                 }
             }
         });
-
-        $('body').on('click', '.owl-dot', function () {
-            console.log('ckick');
-
-        })
     }
 
     sendFormInit(){

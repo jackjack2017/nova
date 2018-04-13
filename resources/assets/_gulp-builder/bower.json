@@ -13,8 +13,7 @@
     "jquery": "2.*",
     "magnificPopup": "git://github.com/dimsemenov/Magnific-Popup.git",
     "meyer-reset": "*",
-    "owl.carousel": "^2.2.1",
-    "jquery-sortable-photos": "^1.0.0",
+    "owl.carousel": "2.2.1",
     "select2": "^4.0.5"
   },
   "moduleType": [

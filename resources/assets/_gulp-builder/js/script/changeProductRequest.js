@@ -50,7 +50,9 @@ export class ChangeProductRequest{
     success(data) {
         let info = JSON.parse(data);
         console.log(info[1]);
+
         $('.js_sizes-blk').html('');
+
         $(info[1]).each(function (i, el) {
             $('.js_sizes-blk').append(
               ` <div class="product-s-i">

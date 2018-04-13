@@ -17,10 +17,6 @@
   <link rel="stylesheet" href="{{ asset('adminlte/css/AdminLTE.min.css') }}">
   <!-- AdminLTE Skins. -->
   <link rel="stylesheet" href="{{ asset('adminlte/css/skins/skin-blue.min.css') }}">
-  {{--dropzone--}}
-  <link rel="stylesheet" href="{{ asset('adminlte/css/dropzone.min.css') }}">
-
-  <link rel="stylesheet" href="{{ asset('adminlte/css/fine-uploader-new.min.css') }}">
 
   @yield('css')
 
