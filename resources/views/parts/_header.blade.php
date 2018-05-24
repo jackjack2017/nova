@@ -38,10 +38,8 @@
             </div>
             <div class="header-col __r">
                 <div class="header-r">
-                    <form action="{{url('search')}}" class="header-search-form">
-                        <input type="text" placeholder="Найти товары" class="header-search-form-inp">
-                        <input type="hidden" name="form_type" value="Поиск">
-                        <input type="hidden" name="_token" value="{{csrf_token()}}">
+                    <form action="{{url('search')}}" method="GET" class="header-search-form">
+                        <input type="text" name="search" placeholder="Найти товары" class="header-search-form-inp">
                         <button type="submit" class="header-search-form-ic fa fa-search"></button>
                     </form>
                     <a href="{{route('favourite')}}" class="header-like"><span
