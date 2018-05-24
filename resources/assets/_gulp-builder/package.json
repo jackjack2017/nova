@@ -32,7 +32,7 @@
     "gulp-favicons": "^1.0.9",
     "gulp-uglifycss": "^1.0.6",
     "inquirer": "^3.0.6",
-    "jquery": "^2.2.4",
+    "jquery": "latest",
     "script-loader": "^0.7.0"
   },
   "scripts": {
