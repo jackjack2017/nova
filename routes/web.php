@@ -26,6 +26,7 @@ Route::view('/deal', 'deal');
 Route::view('/new', 'new');
 Route::view('/top', 'top');
 Route::view('/actions', 'actions');
+Route::view('/search', 'search');
 
 Route::post('/test', function () {
    return view('test');
